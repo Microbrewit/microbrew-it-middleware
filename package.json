@@ -1,0 +1,16 @@
+{
+  "name": "microbrew-it-node",
+  "version": "1.0.0",
+  "description": "Server middleware for Microbrew.it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Torstein Thune <torstein@gmail.com> (http://thune.io/)",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^3.0.3",
+    "hapi": "^8.6.1",
+    "minimist": "^1.1.1"
+  }
+}
