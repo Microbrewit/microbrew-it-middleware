@@ -7,6 +7,7 @@ console.log 'settings', settings[argv.environment].connection
 server.connection settings[argv.environment].connection
 
 modules =
+	static: require './app/static'
 	index: require './app/index'
 
 	fermentable: require './app/fermentable'
