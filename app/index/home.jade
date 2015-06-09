@@ -1,0 +1,45 @@
+article.frontpage
+	header
+		.header-content-wrapper
+			unless user
+				h1 Welcome to the alpha
+				.subheader
+					| Already have an account?
+				button.call-to-action.create(href='/login') LOGIN
+			else
+				h1 Welcome back, #{user.username}!
+				.subheader
+				button.call-to-action.create(href='/add') CREATE NEW RECIPE
+	section.the-content
+		h2 A new home for homebrewers
+		h3(style='margin-bottom: 50px;')
+			| Microbrew.it provides you with the tools you need to design the ultimate beer recipes.
+		section.inner-wrapper(style='background:white;')
+			.half
+				h3 Customisability
+				p
+					| Ever been annoyed by recipes with imperial or metric values? Maybe you are used to entering your grain bill in kilograms instead of pounds? Well, Microbrew.it doesn't care. You can set up your account to use any sort of measurement, and everything will adapt.
+			.half
+				h3 Tinseth, rager, srm, ebc
+				p
+					| There are a lot of formulas and measurement units out there for beer. And we support them all. You can use the industry standard defaults, or you can use good old Rager. Microbrew.it lets you customise your account to use your prefered formulas.
+		section.inner-wrapper
+			.half
+				h3 Clones
+				p
+					| Made the perfect clone recipe of your favourite commercial brew? Or maybe you wish you had a recipe for something you just tasted at the pub? Microbrew.it supports adding clones for your favourite beers. Just search it up in our database and click the "clone" button.
+			.half
+				h3 Forks
+				p
+					| Have you ever thought "hey, this looks good, but I know just what would make it better"? We support forks, a simple way of creating new variations of existing recipes. Simply navigate to any recipe and click the "fork" button to add your variation.
+		section.inner-wrapper(style='background:white')
+			.half
+				h3 Homebreweries
+				p
+					| Do you brew with your friends? Here at Microbrew.it you can create and invite members into homebreweries. That way you can cooperate with your friends and collect all your common recipes in one place.
+			.half
+				h3 And more...
+				p
+					| We have even more features planned before the beta. We want to let you import your recipes, log your brew sessions, rate eachothers homebrew and more. Stay tuned!
+	section.huge-call-to-action
+		h2 Stay tuned for the open beta

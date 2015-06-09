@@ -6,5 +6,8 @@ exports.getRoutes = () ->
 	}]
 
 handler = (req, reply) =>
-	html = @renderer.header('home') + "<div>Hey there!</div>" + @renderer.footer()
+	html = @renderer.header('home') 
+	html += @renderer.render
+		template: "#{__dirname}/home.jade"
+	html += @renderer.footer()
 	reply html
