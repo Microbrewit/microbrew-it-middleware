@@ -1,0 +1,11 @@
+.single-brewer.search-grid-result
+	a.content(href='fermentables/#{result.fermentableId}')
+		.top-circle
+			mb-colour-box.colour-box(type='lovibond', colour='#{result.lovibond}', size='50px')
+			img(src='images/fermentable-large.png', width='50', height='50', alt='Malt')
+		h3 #{result.name}
+		.type Fermentable
+		.meta
+			.meta-table
+				.meta-cell #{result.lovibond}°L
+				.meta-cell #{result.ppg} PPG

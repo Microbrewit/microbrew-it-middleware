@@ -1,0 +1,13 @@
+article.all-fermentables
+	.header-bubble.inner-wrapper
+		.icon
+			mb-colour-box.colour-box(absolutecolour='212,78,0', size='76px')
+			img(src='images/fermentable-large.png', alt='Malt')
+	h1 Fermentables
+	div(ng-include="'templates/ingredients/ingredients.navigation.html'")
+	section.the-content.the-list
+		.inner-wrapper
+			ul.search-grid-results
+				each result in results
+					li
+						include fermentable.gridItem.jade
