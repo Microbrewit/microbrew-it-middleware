@@ -12,10 +12,24 @@ exports.getRoutes = () ->
 		}
 	]
 
+navigationElement = 'ingredients'
+
 handler = (req, reply) =>
-	reply 'hello any fermentable'
+	@get req.url.path, (status, response) =>
+		@render
+			req: req 
+			reply: reply
+			data: response
+			template: undefined
 
 singleFermentableHandler = (req, reply) =>
-	@get(req.url.path, (status, response) =>
-		@render(response, './singleFermentable', (html) -> reply html)
-	)
+	@get req.url.path, (status, response) =>
+
+		html = @renderer.header navigationElement
+		html += @renderer.render
+			template: "#{__dirname}/singleFermentable.jade"
+			data: 
+				fermentable: response.fermentables[0] 
+		html += @renderer.footer()
+
+		reply html
