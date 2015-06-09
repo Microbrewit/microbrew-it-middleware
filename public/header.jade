@@ -1,0 +1,35 @@
+doctype html
+html(lang='en', ng-app='Microbrewit')
+	head
+		base(href='/')
+		meta(charset='utf-8')
+		title Microbrew.it prealpha
+		link(rel='icon', type='image/png', href='./images/favicon.png')
+		link(rel='stylesheet', href='css/main.css')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=1')
+	body
+		nav#main-navigation
+			ul
+				li.logo-text
+					a(ui-sref='home') Microbrew.it
+				li
+					a(ui-sref='add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
+				li
+					a(ui-sref='brews.list', class=navigationState === 'beer' ? 'active':'') Beer
+				li
+					a(ui-sref='breweries.list', class=navigationState === 'breweries' ? 'active':'') Breweries
+				li
+					a(ui-sref='brewers.list', class=navigationState === 'brewers' ? 'active':'') Brewers
+				li
+					a(ui-sref='ingredients.search', class=navigationState === 'ingredients' ? 'active':'') Ingredients
+				li
+					a(ui-sref='search', ng-class="{active: is('search')}") Search
+				
+				if user
+					li.right(ng-if='user.username')
+						a(ui-sref='account.settings', ng-class="{active: includes('account')}")
+							gravatar(url='{{user.gravatar}}', size='20px', style='display: inline-block;margin-right: 5px;')
+							| {{::user.username}}
+				else
+					li.right(ng-if='!user.username')
+						a(ui-sref='user.login', ng-class="{active: includes('user')}") Login
