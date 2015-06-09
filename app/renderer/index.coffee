@@ -11,11 +11,14 @@ exports.render = (renderObj) ->
 	else
 		return renderObj.data
 
-exports.header = (navigationState) ->
+exports.header = (navigationState, title) ->
+	title ?= "Homebrewer's home"
+	title += " - #{navigationState} - Microbrew.it"
 	return @render
 		template: 'public/header.jade'
 		data:
 			navigationState: navigationState
+			title: title
 
 exports.footer = (options) ->
 	return @render

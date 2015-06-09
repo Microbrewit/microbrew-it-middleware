@@ -3,7 +3,7 @@ html(lang='en', ng-app='Microbrewit')
 	head
 		base(href='/')
 		meta(charset='utf-8')
-		title Microbrew.it prealpha
+		title #{title}
 		link(rel='icon', type='image/png', href='./images/favicon.png')
 		link(rel='stylesheet', href='css/main.css')
 		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=1')
@@ -11,25 +11,25 @@ html(lang='en', ng-app='Microbrewit')
 		nav#main-navigation
 			ul
 				li.logo-text
-					a(ui-sref='home') Microbrew.it
+					a(href="/" class=navigationState === 'home' ? 'active':'') Microbrew.it
 				li
-					a(ui-sref='add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
+					a(href='/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
 				li
-					a(ui-sref='brews.list', class=navigationState === 'beer' ? 'active':'') Beer
+					a(href='/beer', class=navigationState === 'beer' ? 'active':'') Beer
 				li
-					a(ui-sref='breweries.list', class=navigationState === 'breweries' ? 'active':'') Breweries
+					a(href='/breweries', class=navigationState === 'breweries' ? 'active':'') Breweries
 				li
-					a(ui-sref='brewers.list', class=navigationState === 'brewers' ? 'active':'') Brewers
+					a(href='brewers', class=navigationState === 'brewers' ? 'active':'') Brewers
 				li
-					a(ui-sref='ingredients.search', class=navigationState === 'ingredients' ? 'active':'') Ingredients
+					a(href='ingredients', class=navigationState === 'ingredients' ? 'active':'') Ingredients
 				li
-					a(ui-sref='search', ng-class="{active: is('search')}") Search
+					a(ui-sref='search', class=navigationState === 'search' ? 'active' : '') Search
 				
 				if user
-					li.right(ng-if='user.username')
-						a(ui-sref='account.settings', ng-class="{active: includes('account')}")
-							gravatar(url='{{user.gravatar}}', size='20px', style='display: inline-block;margin-right: 5px;')
-							| {{::user.username}}
+					li.right
+						a(href='/account/settings', class=navigationState === 'account' ? 'active':'')
+							gravatar(url='#{user.gravatar}', size='20px', style='display: inline-block;margin-right: 5px;')
+							| #{user.username}
 				else
 					li.right(ng-if='!user.username')
-						a(ui-sref='user.login', ng-class="{active: includes('user')}") Login
+						a(ui-sref='user.login', class=navigationState === 'login' ? 'active':'') Login
