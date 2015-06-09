@@ -6,6 +6,5 @@ exports.getRoutes = () ->
 	}]
 
 handler = (req, reply) =>
-	console.log @
-	console.log exports
-	reply 'hello world'
+	html = @renderer.header('home') + "<div>Hey there!</div>" + @renderer.footer()
+	reply html
