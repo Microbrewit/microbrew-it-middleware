@@ -15,17 +15,22 @@ exports.getRoutes = () ->
 navigationElement = 'ingredients'
 
 handler = (req, reply) =>
+	console.log req.url.path
 	@get req.url.path, (status, response) =>
-		@render
-			req: req 
-			reply: reply
-			data: response
-			template: undefined
+		console.log 'hello?'
+		html = @renderer.header navigationElement, "Fermentables"
+		html += @renderer.render
+			data: 
+				results: response.fermentables
+			template: "#{__dirname}/fermentables.jade"
+		html += @renderer.footer()
+
+		reply html
 
 singleFermentableHandler = (req, reply) =>
 	@get req.url.path, (status, response) =>
 
-		html = @renderer.header navigationElement
+		html = @renderer.header navigationElement, "#{response.fermentables[0].name} - Fermentables"
 		html += @renderer.render
 			template: "#{__dirname}/singleFermentable.jade"
 			data: 
