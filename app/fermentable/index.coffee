@@ -3,7 +3,9 @@ exports.getRoutes = () ->
 		{
 			method: 'GET'
 			path:'/fermentables' 
-			handler: handler
+			config: 
+				handler: handler
+				auth: 'session'
 		}
 		{
 			method: 'GET'

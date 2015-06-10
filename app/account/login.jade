@@ -1,0 +1,11 @@
+article.login
+	section.login-form
+		.inner-wrapper
+			form( action="/login", method="post")
+				label(for="username") Username
+				input(type="text" id="username" name="username" placeholder="johnfredrik" required)
+				label(for="password") Password
+				input(type="text" id="password" name="password" placeholder="password" required)
+				label(for="remember") keep loggen in
+				input(type="checkbox" id="remember")
+				button(class="submit" type="submit") Login
