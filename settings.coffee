@@ -12,4 +12,4 @@ exports.dev =
 	connection:
 		port: 3000
 		host: 'localhost'
-	api: 'http://localhost:54663'
+	api: 'http://dev.asphaug.io'
