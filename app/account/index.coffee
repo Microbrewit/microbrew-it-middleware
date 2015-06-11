@@ -38,6 +38,7 @@ exports.getRoutes = () ->
 
 navigationElement = 'account'
 
+# Gets the login page
 loginGetHandler = (req, reply) =>
 	html = @renderer.header navigationElement, "Account"
 	html += @renderer.render
@@ -47,7 +48,7 @@ loginGetHandler = (req, reply) =>
 	html += @renderer.footer()
 
 	reply html
-
+# Sends a post to the api logging ing the user and starting a session.
 loginPostHandler = (req, reply) =>
 	body = 
 		username : req.payload.username
@@ -68,7 +69,7 @@ loginPostHandler = (req, reply) =>
 		req.auth.session.set response 
 		console.log req.auth
 		reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
-
+#Logout the use, by clearing the session.
 logoutHandler = (req, reply) =>
 	credentials = req.auth.credentials
 	console.log credentials

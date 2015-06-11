@@ -20,7 +20,8 @@ exports.get = (url, onSuccess, onError) ->
 	, (err) ->
 		onError?(err)
 	)
-
+#Takes a query that is posted to the api
+#@param [Object] query, the query contining, url, body, headers.
 exports.post = (query, onSuccess, onError) ->
 	request.post(
 		headers: query.headers
@@ -32,6 +33,8 @@ exports.post = (query, onSuccess, onError) ->
 		onSuccess?(response.statusCode, JSON.parse(body))
 	)
 
+#Takes a query that is put to the api
+#@param [Object] query, the query contining, url, body, headers.
 exports.put = (query, onSuccess, onError) ->
 	request.put(
 		headers: query.headers
@@ -42,7 +45,8 @@ exports.put = (query, onSuccess, onError) ->
 			onError?(error)
 		onSuccess?(response.statusCode, body)
 	)
-
+#Takes a query that is delete to the api
+#@param [Object] query, the query contining, url, headers.
 exports.delete = (query, onSuccess, onError) ->
 	console.log "#{@settings.api}#{query.url}"
 	request.del(

@@ -50,14 +50,14 @@ getRoutes = () ->
 
 injectHelpers()
 
+#Registers a plugin for hapi
 server.register( register: require('hapi-auth-cookie'), (err) ->
 	if err 
 		cosole.log err 
 
 )
-cache = server.cache(segment: 'sessions', expiresIn: 3 * 24 * 60 * 60 * 1000)
-server.app.cache = cache
 
+#Sets the configuration for the session.
 server.auth.strategy 'session','cookie',
 	password: 'supersecretpassword'
 	cookie: 'app-cookie'
