@@ -21,7 +21,7 @@ modules =
 	search: undefined
 	account: undefined
 	supplier: undefined
-	beer: undefined
+	beer: require './app/beers'
 	origin: undefined
 	glass: undefined
 	beerStyle: undefined

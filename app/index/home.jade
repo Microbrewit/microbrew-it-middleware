@@ -5,11 +5,11 @@ article.frontpage
 				h1 Welcome to the alpha
 				.subheader
 					| Already have an account?
-				button.call-to-action.create(href='/login') LOGIN
+				a.call-to-action.create(href='/login') LOGIN
 			else
 				h1 Welcome back, #{user.username}!
 				.subheader
-				button.call-to-action.create(href='/add') CREATE NEW RECIPE
+				a.call-to-action.create(href='/add') CREATE NEW RECIPE
 	section.the-content
 		h2 A new home for homebrewers
 		h3(style='margin-bottom: 50px;')

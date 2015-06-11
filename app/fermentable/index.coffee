@@ -12,29 +12,24 @@ exports.getRoutes = () ->
 		}
 	]
 
-navigationElement = 'ingredients'
-
 handler = (req, reply) =>
-	console.log req.url.path
 	@get req.url.path, (status, response) =>
-		console.log 'hello?'
-		html = @renderer.header navigationElement, "Fermentables"
-		html += @renderer.render
-			data: 
-				results: response.fermentables
-			template: "#{__dirname}/fermentables.jade"
-		html += @renderer.footer()
-
-		reply html
+		reply @renderer.page
+			head: @renderer.head 'Fermentables - Ingredients'
+			navigation: @renderer.navigation 'ingredients'
+			headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
+			html: @renderer.render
+				template: "#{__dirname}/fermentables.jade"
+				data: 
+					results: response.fermentables
 
 singleFermentableHandler = (req, reply) =>
 	@get req.url.path, (status, response) =>
+		reply @renderer.page
+			head: @renderer.head "#{response.fermentables[0].name} - Fermentables - Ingredients"
+			navigation: @renderer.navigation 'ingredients'
+			headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
+			html: @renderer.render
+				template: "#{__dirname}/fermentables.single.jade"
+				data: response.fermentables[0]
 
-		html = @renderer.header navigationElement, "#{response.fermentables[0].name} - Fermentables"
-		html += @renderer.render
-			template: "#{__dirname}/singleFermentable.jade"
-			data: 
-				fermentable: response.fermentables[0] 
-		html += @renderer.footer()
-
-		reply html

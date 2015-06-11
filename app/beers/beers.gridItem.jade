@@ -1,0 +1,11 @@
+a.content(href='beers/#{result.id}')
+	.top-circle
+		mb-colour-box(type='srm', colour='{{::result.srm.standard}}', size='50px')
+		img(src='images/tulip-large.png', width='50', height='50', alt='Beer')
+	h3 #{result.name}
+	.type #{result.beerStyle.name}
+	.meta
+		.meta-table
+			.meta-cell.third #{result.abv.standard.toFixed(1)}% ABV
+			.meta-cell.third #{result.ibu.tinseth} IBU
+			.meta-cell.third #{result.srm.standard} SRM

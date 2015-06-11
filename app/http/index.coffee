@@ -18,3 +18,8 @@ exports.get = (url, onSuccess, onError) ->
 	, (err) ->
 		onError?(err)
 	)
+exports.post = () ->
+
+exports.put = () ->
+
+exports.delete = () ->
