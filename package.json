@@ -12,6 +12,8 @@
     "handlebars": "^3.0.3",
     "hapi": "^8.6.1",
     "jade": "^1.9.2",
-    "minimist": "^1.1.1"
+    "minimist": "^1.1.1",
+    "hapi-auth-cookie": "2.2.0",
+    "request": "2.57.0"
   }
 }

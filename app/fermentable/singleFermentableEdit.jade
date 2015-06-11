@@ -1,0 +1,19 @@
+.header-bubble.inner-wrapper
+	.icon
+		mb-colour-box.colour-box(type='lovibond', colour='#{fermentable.lovibond}', size='76px')
+		img(src='images/fermentable-large.png', alt='Malt')
+article.single-fermentable-form
+	.inner-wrapper
+		form( action="/fermentables/#{fermentable.fermentableId}" method="post" )
+			input(type="hidden" name="fermentableId" value="#{fermentable.fermentableId}")
+			label(for="name") Name
+			input(type="text" name="name" value="#{fermentable.name}")
+			label(for="lovibond") Lovibond
+			input(type='number' name='lovibond' value='#{fermentable.lovibond}')
+			label(for="ppg") PPG
+			input(type='number' name='ppg' value='#{fermentable.ppg}')
+			label(for="type") Name
+			input(type="text" name="type" value="#{fermentable.type}")
+			label(for="checkbox") Custom
+			input(type='checkbox' name='custom' value='#{fermentable.custom}')
+			button(class="submit" type="submit") Save				

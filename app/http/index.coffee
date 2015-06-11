@@ -1,9 +1,9 @@
 http = require 'http'
-querystring = require('querystring');
+request = require('request');
 
 
 exports.get = (url, onSuccess, onError) ->
-	request = http.get("#{@settings.api}#{url}", (res) ->
+	req = http.get("#{@settings.api}#{url}", (res) ->
 		response = ''
 		# We receive data in chunks
 		res.on 'data', (chunk) ->
@@ -21,30 +21,40 @@ exports.get = (url, onSuccess, onError) ->
 		onError?(err)
 	)
 
-exports.post = (url, input, onSuccess, onError) ->
-	options = 
-		host: "localhost"
-		port: 54663
-		path: url
-		method:"POST"
-		headers:
-			"Content-Type": "application/x-www-form-urlencoded"		
+exports.post = (query, onSuccess, onError) ->
+	console.log query.headers
+	request.post(
+		headers: query.headers
+		url: "#{@settings.api}#{query.url}"
+		body: query.body
+	,(error, response, body) ->
+		if(error)
+  			onError?(error)	
+		onSuccess?(response.statusCode,JSON.parse body)
+		)
 
-	request = http.request(options , (res) ->
-		response = ''
-		# We receive data in chunks
-		res.on 'data', (chunk) ->
-			response+=chunk
-		# Request ended, write file (if we have any data)
-		res.on 'end', () ->
-			if response isnt ''
-				try
-					response = JSON.parse response
-				catch e 
-					console.log e
-				onSuccess?(200, response)
-	, (err) ->
-		onError?(err)
+exports.put = (query, onSuccess, onError) ->
+	console.log "#{@settings.api}#{query.url}"
+	request.put(
+		headers: query.headers
+		url: "#{@settings.api}#{query.url}"
+		body: query.body
+	,(error, response, body) ->
+		if(error)
+  			onError?(error)	
+		console.log response.statusCode
+		onSuccess?(response.statusCode,JSON.parse body)				
 	)
-	request.write(querystring.stringify(input))
-	request.end()
+
+exports.delete = (query, onSuccess, onError) ->
+	console.log "DELETE DELETE"
+	console.log "#{@settings.api}#{query.url}"
+	request.del(
+		headers: query.headers
+		url: "#{@settings.api}#{query.url}"
+	,(error, response, body) ->
+		if(error)
+  			onError?(error)	
+		console.log response.statusCode
+		onSuccess?(response.statusCode,JSON.parse body)				
+	)

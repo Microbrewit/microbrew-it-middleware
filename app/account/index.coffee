@@ -1,3 +1,5 @@
+querystring = require('querystring');
+
 exports.getRoutes = () ->
 	return [
 		{
@@ -47,19 +49,23 @@ loginGetHandler = (req, reply) =>
 	reply html
 
 loginPostHandler = (req, reply) =>
-	input = 
+	body = 
 		username : req.payload.username
 		password : req.payload.password
 		grant_type: "password"
-	@post '/token', input, (status, response) =>
-		
+	
+	query = 
+		headers:
+			'Content-Type':'application/x-www-form-urlencoded'
+		body: querystring.stringify body
+		url: '/token'
+
+	@post query, (status, response) =>	
 		html = @renderer.header navigationElement, "Account"
 		html += "Login Post"
 		html += @renderer.footer()
-		session = 
-			user: req.payload.username
-			token: response.access_token
-		req.auth.session.set(response)
+
+		req.auth.session.set response 
 		console.log req.auth
 		reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
 

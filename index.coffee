@@ -39,8 +39,8 @@ injectHelpers = () ->
 			module.get = utils.http.get
 			module.renderer = utils.renderer
 			module.post = utils.http.post
-			module.put = () ->
-			module.delete = () ->
+			module.put = utils.http.put
+			module.delete = utils.http.delete
 
 getRoutes = () ->
 	availableRoutes = []
