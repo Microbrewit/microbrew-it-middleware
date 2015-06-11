@@ -22,7 +22,6 @@ exports.get = (url, onSuccess, onError) ->
 	)
 
 exports.post = (query, onSuccess, onError) ->
-	console.log query.headers
 	request.post(
 		headers: query.headers
 		url: "#{@settings.api}#{query.url}"
@@ -30,11 +29,10 @@ exports.post = (query, onSuccess, onError) ->
 	,(error, response, body) ->
 		if(error)
   			onError?(error)	
-		onSuccess?(response.statusCode,JSON.parse body)
+		onSuccess?(response.statusCode, JSON.parse(body))
 	)
 
 exports.put = (query, onSuccess, onError) ->
-	console.log "#{@settings.api}#{query.url}"
 	request.put(
 		headers: query.headers
 		url: "#{@settings.api}#{query.url}"
@@ -42,7 +40,7 @@ exports.put = (query, onSuccess, onError) ->
 	,(error, response, body) ->
 		if(error)
 			onError?(error)
-		onSuccess?(response.statusCode,JSON.parse body)				
+		onSuccess?(response.statusCode, body)
 	)
 
 exports.delete = (query, onSuccess, onError) ->
@@ -54,5 +52,5 @@ exports.delete = (query, onSuccess, onError) ->
 		if(error)
   			onError?(error)	
 		console.log response.statusCode
-		onSuccess?(response.statusCode,JSON.parse body)				
+		onSuccess?(response.statusCode, JSON.parse body)				
 	)
