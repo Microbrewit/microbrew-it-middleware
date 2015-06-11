@@ -1,0 +1,14 @@
+.inner-wrapper
+	form(action=item.itemId ? "/items/#{item.itemId}" : "" method="post" )
+		input(type="hidden" name="itemId" value=item.itemId ? "#{item.itemId}" : "")
+		label(for="name") Name
+		input(type="text" name="name" value="#{item.name}")
+		label(for="lovibond") Lovibond
+		input(type='number' name='lovibond' value='#{item.lovibond}')
+		label(for="ppg") PPG
+		input(type='number' name='ppg' value='#{item.ppg}')
+		label(for="type") Name
+		input(type="text" name="type" value="#{item.type}")
+		label(for="checkbox") Custom
+		input(type='checkbox' name='custom' value='#{item.custom}')
+		button(class="submit" type="submit") Save

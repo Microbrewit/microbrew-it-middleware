@@ -1,0 +1,10 @@
+article.fermentable
+	!{headline}
+	.the-content
+		case mode
+			when 'edit'
+				include edit.jade
+			when 'new'
+				include edit.jade
+			default
+				include single.jade

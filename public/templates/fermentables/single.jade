@@ -1,0 +1,10 @@
+.inner-wrapper
+	.meta
+		span.lovibond(title="Lovibond is a measure of a grain's colour.")
+			| Colour: 
+			strong
+				| #{item.lovibond}°L 
+				mb-colour-box.colour-box(type='lovibond', colour='#{lovibond}', size='20px')
+		span.ppg(title='PPG descripbes the sugar contents of a malt')
+			| PPG: 
+			strong #{item.ppg}

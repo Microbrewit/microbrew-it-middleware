@@ -39,12 +39,10 @@ exports.getRoutes = () ->
 navigationElement = 'account'
 
 loginGetHandler = (req, reply) =>
-	html = @renderer.header navigationElement, "Account"
-	html += @renderer.render
+	html = @renderer.render
 		data: 
 			results: ""
 		template: "#{__dirname}/login.jade"
-	html += @renderer.footer()
 
 	reply html
 
@@ -61,9 +59,6 @@ loginPostHandler = (req, reply) =>
 		url: '/token'
 
 	@post query, (status, response) =>	
-		html = @renderer.header navigationElement, "Account"
-		html += "Login Post"
-		html += @renderer.footer()
 
 		req.auth.session.set response 
 		console.log req.auth
@@ -73,8 +68,6 @@ logoutHandler = (req, reply) =>
 	credentials = req.auth.credentials
 	console.log credentials
 	req.auth.session.clear()
-	html = @renderer.header navigationElement, "Account"
-	html += "Logout"
-	html += @renderer.footer()
+	html = "Logout"
 
 	reply html

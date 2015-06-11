@@ -1,0 +1,20 @@
+!{headline}
+section.the-content.the-list
+	.inner-wrapper
+		ul.search-grid-results
+			each item in results
+				li
+					case item.dataType
+						when 'fermentable'
+							include fermentables/gridItem.jade
+						when 'hop'
+							include fermentables/gridItem.jade
+						when 'yeast'
+							include fermentables/gridItem.jade
+						default
+							p No template for "#{item.dataType}"
+
+		if prevPage
+			a(href=prevPage, class="prev") Previous page
+		if nextPage
+			a(href=nextPage, class="next") Next page

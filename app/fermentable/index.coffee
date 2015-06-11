@@ -4,85 +4,100 @@ exports.getRoutes = () ->
 			method: 'GET'
 			path:'/fermentables' 
 			config: 
-				handler: handler
+				handler: list
 				auth: 'session'
 		}
 		{
 			method: 'GET'
 			path: '/fermentables/{id}'
-			handler: singleFermentableHandler
+			handler: show
 		}
 		{
 			method: 'GET'
 			path: '/fermentables/{id}/edit'
 			config:
-				handler: singleFermentableEditHandler
+				handler: showEdit
 		}
 		{
 			method: 'POST'
 			path: '/fermentables/{id}'
 			config: 
-				handler: singleFermentableEditPutHandler
+				handler: performEdit
 				auth: 'session'
 		}
 		{
 			method: 'GET'
 			path: '/fermentables/new'
 			config: 
-				handler: fermentableNewHandler
+				handler: showNew
 				auth: 'session'
 		}
 		{
 			method: 'POST'
 			path: '/fermentables'
 			config: 
-				handler: fermentablePostHandler
+				handler: performNew
 				auth: 'session'
 		}
 		{
 			method: 'GET'
 			path: '/fermentables/{id}/delete'
 			config: 
-				handler: fermentableDeleteHandler
+				handler: performDelete
 				auth: 'session'
 		}
 
 	]
 
-handler = (req, reply) =>
+list = (req, reply) =>
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
-			head: @renderer.head 'Fermentables - Ingredients'
-			navigation: @renderer.navigation 'ingredients'
-			headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
+			title: " Fermentables - Ingredients"
+			navigationState: 'ingredients'
 			html: @renderer.render
-				template: "#{__dirname}/fermentables.jade"
+				template: "public/templates/gridList.jade"
 				data: 
+					headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
+					mode: 'list'
 					results: response.fermentables
 
-singleFermentableHandler = (req, reply) =>
+show = (req, reply) =>
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
-			head: @renderer.head "#{response.fermentables[0].name} - Fermentables - Ingredients"
-			navigation: @renderer.navigation 'ingredients'
-			headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
+			title: "#{response.fermentables[0].name} - Fermentables - Ingredients"
+			navigationState: 'ingredients'
 			html: @renderer.render
-				template: "#{__dirname}/fermentables.single.jade"
-				data: response.fermentables[0]
+				template: "public/templates/fermentables/index.jade"
+				data: 
+					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
+					mode: 'single'
+					item: response.fermentables[0]
 
-singleFermentableEditHandler = (req, reply) =>
+showEdit = (req, reply) =>
 	url = req.url.path.substring(0,req.url.path.length - 5)
 	@get url, (status, response) =>
-		html = @renderer.header navigationElement, "#{response.fermentables[0].name} - Fermentables"
-		html += @renderer.render
-			template: "#{__dirname}/singleFermentableEdit.jade"
-			data: 
-				fermentable: response.fermentables[0] 
-		html += @renderer.footer()
+		reply @renderer.page
+			title: "#{response.fermentables[0].name} - Fermentables - Ingredients"
+			navigationState: 'ingredients'
+			html: @renderer.render
+				template: "public/templates/fermentables/index.jade"
+				data: 
+					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
+					mode: 'edit'
+					item: response.fermentables[0]
 
-		reply html
+showNew = (req, reply) =>
+	reply @renderer.page
+			title: "Add - Fermentables - Ingredients"
+			navigationState: 'ingredients'
+			html: @renderer.render
+				template: "public/templates/fermentables/index.jade"
+				data: 
+					headline: @renderer.headline "Add Fermentable"
+					mode: 'edit'
+					item: {}
 
-singleFermentableEditPutHandler = (req, reply) =>
+performEdit = (req, reply) =>
 	query = 
 		headers:
 			"content-type": "application/json"
@@ -103,14 +118,9 @@ singleFermentableEditPutHandler = (req, reply) =>
 		else
 			reply "<div>#{status}</div><div>#{response}</div>"
 
-fermentableNewHandler = (req, reply) =>
-	html = @renderer.header navigationElement, "Fermentables"
-	html += @renderer.render
-		template: "#{__dirname}/singleFermentableNew.jade"
-	html += @renderer.footer()
-	reply html
 
-fermentablePostHandler = (req, reply) =>
+
+performNew = (req, reply) =>
 	query = 
 		headers:
 			"content-type": "application/json"
@@ -130,7 +140,7 @@ fermentablePostHandler = (req, reply) =>
 		else
 			reply "<div>#{status}</div><div>#{JSON.stringify(response)}</div>"
 
-fermentableDeleteHandler = (req, reply) =>
+performDelete = (req, reply) =>
 	query =
 		headers: 
 			accept: "application/json"
