@@ -99,7 +99,7 @@ singleFermentableEditPutHandler = (req, reply) =>
 		id: req.payload.fermentableId
 
 	if(req.auth.isAuthenticated)
-		query.headers['Authorization'] = "Bearer #{req.auth.credentials.access_token}"
+		query.headers['Authorization'] = "Bearer #{req.auth.credentials.token.access_token}"
 
 	@put query, (status, response) =>
 		if(status is 200 || status is 201 || status is 204)
@@ -125,7 +125,7 @@ fermentablePostHandler = (req, reply) =>
 	console.log req.payload.custom
 	console.log req.auth.isAuthenticated
 	if(req.auth.isAuthenticated)
-		query.headers['Authorization'] = "Bearer #{req.auth.credentials.access_token}"
+		query.headers['Authorization'] = "Bearer #{req.auth.credentials.token.access_token}"
 
 
 	@post query, (status, response) =>
@@ -142,7 +142,7 @@ fermentableDeleteHandler = (req, reply) =>
 		url: req.url.path.substring(0,req.url.path.length - 7);
 	console.log "ferm: " + query.url
 	if(req.auth.isAuthenticated)
-		query.headers['Authorization'] = "Bearer #{req.auth.credentials.access_token}"
+		query.headers['Authorization'] = "Bearer #{req.auth.credentials.token.access_token}"
 
 	@delete query, (status, response) =>
 		if(status is 200 || status is 201 || status is 204)
