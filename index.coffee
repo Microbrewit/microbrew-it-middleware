@@ -19,7 +19,7 @@ modules =
 	user: undefined
 	
 	search: undefined
-	account: undefined
+	account: require './app/account'
 	supplier: undefined
 	beer: undefined
 	origin: undefined
@@ -38,10 +38,9 @@ injectHelpers = () ->
 			module.settings = settings[argv.environment]
 			module.get = utils.http.get
 			module.renderer = utils.renderer
-
-			module.post = () ->
-			module.put = () ->
-			module.delete = () ->
+			module.post = utils.http.post
+			module.put = utils.http.put
+			module.delete = utils.http.delete
 
 getRoutes = () ->
 	availableRoutes = []
@@ -50,6 +49,21 @@ getRoutes = () ->
 	return availableRoutes
 
 injectHelpers()
+
+server.register( register: require('hapi-auth-cookie'), (err) ->
+	if err 
+		cosole.log err 
+
+)
+cache = server.cache(segment: 'sessions', expiresIn: 3 * 24 * 60 * 60 * 1000)
+server.app.cache = cache
+
+server.auth.strategy 'session','cookie',
+	password: 'supersecretpassword'
+	cookie: 'app-cookie'
+	ttl: 24 * 60 * 60 * 1000
+	redirectTo: 'login'
+	isSecure: false
 
 server.route getRoutes()
 server.start () ->
