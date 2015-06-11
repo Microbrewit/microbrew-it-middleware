@@ -13,6 +13,6 @@ article.single-fermentable-form
 			input(type='number' name='ppg')
 			label(for="type") Name
 			input(type="text" name="type")
-			label(for="checkbox") Custom
-			input(type='checkbox' name='custom')
+			label(for='custom') Custom
+			input(type='text' name='custom' pattern="false|true" value="true")
 			button(class="submit" type="submit") Add

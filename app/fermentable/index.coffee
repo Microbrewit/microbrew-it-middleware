@@ -5,7 +5,6 @@ exports.getRoutes = () ->
 			path:'/fermentables' 
 			config: 
 				handler: handler
-				auth: 'session'
 		}
 		{
 			method: 'GET'
@@ -17,6 +16,7 @@ exports.getRoutes = () ->
 			path: '/fermentables/{id}/edit'
 			config:
 				handler: singleFermentableEditHandler
+				auth: 'session'
 		}
 		{
 			method: 'POST'
@@ -89,6 +89,7 @@ singleFermentableEditHandler = (req, reply) =>
 		reply html
 
 singleFermentableEditPutHandler = (req, reply) =>
+	console.log req.payload.name
 	query = 
 		headers:
 			"content-type": "application/json"
@@ -97,17 +98,14 @@ singleFermentableEditPutHandler = (req, reply) =>
 		url: req.url.path
 		id: req.payload.fermentableId
 
-	console.log req.auth.isAuthenticated
-	console.log req.auth.credentials.access_token
 	if(req.auth.isAuthenticated)
 		query.headers['Authorization'] = "Bearer #{req.auth.credentials.access_token}"
 
-	console.log query.url
 	@put query, (status, response) =>
 		if(status is 200 || status is 201 || status is 204)
 			reply.redirect("/fermentables/#{req.payload.fermentableId}")
 		else
-			reply "<div>#{status}</div><div>#{response}</div>"
+			reply "<div>#{status}</div><div>#{JSON.stringify(response)}</div>"
 
 fermentableNewHandler = (req, reply) =>
 	html = @renderer.header navigationElement, "Fermentables"
@@ -124,6 +122,7 @@ fermentablePostHandler = (req, reply) =>
 		body: JSON.stringify(req.payload)
 		url: req.url.path
 	
+	console.log req.payload.custom
 	console.log req.auth.isAuthenticated
 	if(req.auth.isAuthenticated)
 		query.headers['Authorization'] = "Bearer #{req.auth.credentials.access_token}"

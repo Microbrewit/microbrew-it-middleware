@@ -31,7 +31,7 @@ exports.post = (query, onSuccess, onError) ->
 		if(error)
   			onError?(error)	
 		onSuccess?(response.statusCode,JSON.parse body)
-		)
+	)
 
 exports.put = (query, onSuccess, onError) ->
 	console.log "#{@settings.api}#{query.url}"
@@ -41,13 +41,11 @@ exports.put = (query, onSuccess, onError) ->
 		body: query.body
 	,(error, response, body) ->
 		if(error)
-  			onError?(error)	
-		console.log response.statusCode
+			onError?(error)
 		onSuccess?(response.statusCode,JSON.parse body)				
 	)
 
 exports.delete = (query, onSuccess, onError) ->
-	console.log "DELETE DELETE"
 	console.log "#{@settings.api}#{query.url}"
 	request.del(
 		headers: query.headers
