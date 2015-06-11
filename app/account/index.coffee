@@ -38,6 +38,7 @@ exports.getRoutes = () ->
 
 navigationElement = 'account'
 
+# Gets the login page
 loginGetHandler = (req, reply) =>
 	html = @renderer.render
 		data: 
@@ -45,7 +46,7 @@ loginGetHandler = (req, reply) =>
 		template: "#{__dirname}/login.jade"
 
 	reply html
-
+# Sends a post to the api logging ing the user and starting a session.
 loginPostHandler = (req, reply) =>
 	body = 
 		username : req.payload.username
@@ -60,10 +61,23 @@ loginPostHandler = (req, reply) =>
 
 	@post query, (status, response) =>	
 
-		req.auth.session.set response 
-		console.log req.auth
-		reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
+		if(status is 200)
+			url = "/users/" + response.username
+			console.log url
+			@get url, (sta, res) =>
+				console.log sta
+				if(sta is 200)
+					credentials =
+						toke: response
+						user: res.users[0]
+					req.auth.session.set credentials
+					reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
+				else
+					reply '<h2> Failed duh duh duuuuuhhh</h2>'
+		else 
+			reply '<h2> Failed duh duh duuuuuhhh</h2>'
 
+#Logout the use, by clearing the session.
 logoutHandler = (req, reply) =>
 	credentials = req.auth.credentials
 	console.log credentials
