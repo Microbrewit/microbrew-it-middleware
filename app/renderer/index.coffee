@@ -16,7 +16,7 @@ exports.page = (data) ->
 		template: 'public/index.jade'
 		data: data
 
-exports.head = (title) ->
+exports.header = (title) ->
 	title ?= "Homebrewer's home"
 	title += " - Microbrew.it"
 	return @render
