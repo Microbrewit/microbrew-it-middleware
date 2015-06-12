@@ -5,8 +5,6 @@ exports.getRoutes = () ->
 			path:'/fermentables' 
 			config: 
 				handler: list
-				auth: 'session'
-
 		}
 		{
 			method: 'GET'
@@ -68,7 +66,7 @@ list = (req, reply) =>
 			navigationState: 'ingredients'
 			user: user
 			html: @renderer.render
-				template: "public/templates/gridList.jade"
+				template: "public/templates/fermentables/index.jade"
 				data: 
 					headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
 					mode: 'list'
@@ -102,9 +100,11 @@ showEdit = (req, reply) =>
 					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
 					mode: 'edit'
 					item: response.fermentables[0]
+					action: "/fermentables/#{response.fermentables[0].fermentableId}"
 
 showNew = (req, reply) =>
 	reply @renderer.page
+<<<<<<< HEAD
 			title: "Add - Fermentables - Ingredients"
 			navigationState: 'ingredients'
 			user: req.auth.credentials.user
@@ -114,6 +114,17 @@ showNew = (req, reply) =>
 					headline: @renderer.headline "Add Fermentable"
 					mode: 'edit'
 					item: {}
+=======
+		title: "Add - Fermentables - Ingredients"
+		navigationState: 'ingredients'
+		html: @renderer.render
+			template: "public/templates/fermentables/index.jade"
+			data: 
+				headline: @renderer.headline "Add Fermentable"
+				mode: 'edit'
+				item: {}
+				action: "/fermentables"
+>>>>>>> e988c51b204b7762c7950614603aaee94d622def
 
 performEdit = (req, reply) =>
 	query = 
@@ -124,7 +135,7 @@ performEdit = (req, reply) =>
 		url: req.url.path
 		id: req.payload.fermentableId
 
-	if(req.auth.isAuthenticated)
+	if req.auth.isAuthenticated and req.auth.credentials?.token?.access_token
 		query.headers['Authorization'] = "Bearer #{req.auth.credentials.token.access_token}"
 
 	@put query, (status, response) =>
