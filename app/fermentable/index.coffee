@@ -4,7 +4,14 @@ exports.getRoutes = () ->
 			method: 'GET'
 			path:'/fermentables' 
 			config: 
-				handler: list
+            	handler: list
+            	auth: 
+                	mode: 'try',
+                	strategy: 'session'
+            
+           	 	plugins: 
+                	'hapi-auth-cookie': 
+                    	redirectTo: false  
 		}
 		{
 			method: 'GET'
@@ -104,27 +111,16 @@ showEdit = (req, reply) =>
 
 showNew = (req, reply) =>
 	reply @renderer.page
-<<<<<<< HEAD
 			title: "Add - Fermentables - Ingredients"
 			navigationState: 'ingredients'
-			user: req.auth.credentials.user
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
 					headline: @renderer.headline "Add Fermentable"
 					mode: 'edit'
 					item: {}
-=======
-		title: "Add - Fermentables - Ingredients"
-		navigationState: 'ingredients'
-		html: @renderer.render
-			template: "public/templates/fermentables/index.jade"
-			data: 
-				headline: @renderer.headline "Add Fermentable"
-				mode: 'edit'
-				item: {}
-				action: "/fermentables"
->>>>>>> e988c51b204b7762c7950614603aaee94d622def
+					action: "/fermentables"
+
 
 performEdit = (req, reply) =>
 	query = 

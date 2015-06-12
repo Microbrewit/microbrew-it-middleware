@@ -64,7 +64,6 @@ loginPostHandler = (req, reply) =>
 		if status is 200
 			url = "/users/" + response.username
 			@get url, (sta, res) =>
-<<<<<<< HEAD
 				console.log sta
 				if(sta is 200)
 					data =
@@ -75,16 +74,6 @@ loginPostHandler = (req, reply) =>
 							settings: res.users[0].settings
 
 					req.auth.session.set data
-
-=======
-				console.log status
-				if status is 200
-					credentials =
-						token: response.token
-						user: response.users[0]
-						console.log credentials
-					req.auth.session.set credentials
->>>>>>> e988c51b204b7762c7950614603aaee94d622def
 					reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
 				else
 					reply '<h2> Failed duh duh duuuuuhhh</h2>'
