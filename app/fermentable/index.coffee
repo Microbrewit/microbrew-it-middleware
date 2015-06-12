@@ -11,7 +11,15 @@ exports.getRoutes = () ->
 		{
 			method: 'GET'
 			path: '/fermentables/{id}'
-			handler: show
+			config: 
+            	handler: show
+            	auth: 
+                	mode: 'try',
+                	strategy: 'session'
+            
+           	 	plugins: 
+                	'hapi-auth-cookie': 
+                    	redirectTo: false  
 		}
 		{
 			method: 'GET'
@@ -52,10 +60,13 @@ exports.getRoutes = () ->
 	]
 
 list = (req, reply) =>
+	if(req.auth.isAuthenticated)
+		user = req.auth.credentials.user
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
 			title: " Fermentables - Ingredients"
 			navigationState: 'ingredients'
+			user: user
 			html: @renderer.render
 				template: "public/templates/gridList.jade"
 				data: 
@@ -64,10 +75,13 @@ list = (req, reply) =>
 					results: response.fermentables
 
 show = (req, reply) =>
+	if(req.auth.isAuthenticated)
+		user = req.auth.credentials.user
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
 			title: "#{response.fermentables[0].name} - Fermentables - Ingredients"
 			navigationState: 'ingredients'
+			user: user
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
@@ -81,6 +95,7 @@ showEdit = (req, reply) =>
 		reply @renderer.page
 			title: "#{response.fermentables[0].name} - Fermentables - Ingredients"
 			navigationState: 'ingredients'
+			user: req.auth.credentials.user
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
@@ -92,6 +107,7 @@ showNew = (req, reply) =>
 	reply @renderer.page
 			title: "Add - Fermentables - Ingredients"
 			navigationState: 'ingredients'
+			user: req.auth.credentials.user
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
