@@ -14,7 +14,7 @@ nav#main-navigation
 		li
 			a(href='ingredients', class=navigationState === 'ingredients' ? 'active':'') Ingredients
 		li
-			a(ui-sref='search', class=navigationState === 'search' ? 'active' : '') Search
+			a(href='search', class=navigationState === 'search' ? 'active' : '') Search
 		
 		if user
 			li.right
@@ -22,5 +22,5 @@ nav#main-navigation
 					gravatar(url='#{user.gravatar}', size='20px', style='display: inline-block;margin-right: 5px;')
 					| #{user.username}
 		else
-			li.right(ng-if='!user.username')
-				a(ui-sref='user.login', class=navigationState === 'login' ? 'active':'') Login
+			li.right
+				a(href='user', class=navigationState === 'login' ? 'active':'') Login

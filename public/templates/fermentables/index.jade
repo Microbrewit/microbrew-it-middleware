@@ -1,7 +1,9 @@
 article.fermentable
 	!{headline}
-	.the-content
+	section.the-content
 		case mode
+			when 'list'
+				include ../gridList.jade
 			when 'edit'
 				include edit.jade
 			when 'new'

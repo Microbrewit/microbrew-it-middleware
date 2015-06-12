@@ -1,15 +1,13 @@
 doctype html
-html(lang='en', ng-app='Microbrewit')
+html(lang='en')
 	head
 		include head.jade
 	body
 		include navigation.jade
 		
-		article(class=pageClass)
-
-			if html
-				!{html}
-			else
-				div Server error, missing html is undefined.
+		if html
+			!{html}
+		else
+			div Server error, missing html is undefined.
 		
 		include footer.jade
