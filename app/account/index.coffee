@@ -63,14 +63,18 @@ loginPostHandler = (req, reply) =>
 
 		if(status is 200)
 			url = "/users/" + response.username
-			console.log url
 			@get url, (sta, res) =>
 				console.log sta
 				if(sta is 200)
-					credentials =
-						toke: response
-						user: res.users[0]
-					req.auth.session.set credentials
+					data =
+						token: response
+						user:
+							username: res.users[0].username
+							gravatar: res.users[0].gravatar
+							settings: res.users[0].settings
+
+					req.auth.session.set data
+
 					reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
 				else
 					reply '<h2> Failed duh duh duuuuuhhh</h2>'
@@ -79,8 +83,6 @@ loginPostHandler = (req, reply) =>
 
 #Logout the use, by clearing the session.
 logoutHandler = (req, reply) =>
-	credentials = req.auth.credentials
-	console.log credentials
 	req.auth.session.clear()
 	html = "Logout"
 
