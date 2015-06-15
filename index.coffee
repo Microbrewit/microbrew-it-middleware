@@ -24,7 +24,7 @@ modules =
 	beer: require './app/beers'
 	origin: undefined
 	glass: undefined
-	beerStyle: undefined
+	beerStyle: require './app/beerstyles'
 
 	recipe: undefined
 

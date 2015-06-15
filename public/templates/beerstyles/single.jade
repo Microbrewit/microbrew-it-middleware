@@ -1,0 +1,16 @@
+.inner-wrapper
+	.meta
+		span.og(title="OG low and high")
+			| Original Gravity: 
+			strong
+				| #{item.ogLow} - #{item.ogHigh} 
+				mb-colour-box.colour-box(type='lovibond', colour='#{lovibond}', size='20px')
+		span.ppg(title='FG low and high')
+			| Final Gravity: 
+			strong #{item.fgLow} - #{item.fgHigh}
+		span.ibu(title='IBU low and high')
+			| IBU: 
+			strong #{item.ibuLow} - #{item.ibuHigh}
+		span.ibu(title='SRM low and high')
+			| SRM: 
+			strong #{item.srmLow} - #{item.srmHigh}
