@@ -12,8 +12,8 @@ modules =
 
 	fermentable: require './app/fermentable'
 	hop: require './app/hop'
-	yeast: undefined
-	others: undefined
+	yeast: require './app/yeasts'
+	others: require './app/others'
 	
 	brewery: undefined
 	user: undefined
