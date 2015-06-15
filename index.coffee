@@ -22,7 +22,7 @@ modules =
 	account: require './app/account'
 	supplier: undefined
 	beer: require './app/beers'
-	origin: undefined
+	origin: require './app/origins'
 	glass: undefined
 	beerStyle: require './app/beerstyles'
 
