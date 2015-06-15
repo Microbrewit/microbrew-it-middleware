@@ -1,8 +1,10 @@
 .grid-item.search-grid-result
 	a.content(href='users/#{item.username}')
 		.top-circle
-			mb-colour-box.colour-box(absolutecolour='231,200,126', size='50px')
-			img(src='#{item.gravatar}', width='50', height='50', alt='Yeast')
+			if item.gravatar
+				span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('#{item.gravatar}') center center;background-size: contain;")
+			else
+				span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('http://gravatar.com/avatar/#{item.username}?d=mm') center center;background-size: contain;")
 		h3 #{item.username}
 		.type Users
 		
