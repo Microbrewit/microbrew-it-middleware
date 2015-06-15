@@ -89,7 +89,7 @@ conversionFormulas.lovibond =
 	ebc: (lovibond) ->
 		return (lovibond*1.35-0.6)*1.97
 	rgb: (lovibond) ->
-		return '0,0,0'
+		return conversionFormulas['srm']['rgb'](conversionFormulas['lovibond']['srm'](lovibond))
 
 conversionFormulas.srm = 
 	lovibond: (srm) ->
@@ -124,8 +124,8 @@ conversionFormulas.weeks =
 		return weeks * 7
 
 exports.convert = (amount, from, to) ->
-	# console.log "@[#{from}][#{to}](#{amount})"
-	# console.log "= #{conversionFormulas[from][to](amount)}"
+	console.log "@[#{from}][#{to}](#{amount})"
+	console.log "= #{conversionFormulas[from][to](amount)}"
 	return amount if from == to
 
 	# We actually want to convert
