@@ -3,23 +3,27 @@ request = require('request');
 
 
 exports.get = (url, onSuccess, onError) ->
-	req = http.get("#{@settings.api}#{url}", (res) ->
-		response = ''
-		# We receive data in chunks
-		res.on 'data', (chunk) ->
-			response+=chunk
+	try
+		req = http.get("#{@settings.api}#{url}", (res) ->
+			response = ''
+			# We receive data in chunks
+			res.on 'data', (chunk) ->
+				response+=chunk
 
-		# Request ended, write file (if we have any data)
-		res.on 'end', () ->
-			if response isnt ''
-				try
-					response = JSON.parse response
-				catch e 
-					console.log e
-				onSuccess?(200, response)
-	, (err) ->
-		onError?(err)
-	)
+			# Request ended, write file (if we have any data)
+			res.on 'end', () ->
+				if response isnt ''
+					try
+						response = JSON.parse response
+					catch e 
+						console.log e
+					onSuccess?(200, response)
+		, (err) ->
+			onError?(err)
+		)
+	catch e
+		console.log 'catch'
+		onError(e)
 #Takes a query that is posted to the api
 #@param [Object] query, the query contining, url, body, headers.
 exports.post = (query, onSuccess, onError) ->

@@ -1,0 +1,26 @@
+.inner-wrapper
+	.meta
+		if item.aaLow || item.aaHigh
+			span.alpha-acids(title='Alpha acids contribute bitterness in addition to having a mild anti bacterial effect.')
+				| Alpha acids: 
+				strong #{item.aaLow} - #{item.aaHigh}%
+		if item.betaLow || item.betaHigh
+		span.beta-acids(title="Beta acids contribute to a beer's aroma. over Time they may oxidise into compounds that can give beer off-flavours.")
+			| Beta acids: 
+			strong #{item.betaLow}} - #{item.betaHigh}}%
+
+	if item.flavours.length > 0
+		.meta
+			span.flavours
+				| Tastes of 
+				each flavour in item.flavours
+					strong #{flavour},
+	.meta
+		p #{item.flavourDescription}
+section.substitutes
+h2 Substitutes
+.inner-wrapper
+	.center
+		| Sorry, there are no substitutes registered for 
+		strong #{item.name}
+		| .

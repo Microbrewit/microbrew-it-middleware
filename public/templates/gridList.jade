@@ -7,9 +7,11 @@
 						when 'fermentable'
 							include fermentables/gridItem.jade
 						when 'hop'
-							include fermentables/gridItem.jade
+							include hops/gridItem.jade
 						when 'yeast'
 							include fermentables/gridItem.jade
+						when 'beer'
+							include beers/gridItem.jade
 						default
 							p No template for "#{item.dataType}"
 

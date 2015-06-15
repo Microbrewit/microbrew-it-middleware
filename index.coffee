@@ -11,7 +11,7 @@ modules =
 	index: require './app/index'
 
 	fermentable: require './app/fermentable'
-	hop: undefined
+	hop: require './app/hop'
 	yeast: undefined
 	others: undefined
 	
@@ -27,6 +27,8 @@ modules =
 	beerStyle: undefined
 
 	recipe: undefined
+
+	error: require './app/error'
 
 utils =
 	renderer: require './app/renderer'

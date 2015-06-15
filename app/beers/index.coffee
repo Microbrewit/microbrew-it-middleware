@@ -3,7 +3,11 @@ exports.getRoutes = () ->
 		{
 			method: 'GET'
 			path:'/beers' 
-			handler: handler
+			handler: (req, reply) -> 
+				try
+					handler(req, reply)
+				catch e 
+					console.log e
 		}
 		{
 			method: 'GET'
@@ -43,18 +47,40 @@ makePrevNextLink = (query, pathname, currentResults) ->
 	}
 
 handler = (req, reply) =>
-	@get req.url.path, (status, response) =>
-		pagination = makePrevNextLink(req.url.query, req.url.pathname, response.beers.length)
-		reply @renderer.page
-			head: @renderer.head 'Beers'
-			navigation: @renderer.navigation 'beers'
-			headline: @renderer.headline 'Beers'
-			html: @renderer.render
-				template: "#{__dirname}/beers.jade"
-				data: 
-					results: response.beers
-					nextPage: pagination.next
-					prevPage: pagination.prev
+	try
+		@get req.url.path, (status, response) =>
+			console.log 'here?'
+			pagination = makePrevNextLink(req.url.query, req.url.pathname, response.beers.length)
+			reply @renderer.page
+				title: "Beers"
+				navigationState: 'beers'
+				user: req?.auth?.credentials?.user
+				html: @renderer.render
+					template: "public/templates/beers/index.jade"
+					data: 
+						headline: @renderer.headline 'Beers'
+						mode: 'list'
+						user: req?.auth?.credentials?.user
+						results: response.beers
+						nextPage: pagination.next
+						prevPage: pagination.prev
+		, (err) ->
+			console.log 'error here?'
+			reply 'ERROR'
+	catch e 
+		reply 'ERROR 2'
+	# @get req.url.path, (status, response) =>
+		
+	# 	reply @renderer.page
+	# 		head: @renderer.head 'Beers'
+	# 		navigation: @renderer.navigation 'beers'
+	# 		headline: @renderer.headline 'Beers'
+	# 		html: @renderer.render
+	# 			template: "#{__dirname}/beers.jade"
+	# 			data: 
+	# 				results: response.beers
+	# 				nextPage: pagination.next
+	# 				prevPage: pagination.prev
 
 
 singleHandler = (req, reply) =>

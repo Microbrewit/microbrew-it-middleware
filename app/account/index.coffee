@@ -32,7 +32,7 @@ exports.getRoutes = () ->
             
            	 	plugins: 
                 	'hapi-auth-cookie': 
-                    	redirectTo: false                            
+                    	redirectTo: '/'                            
 		}
 	]
 

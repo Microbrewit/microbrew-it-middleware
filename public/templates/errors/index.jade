@@ -1,0 +1,13 @@
+article.error
+	!{headline}
+	section.the-content
+		case mode
+			when 404
+				p "404 not found."
+				//- include 404.jade
+			when 500
+				p "500 internal server error"
+				//- include 500.jade
+			default
+				p "Error."
+				//- include single.jade

@@ -1,8 +1,9 @@
-.header-bubble.inner-wrapper
-	.icon
-		//- mb-colour-box.colour-box(absolutecolour='212,78,0', size='76px')
-		img(src='images/fermentable-large.png', alt='Malt')
-h1 #{headline}
-if subheader
-	.subheader
-		span #{subheader}
+header
+	.header-bubble.inner-wrapper
+		.icon(style="border-radius:50%;background:#333")
+			//- mb-colour-box.colour-box(absolutecolour='212,78,0', size='76px')
+			img(src='images/fermentable-large.png', alt='Malt')
+	h1 #{headline}
+	if subheader
+		.subheader
+			span #{subheader}

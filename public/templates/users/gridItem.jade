@@ -1,0 +1,11 @@
+.grid-item.search-grid-result
+	a.content(href='yeasts/#{result.yeastId}')
+		.top-circle
+			mb-colour-box.colour-box(absolutecolour='231,200,126', size='50px')
+			img(src='images/yeast-large.png', width='50', height='50', alt='Yeast')
+		h3 #{result.name}
+		.type #{result.species} Yeast
+		.meta
+			.meta-table
+				.meta-cell #{result.productCode}
+				.meta-cell #{result.supplier.name}

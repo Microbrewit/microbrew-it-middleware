@@ -6,7 +6,7 @@ nav#main-navigation
 		li
 			a(href='/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
 		li
-			a(href='/beer', class=navigationState === 'beer' ? 'active':'') Beer
+			a(href='/beers', class=navigationState === 'beers' ? 'active':'') Beer
 		li
 			a(href='/breweries', class=navigationState === 'breweries' ? 'active':'') Breweries
 		li
@@ -23,4 +23,4 @@ nav#main-navigation
 					| #{user.username}
 		else
 			li.right
-				a(href='user', class=navigationState === 'login' ? 'active':'') Login
+				a(href='login', class=navigationState === 'login' ? 'active':'') Login

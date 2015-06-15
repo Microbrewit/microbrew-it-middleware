@@ -2,7 +2,7 @@ exports.getRoutes = () ->
 	return [
 		{
 			method: 'GET'
-			path:'/fermentables' 
+			path:'/hops' 
 			config: 
 				handler: list
 				auth: 
@@ -15,7 +15,7 @@ exports.getRoutes = () ->
 		}
 		{
 			method: 'GET'
-			path: '/fermentables/{id}'
+			path: '/hops/{id}'
 			config: 
 				handler: show
 				auth: 
@@ -28,35 +28,35 @@ exports.getRoutes = () ->
 		}
 		{
 			method: 'GET'
-			path: '/fermentables/{id}/edit'
+			path: '/hops/{id}/edit'
 			config:
 				handler: showEdit
 				auth: 'session'
 		}
 		{
 			method: 'POST'
-			path: '/fermentables/{id}'
+			path: '/hops/{id}'
 			config: 
 				handler: performEdit
 				auth: 'session'
 		}
 		{
 			method: 'GET'
-			path: '/fermentables/new'
+			path: '/hops/new'
 			config: 
 				handler: showNew
 				auth: 'session'
 		}
 		{
 			method: 'POST'
-			path: '/fermentables'
+			path: '/hops'
 			config: 
 				handler: performNew
 				auth: 'session'
 		}
 		{
 			method: 'GET'
-			path: '/fermentables/{id}/delete'
+			path: '/hops/{id}/delete'
 			config: 
 				handler: performDelete
 				auth: 'session'
@@ -69,57 +69,57 @@ list = (req, reply) =>
 		user = req.auth.credentials.user
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
-			title: " Fermentables - Ingredients"
+			title: " hops - Ingredients"
 			navigationState: 'ingredients'
 			user: user
 			html: @renderer.render
-				template: "public/templates/fermentables/index.jade"
+				template: "public/templates/hops/index.jade"
 				data: 
-					headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
+					headline: @renderer.headline 'Hops', 'Malts, adjuncts, sugars'
 					mode: 'list'
-					results: response.fermentables
+					results: response.hops
 
 show = (req, reply) =>
 	if(req.auth.isAuthenticated)
 		user = req.auth.credentials.user
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
-			title: "#{response.fermentables[0].name} - Fermentables - Ingredients"
+			title: "#{response.hops[0].name} - hops - Ingredients"
 			navigationState: 'ingredients'
 			user: user
 			html: @renderer.render
-				template: "public/templates/fermentables/index.jade"
+				template: "public/templates/hops/index.jade"
 				data: 
-					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
+					headline: @renderer.headline "#{response.hops[0].name}", "#{response.hops[0].type}"
 					mode: 'single'
-					item: response.fermentables[0]
+					item: response.hops[0]
 
 showEdit = (req, reply) =>
 	url = req.url.path.substring(0,req.url.path.length - 5)
 	@get url, (status, response) =>
 		reply @renderer.page
-			title: "#{response.fermentables[0].name} - Fermentables - Ingredients"
+			title: "#{response.hops[0].name} - hops - Ingredients"
 			navigationState: 'ingredients'
 			user: req.auth.credentials.user
 			html: @renderer.render
-				template: "public/templates/fermentables/index.jade"
+				template: "public/templates/hops/index.jade"
 				data: 
-					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
+					headline: @renderer.headline "#{response.hops[0].name}", "#{response.hops[0].type}"
 					mode: 'edit'
-					item: response.fermentables[0]
-					action: "/fermentables/#{response.fermentables[0].fermentableId}"
+					item: response.hops[0]
+					action: "/hops/#{response.hops[0].hopId}"
 
 showNew = (req, reply) =>
 	reply @renderer.page
-			title: "Add - Fermentables - Ingredients"
+			title: "Add - hops - Ingredients"
 			navigationState: 'ingredients'
 			html: @renderer.render
-				template: "public/templates/fermentables/index.jade"
+				template: "public/templates/hops/index.jade"
 				data: 
-					headline: @renderer.headline "Add Fermentable"
+					headline: @renderer.headline "Add hop"
 					mode: 'edit'
 					item: {}
-					action: "/fermentables"
+					action: "/hops"
 
 
 performEdit = (req, reply) =>
@@ -129,14 +129,14 @@ performEdit = (req, reply) =>
 			accept: "application/json"
 		body: JSON.stringify(req.payload)
 		url: req.url.path
-		id: req.payload.fermentableId
+		id: req.payload.hopId
 
 	if req.auth.isAuthenticated and req.auth.credentials?.token?.access_token
 		query.headers['Authorization'] = "Bearer #{req.auth.credentials.token.access_token}"
 
 	@put query, (status, response) =>
 		if(status is 200 || status is 201 || status is 204)
-			reply.redirect("/fermentables/#{req.payload.fermentableId}")
+			reply.redirect("/hops/#{req.payload.hopId}")
 		else
 			reply "<div>#{status}</div><div>#{JSON.stringify(response)}</div>"
 
@@ -159,7 +159,7 @@ performNew = (req, reply) =>
 	@post query, (status, response) =>
 		if(status is 200 || status is 201 || status is 204)
 			console.log response	
-			reply.redirect("/fermentables/#{response.fermentableId}")
+			reply.redirect("/hops/#{response.hopId}")
 		else
 			reply "<div>#{status}</div><div>#{JSON.stringify(response)}</div>"
 
@@ -175,6 +175,6 @@ performDelete = (req, reply) =>
 	@delete query, (status, response) =>
 		if(status is 200 || status is 201 || status is 204)
 			console.log response	
-			reply.redirect("/fermentables")
+			reply.redirect("/hops")
 		else
 			reply "<div>#{status}</div><div>#{JSON.stringify(response)}</div>"

@@ -2,9 +2,12 @@ fs = require 'fs'
 jade = require 'jade'
 
 exports.render = (renderObj) ->
+	console.log 'renderer.render'
+	console.log @user
 	if renderObj.template
 		options = renderObj.data
 		options ?= {}
+		options.user = @user
 		options.pretty = true
 		options.compileDebug = true
 		return jade.renderFile(renderObj.template, options)
