@@ -23,7 +23,7 @@ modules =
 	supplier: require './app/suppliers'
 	beer: require './app/beers'
 	origin: require './app/origins'
-	glass: undefined
+	glass: require './app/glasses'
 	beerStyle: require './app/beerstyles'
 
 	recipe: undefined
