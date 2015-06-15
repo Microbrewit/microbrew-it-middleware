@@ -44,7 +44,7 @@ makePrevNextLink = (query, pathname, currentResults) ->
 
 list = (req, reply) =>
 	@get req.url.path, (status, response) =>
-		#pagination = makePrevNextLink(req.url.query, req.url.pathname, response.beers.length)
+		pagination = makePrevNextLink(req.url.query, req.url.pathname, response.users.length)
 		reply @renderer.page
 			title: "Brewers"
 			navigationState: 'brewers'
@@ -56,8 +56,8 @@ list = (req, reply) =>
 					mode: 'list'
 					user: req?.auth?.credentials?.user
 					results: response.users
-		#			nextPage: pagination.next
-		#			prevPage: pagination.prev
+					nextPage: pagination.next
+					prevPage: pagination.prev
 
 show = (req, reply) =>
 	if(req.auth.isAuthenticated)
