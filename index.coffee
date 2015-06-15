@@ -14,6 +14,7 @@ modules =
 	hop: require './app/hop'
 	yeast: require './app/yeasts'
 	others: require './app/others'
+	ingredients: require './app/ingredients'
 	
 	brewery: require './app/breweries'
 	user: require './app/users'

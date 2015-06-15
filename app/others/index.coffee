@@ -78,6 +78,14 @@ list = (req, reply) =>
 					headline: @renderer.headline 'Others', 'Fruits, spices, miscellaneous'
 					mode: 'list'
 					results: response.others
+					subNavState: 'others'
+					subnav: [
+						{href: '/fermentables', label: 'Fermentables', activeState: 'fermentables'}
+						{href: '/hops', label: 'Hops', activeState: 'hops'}
+						{href: '/yeasts', label: 'Yeasts', activeState: 'yeasts'}
+						{href: '/others', label: 'Others', activeState: 'others'}
+						{action: '/search/ingredients', label: 'Search', activeState: 'search'}
+					]
 
 show = (req, reply) =>
 	if(req.auth.isAuthenticated)

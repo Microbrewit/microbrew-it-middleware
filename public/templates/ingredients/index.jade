@@ -1,0 +1,10 @@
+article.hops
+	!{headline}
+	include ../../subnavigation.jade
+	section.the-content
+		if results
+			include ../gridList.jade
+		else if hits
+			p "Query #{query} returned #{hits}"
+		else
+			p "Search for ingredients"

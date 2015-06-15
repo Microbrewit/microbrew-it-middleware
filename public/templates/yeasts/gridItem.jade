@@ -1,11 +1,11 @@
-.grid-item.search-grid-result
-	a.content(href='yeasts/#{item.yeastId}')
+.grid-result.search-grid-result
+	a.content(href='yeasts/#{result.yeastId}')
 		.top-circle
 			span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background:rgba(231,200,126,1);")
 			img(src='images/yeast-large.png', width='50', height='50', alt='Yeast')
-		h3 #{item.name}
-		.type #{item.species} Yeast
+		h3 #{result.name}
+		.type #{result.species} Yeast
 		.meta
 			.meta-table
-				.meta-cell #{item.productCode}
-				.meta-cell #{item.supplier.name}
+				.meta-cell #{result.productCode}
+				.meta-cell #{result.supplier.name}

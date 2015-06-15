@@ -1,12 +1,12 @@
-.grid-item.search-grid-result
-	a.content(href='beers/#{item.id}')
+.grid-result.search-grid-result
+	a.content(href='beers/#{result.id}')
 		.top-circle
-			span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background:rgba(#{convert(item.srm.standard, 'srm', 'rgb')},1);")
+			span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background:rgba(#{convert(result.srm.standard, 'srm', 'rgb')},1);")
 			img(src='images/tulip-large.png', width='50', height='50', alt='Beer')
-		h3 #{item.name}
-		.type #{item.beerStyle.name}
+		h3 #{result.name}
+		.type #{result.beerStyle.name}
 		.meta
 			.meta-table
-				.meta-cell.third #{item.abv.standard.toFixed(1)}% ABV
-				.meta-cell.third #{item.ibu.tinseth} IBU
-				.meta-cell.third #{item.srm.standard} SRM
+				.meta-cell.third #{result.abv.standard.toFixed(1)}% ABV
+				.meta-cell.third #{result.ibu.tinseth} IBU
+				.meta-cell.third #{result.srm.standard} SRM

@@ -1,0 +1,12 @@
+if subnav
+	nav.sub-nav
+		ul
+			each navItem in subnav
+				if navItem.action
+					li.search-box
+						form(action='#{navItem.action}' method='GET')
+							input(name='query', type='text', placeholder='search', value=query ? query : '')
+							button.searchButton Search
+				else
+					li
+						a(href='#{navItem.href}' class="#{subNavState === navItem.activeState ? 'active':''}") #{navItem.label}

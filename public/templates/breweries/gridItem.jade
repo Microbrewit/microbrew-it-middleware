@@ -1,10 +1,12 @@
-.grid-item.search-grid-result
-	a.content(href='breweries/#{item.breweryId}')
+.grid-result.search-grid-result
+	a.content(href='breweries/#{result.breweryId}')
 		.top-circle
-			gravatar(url='#{item.gravatar}}', size='50px')
-		h3 #{item.name}
-		.type #{item.type}
+			gravatar(url='#{result.gravatar}}', size='50px')
+		h3 #{result.name}
+		.type #{result.type}
 		.meta
 			.meta-table
-				.meta-cell #{item.beers.length} Beers
-				.meta-cell #{item.members.length} Brewers
+				if result.beers
+					.meta-cell #{result.beers.length} Beers
+				if result.members
+					.meta-cell #{result.members.length} Brewers

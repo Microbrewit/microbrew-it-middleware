@@ -1,5 +1,8 @@
 article.fermentable
 	!{headline}
+	case mode
+		when 'list'
+			include ../../subnavigation.jade
 	section.the-content
 		case mode
 			when 'list'

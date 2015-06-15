@@ -1,0 +1,21 @@
+.the-list
+	h2 Beers
+	.inner-wrapper
+		if item.beers && item.beers.length > 0
+			ul.search-grid-results
+				each result in item.beers
+					li
+						include ../beers/gridItem.jade
+		else
+			p #{item.username.charAt(0).toUpperCase()}#{item.username.slice(1)} has not added any beers.
+
+.the-list
+	h2 Breweries
+	.inner-wrapper
+		if item.breweries && item.breweries.length > 0
+			ul.search-grid-results
+				each result in item.breweries
+					li
+						include ../breweries/gridItem.jade
+		else
+			p #{item.username.charAt(0).toUpperCase()}#{item.username.slice(1)} is not a member of any breweries.

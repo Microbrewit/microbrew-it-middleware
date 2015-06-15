@@ -1,9 +1,9 @@
 .the-list
 	.inner-wrapper
 		ul.search-grid-results
-			each item in results
+			each result in results
 				li
-					case item.dataType
+					case result.dataType
 						when 'fermentable'
 							include fermentables/gridItem.jade
 						when 'hop'
