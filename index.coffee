@@ -20,7 +20,7 @@ modules =
 	
 	search: undefined
 	account: require './app/account'
-	supplier: undefined
+	supplier: require './app/suppliers'
 	beer: require './app/beers'
 	origin: require './app/origins'
 	glass: undefined
