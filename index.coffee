@@ -16,7 +16,7 @@ modules =
 	others: require './app/others'
 	
 	brewery: require './app/breweries'
-	user: undefined
+	user: require './app/users'
 	
 	search: undefined
 	account: require './app/account'

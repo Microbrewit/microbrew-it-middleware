@@ -7,8 +7,8 @@ exports.getRoutes = () ->
 		}
 		{
 			method: 'GET'
-			path: '/users/{id}'
-			handler: single
+			path: '/users/{username}'
+			handler: show
 		}
 	]
 
@@ -44,7 +44,7 @@ makePrevNextLink = (query, pathname, currentResults) ->
 
 list = (req, reply) =>
 	@get req.url.path, (status, response) =>
-		pagination = makePrevNextLink(req.url.query, req.url.pathname, response.beers.length)
+		#pagination = makePrevNextLink(req.url.query, req.url.pathname, response.beers.length)
 		reply @renderer.page
 			title: "Brewers"
 			navigationState: 'brewers'
@@ -56,5 +56,20 @@ list = (req, reply) =>
 					mode: 'list'
 					user: req?.auth?.credentials?.user
 					results: response.users
-					nextPage: pagination.next
-					prevPage: pagination.prev
+		#			nextPage: pagination.next
+		#			prevPage: pagination.prev
+
+show = (req, reply) =>
+	if(req.auth.isAuthenticated)
+		user = req.auth.credentials.user
+	@get req.url.path, (status, response) =>
+		reply @renderer.page
+			title: "#{response.users[0].username} - users - Users"
+			navigationState: 'ingredients'
+			user: user
+			html: @renderer.render
+				template: "public/templates/users/index.jade"
+				data: 
+					headline: @renderer.headline "#{response.users[0].username}", "#{response.users[0].type}"
+					mode: 'single'
+					item: response.users[0]
