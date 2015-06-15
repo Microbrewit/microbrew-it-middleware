@@ -1,5 +1,6 @@
 fs = require 'fs'
 jade = require 'jade'
+conversion = require '../utils/convert.coffee'
 
 exports.render = (renderObj) ->
 	console.log 'renderer.render'
@@ -10,6 +11,7 @@ exports.render = (renderObj) ->
 		options.user = @user
 		options.pretty = true
 		options.compileDebug = true
+		options.convert = conversion.convert
 		return jade.renderFile(renderObj.template, options)
 	else
 		return renderObj.data
