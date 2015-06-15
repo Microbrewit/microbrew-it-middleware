@@ -15,7 +15,7 @@ modules =
 	yeast: require './app/yeasts'
 	others: require './app/others'
 	
-	brewery: undefined
+	brewery: require './app/breweries'
 	user: undefined
 	
 	search: undefined
