@@ -9,6 +9,7 @@
   "author": "Torstein Thune <torstein@gmail.com> (http://thune.io/)",
   "license": "MIT",
   "dependencies": {
+    "avatar-generator": "^1.0.6",
     "handlebars": "^3.0.3",
     "hapi": "^8.6.1",
     "hapi-auth-cookie": "2.2.0",

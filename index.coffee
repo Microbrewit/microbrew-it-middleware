@@ -26,6 +26,7 @@ modules =
 	origin: require './app/origins'
 	glass: require './app/glasses'
 	beerStyle: require './app/beerstyles'
+	randomize: require './app/randomize'
 
 	recipe: undefined
 

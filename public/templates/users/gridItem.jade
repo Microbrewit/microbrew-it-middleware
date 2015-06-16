@@ -4,7 +4,7 @@
 			if result.gravatar
 				span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('#{result.gravatar}') center center;background-size: contain;")
 			else
-				span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('http://gravatar.com/avatar/#{result.username}?d=mm') center center;background-size: contain;")
+				span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('/random/#{result.username}?size=50') center center;background-size: contain;")
 		h3 #{result.username}
 		.type Users
 		
