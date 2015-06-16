@@ -4,7 +4,6 @@ article.hops
 	section.the-content
 		if results
 			include ../gridList.jade
-		else if hits
-			p "Query #{query} returned #{hits}"
-		else
-			p "Search for ingredients"
+		else if query
+			.inner-wrapper
+				.center You search for "#{query}" returned #{hits} hits.
