@@ -40,7 +40,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/breweries/index.jade"
 				data: 
-					headline: @renderer.headline 'Breweries', 'Breweries, Microbrweries, Nanobreweries'
+					headline: @renderer.headline 'Breweries', 'Breweries, Microbreweries, Nanobreweries'
 					mode: 'list'
 					results: response.breweries
 
