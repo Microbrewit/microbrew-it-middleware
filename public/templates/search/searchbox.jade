@@ -1,0 +1,6 @@
+form.search-input(action='/search', method='GET')
+	.inner-wrapper
+		input#searchQuery.big-search-box(placeholder='Search Microbrew.it', name='query', value="#{query ? query : ''}")
+		//-- select.search-endpoint(ng-model='endpoint', ng-options='endpoint for endpoint in endpoints')
+		if hits
+			.results-number Number of results: #{hits}

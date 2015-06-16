@@ -19,7 +19,7 @@ modules =
 	brewery: require './app/breweries'
 	user: require './app/users'
 	
-	search: undefined
+	search: require './app/search'
 	account: require './app/account'
 	supplier: require './app/suppliers'
 	beer: require './app/beers'
