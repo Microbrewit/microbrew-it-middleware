@@ -1,9 +1,10 @@
 header
 	.header-bubble.inner-wrapper
-		.icon(style="border-radius:50%;background:#333")
-			//- mb-colour-box.colour-box(absolutecolour='212,78,0', size='76px')
-			img(src='images/fermentable-large.png', alt='Malt')
+		.icon
+			.colour-box
+				span(class='bubble gravity' style="display:inline-block;width:76px;height:76px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('images/fermentable-large.png') center center;background-color: #333;background-size: contain;")
 	h1 #{headline}
 	if subheader
 		.subheader
 			span #{subheader}
+
