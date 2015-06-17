@@ -76,6 +76,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/glasses/index.jade"
 				data: 
+					type:'glasses' 
 					headline: @renderer.headline 'glasses', 'Malts, adjuncts, sugars'
 					mode: 'list'
 					results: response.glasses
@@ -91,6 +92,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/glasses/index.jade"
 				data: 
+					type:'glasses' 
 					headline: @renderer.headline "#{response.glasses[0].name}", "#{response.glasses[0].type}"
 					mode: 'single'
 					item: response.glasses[0]
@@ -105,6 +107,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/glasses/index.jade"
 				data: 
+					type:'glasses' 
 					headline: @renderer.headline "#{response.glasses[0].name}", "#{response.glasses[0].type}"
 					mode: 'edit'
 					item: response.glasses[0]
@@ -117,6 +120,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/glasses/index.jade"
 				data: 
+					type:'glasses' 
 					headline: @renderer.headline "Add glass"
 					mode: 'edit'
 					item: {}

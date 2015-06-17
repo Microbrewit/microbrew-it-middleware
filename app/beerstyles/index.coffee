@@ -72,10 +72,11 @@ list = (req, reply) =>
 		reply @renderer.page
 			title: " beerStyles - Beer Styles"
 			navigationState: 'beerStyles'
-			user: user
+			user: req?.auth?.credentials?.user
 			html: @renderer.render
 				template: "public/templates/beerStyles/index.jade"
 				data: 
+					type:'beerstyles' 
 					headline: @renderer.headline 'beerStyles', ''
 					mode: 'list'
 					results: response.beerStyles
@@ -87,10 +88,11 @@ show = (req, reply) =>
 		reply @renderer.page
 			title: "#{response.beerStyles[0].name} - beerStyles - Beer Styles"
 			navigationState: 'beerStyles'
-			user: user
+			user: req?.auth?.credentials?.user
 			html: @renderer.render
 				template: "public/templates/beerStyles/index.jade"
 				data: 
+					type:'beerstyles' 
 					headline: @renderer.headline "#{response.beerStyles[0].name}", "#{response.beerStyles[0].type}"
 					mode: 'single'
 					item: response.beerStyles[0]
@@ -101,10 +103,11 @@ showEdit = (req, reply) =>
 		reply @renderer.page
 			title: "#{response.beerStyles[0].name} - beerStyles - Beer Styles"
 			navigationState: 'beerStyles'
-			user: req.auth.credentials.user
+			user: req?.auth?.credentials?.user
 			html: @renderer.render
 				template: "public/templates/beerStyles/index.jade"
 				data: 
+					type:'beerstyles' 
 					headline: @renderer.headline "#{response.beerStyles[0].name}", "#{response.beerStyles[0].type}"
 					mode: 'edit'
 					item: response.beerStyles[0]
@@ -117,6 +120,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/beerStyles/index.jade"
 				data: 
+					type:'beerstyles' 
 					headline: @renderer.headline "Add beerstyle"
 					mode: 'edit'
 					item: {}

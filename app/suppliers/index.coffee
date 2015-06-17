@@ -75,6 +75,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/suppliers/index.jade"
 				data: 
+					type:'suppliers' 
 					headline: @renderer.headline 'suppliers', 'Malts, adjuncts, sugars'
 					mode: 'list'
 					results: response.suppliers
@@ -90,6 +91,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/suppliers/index.jade"
 				data: 
+					type:'suppliers' 
 					headline: @renderer.headline "#{response.suppliers[0].name}", "#{response.suppliers[0].type}"
 					mode: 'single'
 					item: response.suppliers[0]
@@ -104,6 +106,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/suppliers/index.jade"
 				data: 
+					type:'suppliers' 
 					headline: @renderer.headline "#{response.suppliers[0].name}", "#{response.suppliers[0].type}"
 					mode: 'edit'
 					item: response.suppliers[0]
@@ -116,6 +119,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/suppliers/index.jade"
 				data: 
+					type:'suppliers' 
 					headline: @renderer.headline "Add supplier"
 					mode: 'edit'
 					item: {}

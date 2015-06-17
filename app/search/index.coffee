@@ -38,6 +38,7 @@ handler = (req, reply, results = undefined, query, hits) =>
 		html: @renderer.render
 			template: "public/templates/search/index.jade"
 			data: 
+				type:'search' 
 				headline: @renderer.headline "Search"
 				results: results
 				query: query

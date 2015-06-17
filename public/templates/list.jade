@@ -1,10 +1,10 @@
 .inner-wrapper
-	ul.grid-list
+	ul
 		each result in results
 			li
 				case result.dataType
 					when 'fermentable'
-						include fermentables/gridItem.jade
+						include fermentables/listItem.jade
 					when 'hop'
 						include hops/gridItem.jade
 					when 'brewery'
@@ -26,8 +26,7 @@
 					default
 						p No template for "#{item.dataType}"
 
-	.buttonWrapper.center
-		if prevPage
-			a(href=prevPage, class="prev") Previous page
-		if nextPage
-			a(href=nextPage, class="next") Next page
+	if prevPage
+		a(href=prevPage, class="prev") Previous page
+	if nextPage
+		a(href=nextPage, class="next") Next page

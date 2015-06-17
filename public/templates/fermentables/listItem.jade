@@ -1,0 +1,13 @@
+div.fermentable.list-item.cf(style="padding:10px;background:rgba(#{convert(result.lovibond, 'lovibond', 'rgb')},0.3);border: 1px solid rgba(0,0,0,0.2);margin:0;")
+	.left-circle(style="float:left;margin-right: 10px;")
+		span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('images/fermentable-large.png') center center;background-sizing:cover;background-color:rgba(#{convert(result.lovibond, 'lovibond', 'rgb')},1);")
+
+	h3(style="padding:0;margin:0;margin-right: 10px;float:left;line-height:52px;font-size:24px;font-weight: normal;display:inline-block")
+		if result.amount
+			span.amount #{result.amount}
+		span.amount(style="font-size:18px;margin-right: 10px;") 2000 grams
+		span.name #{result.name}
+
+	//- ul.meta(style="float:left;")
+	//- 	li(title='Lovibond is a measure of colour') #{result.lovibond}°L
+	//- 	li(title='PPG is the amount of sugar') #{result.ppg} PPG

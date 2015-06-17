@@ -75,6 +75,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/hops/index.jade"
 				data: 
+					type:'hops' 
 					headline: @renderer.headline 'Hops', 'Malts, adjuncts, sugars'
 					mode: 'list'
 					results: response.hops
@@ -98,6 +99,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/hops/index.jade"
 				data: 
+					type:'hops' 
 					headline: @renderer.headline "#{response.hops[0].name}", "#{response.hops[0].type}"
 					mode: 'single'
 					item: response.hops[0]
@@ -112,6 +114,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/hops/index.jade"
 				data: 
+					type:'hops' 
 					headline: @renderer.headline "#{response.hops[0].name}", "#{response.hops[0].type}"
 					mode: 'edit'
 					item: response.hops[0]
@@ -124,6 +127,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/hops/index.jade"
 				data: 
+					type:'hops' 
 					headline: @renderer.headline "Add hop"
 					mode: 'edit'
 					item: {}

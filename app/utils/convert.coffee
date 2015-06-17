@@ -124,8 +124,8 @@ conversionFormulas.weeks =
 		return weeks * 7
 
 exports.convert = (amount, from, to) ->
-	console.log "@[#{from}][#{to}](#{amount})"
-	console.log "= #{conversionFormulas[from][to](amount)}"
+	# console.log "@[#{from}][#{to}](#{amount})"
+	# console.log "= #{conversionFormulas[from][to](amount)}"
 	return amount if from == to
 
 	# We actually want to convert

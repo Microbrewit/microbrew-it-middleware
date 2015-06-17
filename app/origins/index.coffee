@@ -75,6 +75,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/origins/index.jade"
 				data: 
+					type:'origins' 
 					headline: @renderer.headline 'origins', 'Malts, adjuncts, sugars'
 					mode: 'list'
 					results: response.origins
@@ -90,6 +91,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/origins/index.jade"
 				data: 
+					type:'origins' 
 					headline: @renderer.headline "#{response.origins[0].name}", "#{response.origins[0].type}"
 					mode: 'single'
 					item: response.origins[0]
@@ -104,6 +106,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/origins/index.jade"
 				data: 
+					type:'origins' 
 					headline: @renderer.headline "#{response.origins[0].name}", "#{response.origins[0].type}"
 					mode: 'edit'
 					item: response.origins[0]
@@ -116,6 +119,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/origins/index.jade"
 				data: 
+					type:'origins' 
 					headline: @renderer.headline "Add origin"
 					mode: 'edit'
 					item: {}

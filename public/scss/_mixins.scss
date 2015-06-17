@@ -1,0 +1,26 @@
+// Clearfix
+.cf {
+	*zoom: 1;
+	
+	&:before,&:after {
+		content: " "; /* 1 */
+		display: table; /* 2 */
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// Standard shadow
+%shadow {
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+// Filter
+@mixin filter($var) {
+	-webkit-filter: $var;
+	-moz-filter: $var;
+	-ms-filter: $var;
+	-o-filter: $var;
+	filter: $var;
+}

@@ -52,6 +52,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/users/index.jade"
 				data: 
+					type:'users' 
 					headline: @renderer.headline 'Brewers'
 					mode: 'list'
 					user: req?.auth?.credentials?.user
@@ -70,6 +71,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/users/index.jade"
 				data: 
+					type:'users' 
 					headline: @renderer.headline "#{response.users[0].username}", "#{response.users[0].type}"
 					mode: 'single'
 					item: response.users[0]

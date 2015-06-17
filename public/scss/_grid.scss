@@ -1,0 +1,14 @@
+// --- Lattice configuration ---
+
+div, article, section, footer, header {
+	box-sizing: border-box;
+}
+
+.inner-wrapper {
+	@extend .cf;
+	@include col(12, 0, false);
+	max-width: 1000px;
+	width: 100%;
+	margin: 25px auto;
+	clear: both;
+}

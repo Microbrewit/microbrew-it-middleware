@@ -1,0 +1,54 @@
+$grid-width: 100%;
+$number-of-columns: 12;
+$default-grid-gutter: 25px;
+@import "../../bower_components/lattice/scss/grid";
+@import "mixins";
+@import "grid";
+@import "fonts";
+$normal-font-size: 15px;
+$link-color: #00ABD6;
+
+html {
+	margin:0;
+	font-family: Source Sans Pro;
+	line-height: 1.4;
+	font-size: $normal-font-size;
+}
+
+a {
+	text-decoration: none;
+	color: $link-color;
+}
+
+body {
+	margin: 0;
+}
+
+.the-content {
+	padding: 25px 0;
+	background: #efefef;
+	border-top: 1px solid #ccc;
+}
+
+.center {
+	text-align:center;
+	margin: 0 auto;
+}
+
+.inner-wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+@import "buttons";
+
+@import "navigation";
+@import "subnav";
+
+@import "search";
+
+@import "headline";
+
+@import "gridItem";
+
+@import "footer";

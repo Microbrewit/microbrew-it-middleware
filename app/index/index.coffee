@@ -3,13 +3,18 @@ exports.getRoutes = () ->
 			method: 'GET'
 			path:'/'
 			config: 
-            	handler: handler
-            	auth: 
-                	mode: 'try',
-                	strategy: 'session'
+				handler: handler
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 	}]
 
 handler = (req, reply) =>
+	console.log '/ handler'
+	console.log req?.auth?.credentials?.user
 	reply @renderer.page
 		title: "Home of homebrewers"
 		navigationState: 'home'

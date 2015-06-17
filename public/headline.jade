@@ -1,10 +1,69 @@
-header
-	.header-bubble.inner-wrapper
-		.icon
-			.colour-box
-				span(class='bubble gravity' style="display:inline-block;width:76px;height:76px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background: url('images/fermentable-large.png') center center;background-color: #333;background-size: contain;")
-	h1 #{headline}
-	if subheader
-		.subheader
-			span #{subheader}
+if headline
+	header
+		.inner-wrapper
+			.header-bubble
+				case type
+					when 'fermentables'
+						if item
+							span(class='bubble' style="background:rgba(#{convert(item.lovibond, 'lovibond', 'rgb')},1);")
+						else
+							span(class='bubble' style="background:rgba(#{convert(results[0].lovibond, 'lovibond', 'rgb')},1);")
+						img(src='images/fermentable-large.png', width='72', height='72', alt='Malt')
 
+					when 'hops'
+						span(class='bubble', style="background:rgba(0,128,64,1);")
+						img(src='images/hops-large.png', width='72', height='72', alt='Hop')
+
+					when 'breweries'
+						if item
+							if item.avatar !== null
+								span(class='bubble', style="background: url('http://img.microbrew.it/#{item.avatar}') center center;background-color: #333;background-size: cover;")
+							else if item.origin && item.origin.name !== "Unkown"
+								span(class='bubble', style="background: url('#{country.getImageByName(item.origin.name)}') center center;background-size: 152%;")
+							else
+								span(class='bubble', style="background: url('/random/#{item.name}?size=50') center center;background-color: #333;background-size: contain;")
+						else
+							span(class='bubble', style="background: url('/random/#{results[0].name}?size=72') center center;background-color: #333;background-size: contain;")
+
+					when 'beers'
+						if item
+							span(class='bubble', style="background:rgba(#{convert(item.srm.standard, 'srm', 'rgb')},1);")
+						else
+							span(class='bubble', style="background:rgba(#{convert(15, 'srm', 'rgb')},1);")
+						img(src='images/tulip-large.png', width='72', height='72', alt='Beer')
+
+					when 'origins'
+						span(class='bubble', style="background: url('#{country.getImageByName(item.name)}') center center;background-size: 152%;")
+
+					when 'beerstyles'
+						span(class='bubble' style="background:rgba(#{convert((item.srmLow+item.srmHigh)/2, 'srm', 'rgb')},1);")
+						img(src='images/fermentable-large.png', width='72', height='72', alt='Hop')
+					when 'suppliers'
+						span(class='bubble', style="background: url('#{country.getImageByName(item.origin.name)}') center center;background-size: 152%;")
+
+					when 'glasses'
+						span(class='bubble', style="background:#333;")
+						img(src='images/tulip-large.png', width='72', height='72', alt='#{item.name}')
+
+					when 'users'
+						if item
+							if item.gravatar
+								span(class='bubble', style="background: url('#{item.gravatar}') center center;background-size: contain;")
+							else
+								span(class='bubble', style="background: url('/random/#{item.username}?size=72') center center;background-size: contain;")
+						else
+							span(class='bubble', style="background: url('/random/brewers?size=72') center center;background-size: contain;")
+
+					when 'yeasts'
+						span(class='bubble' style="background:rgba(231,200,126,1);")
+						img(src='images/yeast-large.png', width='72', height='72', alt='Yeast')
+					default
+						span(class='bubble' style="background:rgba(231,200,126,1);")
+
+			h1 #{headline.headline}
+			if headline.subheader && headline.subheader !== "undefined"
+				.subheader
+					span #{headline.subheader}
+
+
+//- span(class='bubble gravity' )

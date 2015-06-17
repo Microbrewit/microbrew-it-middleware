@@ -75,6 +75,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/others/index.jade"
 				data: 
+					type:'others' 
 					headline: @renderer.headline 'Others', 'Fruits, spices, miscellaneous'
 					mode: 'list'
 					results: response.others
@@ -98,6 +99,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/others/index.jade"
 				data: 
+					type:'others' 
 					headline: @renderer.headline "#{response.others[0].name}", "#{response.others[0].type}"
 					mode: 'single'
 					item: response.others[0]
@@ -112,6 +114,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/others/index.jade"
 				data: 
+					type:'others' 
 					headline: @renderer.headline "#{response.others[0].name}", "#{response.others[0].type}"
 					mode: 'edit'
 					item: response.others[0]
@@ -124,6 +127,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/others/index.jade"
 				data: 
+					type:'others' 
 					headline: @renderer.headline "Add other"
 					mode: 'edit'
 					item: {}

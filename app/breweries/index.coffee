@@ -36,10 +36,11 @@ list = (req, reply) =>
 		reply @renderer.page
 			title: "Breweries - Breweries"
 			navigationState: 'breweries'
-			user: user
+			user: req?.auth?.credentials?.user
 			html: @renderer.render
 				template: "public/templates/breweries/index.jade"
 				data: 
+					type:'breweries'
 					headline: @renderer.headline 'Breweries', 'Breweries, Microbreweries, Nanobreweries'
 					mode: 'list'
 					results: response.breweries
@@ -51,10 +52,11 @@ show = (req, reply) =>
 		reply @renderer.page
 			title: "#{response.breweries[0].name} - breweries - Breweries"
 			navigationState: 'breweries'
-			user: user
+			user: req?.auth?.credentials?.user
 			html: @renderer.render
 				template: "public/templates/breweries/index.jade"
 				data: 
+					type:'breweries'
 					headline: @renderer.headline "#{response.breweries[0].name}", "#{response.breweries[0].type}"
 					mode: 'single'
 					item: response.breweries[0]

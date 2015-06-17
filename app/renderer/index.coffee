@@ -9,7 +9,6 @@ exports.render = (renderObj) ->
 	if renderObj.template
 		options = renderObj.data
 		options ?= {}
-		options.user = @user
 		options.pretty = true
 		options.compileDebug = true
 		options.convert = conversion.convert
@@ -38,12 +37,10 @@ exports.navigation = (navigationState) ->
 			navigationState: navigationState
 
 exports.headline = (headline, subheader, image = "") ->
-	return @render
-		template: 'public/headline.jade'
-		data:
-			headline: headline
-			subheader: subheader
-			image: image
+	return {
+		headline: headline
+		subheader: subheader
+	}
 
 exports.footer = (options) ->
 	return @render

@@ -48,6 +48,7 @@ handler = (req, reply, results = undefined, query, hits) =>
 		html: @renderer.render
 			template: "public/templates/ingredients/index.jade"
 			data: 
+				type:'ingredients' 
 				headline: @renderer.headline "Ingredients", "Malt, hops, yeasts and more"
 				mode: 'single'
 				subNavState: 'search'
@@ -61,3 +62,4 @@ handler = (req, reply, results = undefined, query, hits) =>
 				results: results
 				query: query
 				hits: hits
+				user: req?.auth?.credentials?.user

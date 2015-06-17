@@ -1,7 +1,7 @@
-.grid-result.search-grid-result
+.grid-item
 	a.content(href='beerstyles/#{result.beerStyleId}')
 		.top-circle
-			span(class='minibubble' style="display:inline-block;width:50px;height:50px;padding:0;margin:0;border-radius:50%;border:1px solid rgba(0,0,0,0.2);background:rgba(#{convert((result.srmLow+result.srmHigh)/2, 'srm', 'rgb')},1);")
+			span(class='minibubble' style="background:rgba(#{convert((result.srmLow+result.srmHigh)/2, 'srm', 'rgb')},1);")
 			img(src='images/fermentable-large.png', width='50', height='50', alt='Hop')
 		h3 #{result.name}
 		.type Beer Style

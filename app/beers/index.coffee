@@ -57,7 +57,8 @@ handler = (req, reply) =>
 				user: req?.auth?.credentials?.user
 				html: @renderer.render
 					template: "public/templates/beers/index.jade"
-					data: 
+					data:
+						type:'beers'
 						headline: @renderer.headline 'Beers'
 						mode: 'list'
 						user: req?.auth?.credentials?.user
@@ -78,6 +79,7 @@ handler = (req, reply) =>
 	# 		html: @renderer.render
 	# 			template: "#{__dirname}/beers.jade"
 	# 			data: 
+	#				type:'beer' 
 	# 				results: response.beers
 	# 				nextPage: pagination.next
 	# 				prevPage: pagination.prev

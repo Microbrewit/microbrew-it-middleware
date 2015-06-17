@@ -75,6 +75,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
+					type:'fermentables' 
 					headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
 					mode: 'list'
 					results: response.fermentables
@@ -98,6 +99,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
+					type:'fermentables' 
 					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
 					mode: 'single'
 					item: response.fermentables[0]
@@ -112,6 +114,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
+					type:'fermentables' 
 					headline: @renderer.headline "#{response.fermentables[0].name}", "#{response.fermentables[0].type}"
 					mode: 'edit'
 					item: response.fermentables[0]
@@ -124,6 +127,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/fermentables/index.jade"
 				data: 
+					type:'fermentables' 
 					headline: @renderer.headline "Add Fermentable"
 					mode: 'edit'
 					item: {}

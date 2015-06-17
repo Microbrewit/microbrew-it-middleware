@@ -75,6 +75,7 @@ list = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/yeasts/index.jade"
 				data: 
+					type:'yeasts' 
 					headline: @renderer.headline 'yeasts', 'Liquid, Dry'
 					mode: 'list'
 					results: response.yeasts
@@ -98,6 +99,7 @@ show = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/yeasts/index.jade"
 				data: 
+					type:'yeasts' 
 					headline: @renderer.headline "#{response.yeasts[0].name}", "#{response.yeasts[0].type}"
 					mode: 'single'
 					item: response.yeasts[0]
@@ -112,6 +114,7 @@ showEdit = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/yeasts/index.jade"
 				data: 
+					type:'yeasts' 
 					headline: @renderer.headline "#{response.yeasts[0].name}", "#{response.yeasts[0].type}"
 					mode: 'edit'
 					item: response.yeasts[0]
@@ -124,6 +127,7 @@ showNew = (req, reply) =>
 			html: @renderer.render
 				template: "public/templates/yeasts/index.jade"
 				data: 
+					type:'yeasts' 
 					headline: @renderer.headline "Add yeast"
 					mode: 'edit'
 					item: {}

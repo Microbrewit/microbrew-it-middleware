@@ -12,27 +12,26 @@ exports.getRoutes = () ->
 			method: 'GET'
 			path: '/logout'
 			config: 
-            	handler: logoutHandler
-            	auth: 
-                	mode: 'try',
-                	strategy: 'session'
-            
-           	 	plugins: 
-                	'hapi-auth-cookie': 
-                    	redirectTo: '/'   
+				handler: logoutHandler
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: '/'   
 		}
 		{
 			method: 'POST'
 			path: '/login'
 			config: 
-            	handler: loginPostHandler
-            	auth: 
-                	mode: 'try',
-                	strategy: 'session'
-            
-           	 	plugins: 
-                	'hapi-auth-cookie': 
-                    	redirectTo: '/'                            
+				handler: loginPostHandler
+				# auth: 
+				# 	mode: 'try',
+				# 	strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': {}                         
 		}
 	]
 
@@ -40,6 +39,7 @@ navigationElement = 'account'
 
 # Gets the login page
 loginGetHandler = (req, reply) =>
+	console.log 'loginGetHandler'
 	html = @renderer.render
 		data: 
 			results: ""
@@ -48,6 +48,7 @@ loginGetHandler = (req, reply) =>
 	reply html
 # Sends a post to the api logging ing the user and starting a session.
 loginPostHandler = (req, reply) =>
+	console.log 'loginPostHandler'
 	body = 
 		username : req.payload.username
 		password : req.payload.password
@@ -74,7 +75,8 @@ loginPostHandler = (req, reply) =>
 							settings: res.users[0].settings
 
 					req.auth.session.set data
-					reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
+					reply.redirect('/')
+					# reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
 				else
 					reply '<h2> Failed duh duh duuuuuhhh</h2>'
 		else 

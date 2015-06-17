@@ -1,0 +1,63 @@
+#main-footer {
+	width: 100%;
+	
+	background: white;
+	color: #333;;
+	bottom: 0;
+
+	.footer-inner-wrapper {
+		margin-bottom: 0;
+				
+	}
+	.logo-text {
+		font-family: 'Kingthings Petrock';
+		font-size: 30px;
+	}
+}
+
+
+.logo-circle {
+	width: 50px;
+	height: 50px;
+	display: block;
+	background: white;
+	border-radius: 50%;
+	line-height: 50px;
+	text-align:center;
+	font-size: 30px;
+	font-family: 'Kingthings Petrock';
+	color: #333;
+	margin: 0 auto;
+
+	// @include transition(background 0.5s, color 0.2s);
+	
+	&:hover {
+		background: $link-color;
+		color: white;
+	}
+	&:active {
+		margin-top: 1px;
+	}
+}
+
+.footer-content {
+	@extend .inner-wrapper;
+
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 50px 0;
+
+	ul, li {
+		list-style:none;
+		margin:0;
+		padding: 0;
+	}
+	ul {
+		text-align:center;
+	}
+	li {
+		display: inline-block;
+		padding: 25px 5px;
+	}
+	text-align:center;
+}
