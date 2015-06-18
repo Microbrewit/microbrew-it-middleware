@@ -1,0 +1,106 @@
+.listItem-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border: 1px solid rgba(0,0,0,0.2);
+
+	li {
+		padding: 0;
+		margin: 0;
+		.list-item {
+			background: rgba(255, 255, 255, 0.2);
+		}
+	}
+	li:nth-child(even) {
+		.list-item {
+			background: rgba(0, 0, 0, 0.05);
+		}
+	}
+}
+
+.list-item {
+	width: 100%;
+	@extend .cf;
+	padding: 0 10px;
+	line-height: 50px;
+	//background:rgba(#{convert(result.lovibond, 'lovibond', 'rgb')},0.3);
+	margin: 0;
+
+	input,input.name,input.amount {
+		background: rgba(255,255,255,0.6);
+		border: rgba(0,0,0,0.8);
+		height: 30px;
+		padding-left: 10px;
+		line-height: 30px
+	}
+
+	.ba,.aa {
+		width: 60px;
+		text-align:right;
+	}
+
+	.name {
+		display:inline-block;
+		width: 300px;
+		padding: 0;
+		margin: 0;
+		margin-right: 20px;
+		line-height:50px;
+		font-size: 120%;
+		font-weight: normal;
+	}
+
+	.amount {
+		display: inline-block;
+		width: 90px;
+		margin-right: 20px;
+		font-size: 110%;
+	}
+
+	.lovibond {
+		width: 35px;
+	}
+	.gp {
+		text-align:right;
+		margin-right: 0;
+		width: 100px;
+	}
+	.ppg {
+		width: 45px;
+	}
+
+	.span {
+		display: inline-block;
+		line-height:50px;
+	}
+	.meta-wrapper {
+		float:right;
+	}
+	.meta {
+		margin-right: 20px;
+		display: inline-block;
+	}
+
+	.left-circle {
+		display: inline-block;
+		height: 30px;
+		width: 25px;
+		margin-right: 20px;
+		position: relative;
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	.minibubble {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		margin-top: -13px;
+
+		width:24px;
+		height:24px;
+		padding:0;
+		border-radius:50%;
+		border:1px solid rgba(0,0,0,0.2);
+	}
+}

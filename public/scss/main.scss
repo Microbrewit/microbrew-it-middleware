@@ -22,6 +22,7 @@ a {
 
 body {
 	margin: 0;
+	color: #333;
 }
 
 .the-content {
@@ -46,9 +47,11 @@ body {
 @import "subnav";
 
 @import "search";
+@import "recipe";
 
 @import "headline";
 
 @import "gridItem";
+@import "listItem";
 
 @import "footer";

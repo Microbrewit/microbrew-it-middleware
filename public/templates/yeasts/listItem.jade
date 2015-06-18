@@ -1,0 +1,9 @@
+div.fermentable.list-item
+	.meta-wrapper
+
+	.left-circle
+		span(class='minibubble' style="background: url('images/yeast-large.png') center center;background-size:contain;background-color:rgba(231,200,126,1);")
+	if showStatic
+		input.name(value="#{result.name}")
+	else
+		h3.name #{result.productCode} #{result.name}

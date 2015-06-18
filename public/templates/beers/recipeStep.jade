@@ -1,0 +1,20 @@
+ul.listItem-list
+	if step.fermentables
+		each result in step.fermentables
+			li
+				include ../fermentables/listItem.jade
+	if step.hops
+		each result in step.hops
+			li
+				include ../hops/listItem.jade
+	if step.yeasts
+		each result in step.yeasts
+			li
+				include ../yeasts/listItem.jade
+//- .others
+//- 	each result in step.others
+//- 		include ../others/listItem.jade
+//- .yeasts
+
+if step.notes
+	textarea.step-notes #{step.notes}

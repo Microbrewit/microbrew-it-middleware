@@ -87,4 +87,19 @@ handler = (req, reply) =>
 
 singleHandler = (req, reply) =>
 	@get req.url.path, (status, response) =>
-		reply response
+		beer = response.beers[0]
+		brewers = []
+		for brewer in beer.brewers
+			brewers.push "<a href=\"users/brewer.username\">#{brewer.username}</a>"
+		reply @renderer.page
+			title: beer.name
+			navigationState: 'beers'
+			user: req?.auth?.credentials?.user
+			html: @renderer.render
+				template: "public/templates/beers/index.jade"
+				data:
+					type:'beers'
+					headline: @renderer.headline beer.name, 'by ' + brewers.join(', ')
+					mode: 'single'
+					user: req?.auth?.credentials?.user
+					item: beer

@@ -1,0 +1,86 @@
+.step-number {
+	color: white;
+	font-size: 40px;
+	text-align:center;
+	line-height: 50px;
+	margin-right: 25px;
+	@include col(1/20, 0);
+}
+.step-meta {
+	background: rgba(0,0,0,0.1);
+	line-height: 46px;
+	width: 100%;
+	padding: 0;
+	padding-right: 5px;
+
+	span {
+		padding:0;
+		display: inline-block;
+		margin:0;
+	}
+
+	.values {
+		float: right;
+		input {
+			width: 60px;
+			display: inline-block;
+		}
+		label {
+			margin-left: 15px;
+		}
+	}
+
+	.step-type {
+		font-size: 20px;
+		line-height: 50px;
+		padding: 0;
+		margin: 0;
+	}
+}
+.step-wrapper {
+	@extend .cf;
+	margin-bottom: 10px;
+}
+
+.steps ul {
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
+
+.mash {
+	padding: 25px 0;
+	background: #EEE4DB;
+	color: #705F58;
+	border-top: 1px solid #D8D2CA;
+	.step-number, tr:first-child, .add-step, .add-ingredient  {
+		background: #705F58;
+	}
+}
+.boil {
+	padding: 25px 0;
+	background: #DFE4CD;
+	color: #66743E;
+	border-top: 1px solid #D2D5C3;
+
+	.step-number, tr:first-child, .add-step, .add-ingredient  {
+		background: #66743E;
+	}
+}
+.fermentation {
+	padding: 25px 0;
+	background: #FCF1EF;
+	color: #592114;
+	border-top: 1px solid #D0D4C1;
+
+	.step-number, tr:first-child, .add-step, .add-ingredient  {
+		background: #592114;
+	}
+}
+
+.recipe-notes {
+	display: block;
+	@include col(8, 15px, false);
+	min-height: 100px;
+	margin: 0 auto;
+}

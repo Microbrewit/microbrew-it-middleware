@@ -1,12 +1,12 @@
 .inner-wrapper
-	ul
+	ul.listItem-list
 		each result in results
 			li
 				case result.dataType
 					when 'fermentable'
 						include fermentables/listItem.jade
 					when 'hop'
-						include hops/gridItem.jade
+						include hops/listItem.jade
 					when 'brewery'
 						include breweries/gridItem.jade
 					when 'beer'
@@ -22,7 +22,7 @@
 					when 'user'
 						include users/gridItem.jade
 					when 'yeast'
-						include yeasts/gridItem.jade
+						include yeasts/listItem.jade
 					default
 						p No template for "#{item.dataType}"
 

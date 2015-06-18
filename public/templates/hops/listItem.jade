@@ -1,0 +1,20 @@
+div.hop.list-item
+	.meta-wrapper
+		if result.aaLow
+			span.meta.aa(title='Alpha acids contributes bitterness') #{result.aaLow.toFixed(1)}% AA
+		else if result.aaValue
+			span.meta.aa(title='Alpha acids contributes bitterness') #{result.aaValue.toFixed(1)}% AA
+		if result.betaLow
+			span.meta.ba(title='Beta acids contributes the hoppy, herbal flavour') #{result.betaLow.toFixed(1)}% BA
+		span.meta.ibu(title='The total contribution to bitterness of the beer') 12.33 IBU
+	.left-circle
+		span(class='minibubble' style="background: url('images/hops-large.png') center center;background-size:contain;background-color:rgba(0,128,64,1);")
+	if showStatic
+		input.amount(value="#{result.amount}")
+		input.name(value="#{result.name}")
+	else
+		if result.amount
+			span.amount #{result.amount} grams
+		h3.name #{result.name}
+		if result.hopForm
+			span.form #{result.hopForm.name}
