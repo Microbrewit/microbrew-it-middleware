@@ -6,16 +6,16 @@ argv.environment ?= 'dev'
 console.log 'settings', settings[argv.environment].connection
 server.connection settings[argv.environment].connection
 
-sass = require 'node-sass'
-fs = require 'fs'
-sassRes = sass.renderSync
-	file: 'public/scss/main.scss'
-	outputStyle: 'compressed'
-	outFile: 'public/css/main.css'
-	sourceMap: false
+# sass = require 'node-sass'
+# fs = require 'fs'
+# sassRes = sass.renderSync
+# 	file: 'public/scss/main.scss'
+# 	outputStyle: 'compressed'
+# 	outFile: 'public/css/main.css'
+# 	sourceMap: false
 
-fs.writeFile 'public/css/main.css', sassRes.css, () ->
-	console.log 'done'
+# fs.writeFile 'public/css/main.css', sassRes.css, () ->
+# 	console.log 'done'
 
 modules =
 	static: require './app/static'
