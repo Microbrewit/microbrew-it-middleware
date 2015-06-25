@@ -3,9 +3,9 @@ h1 + .sub-nav {
 }
 
 .sub-nav {
-	height: 50px;
+	height: 70px;
 	text-align:center;
-	margin-bottom: 25px;
+	margin-bottom: 0px;
 
 	ul {
 		padding: 0;
@@ -18,35 +18,21 @@ h1 + .sub-nav {
 	li {
 		padding: 0;
 		margin: 0;
-		display: block;
-		float:left;
+		display: inline-block;
 
-		&:first-child {
-			a {
-				border-top-left-radius: 5px;
-				border-bottom-left-radius: 5px;
-			}
-		}
-		&:last-child {
-			a {
-				border-top-right-radius: 5px;
-				border-bottom-right-radius: 5px;
-			}
-		}
 
 		a {
 			box-sizing: border-box;
-			border: 1px solid #ccc;
-			margin:0;
-			margin-left: -1px;
-			display: block;
-			color: #333;
+			color: $link-color;
 			padding: 0 10px;
-			line-height: 50px;
+			line-height: 70px;
+			display: block;
+			height: 100%;
+			font-size: 130%;
 
 			&.active, &:hover {
-				color: white;
-				background: #333;
+				color: #333;
+				border-bottom: 4px solid rgba(0,0,0,0.5);
 			}
 		}
 
@@ -55,14 +41,12 @@ h1 + .sub-nav {
 		input {
 			// @include transition(width 0.2s);
 			display: inline-block;
-			width:70px;
-			height: 100%;
-			line-height:50px;
+			width:150px;
+			height: 70%;
+			line-height:35px;
 			font-size:15px;
 			padding:0 10px;
 			border: 1px solid #ccc;
-			border-top-right-radius: 5px;
-			border-bottom-right-radius: 5px;
 
 			&:focus {
 				width: 300px;

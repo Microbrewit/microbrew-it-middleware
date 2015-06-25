@@ -1,0 +1,119 @@
+<ul class="listItem-list edit">
+	<li ng-repeat="item in step.fermentables">
+		<div class="fermentable list-item" style="position:relative">
+			<div class="meta-wrapper">
+				<span class="meta lovibond" title="Lovibond is a measure of colour">{{item.lovibond}}°L
+				</span>
+				<span class="meta ppg" title="PPG is the amount of sugar">{{item.ppg}} PPG</span>
+				<span class="meta gp"><mb-gravity change="updateFermentableValues" ingredient="item" type="{{item.type}}" og="{{beer.recipe.og}}" fluidUnit="liters" weightUnit="grams" ppg="{{item.ppg}}" amount="{{item.amount}}" efficiency="{{beer.recipe.efficiency}}" volume="{{beer.recipe.volume}}"></mb-gravity></span>
+				<button class="remove form-button" ng-click="removeFromStep(item, step.fermentables)">X</button>
+			</div>
+
+			<div class="left-circle">
+				<mb-colour-box class="minibubble" style="background: url('images/fermentable-large.png') center center;background-size:contain;" amount="{{item.amount}}" weightUnit="grams" liquidUnit="liters" ingredient="item" volume="{{beer.recipe.volume}}" type="lovibond" colour="{{item.lovibond}}"></mb-colour-box>
+				<!-- <span class="minibubble" style="background: url('images/fermentable-large.png') center center;background-size:contain;"></span> -->
+			</div>
+			<span class="amount">
+				<mb-convert modelunit="grams" localunit="{{user.settings.largeWeight}}" ingredient="item" modelvalue="item.amount"></mb-convert>
+			</span>
+			<h3 class="name">
+				<ui-select ng-model="item.original" on-select="refreshIngredient(item, $model)" title="Choose a fermentable">
+					<ui-select-match placeholder="Select a fermentable in the list or search">
+						{{$select.selected.name}}
+					</ui-select-match>
+					<ui-select-choices group-by="groupFermentables" ng-show="$select.open && " repeat="result in fermentables | filter: {name: $select.search}">
+						{{result.name}}
+					</ui-select-choices>
+				</ui-select>
+			</h3>
+		</div>
+	</li>
+
+	<li ng-repeat="item in step.hops">
+		<div class="hop list-item" style="position:relative">
+			<div class="meta-wrapper">
+				<span class="meta aa" title="Alpha acids contributes bitterness"><input type="text" ng-model="item.aaValue"/>% alpha</td>
+				</span>
+				<span class="meta ba" title="Beta acids contributes the hoppy, herbal flavour"><input type="text" ng-model="item.betaValue"/>% beta</span>
+				<span class="meta ibu"><mb-bitterness ingredient="item" boilVolume="{{step.volume}}" boilGravity="{{beer.recipe.og}}" boilTime="{{step.length}}" formula="{{user.settings.bitterness.formula}}" change="updateHopsValues"/></span>
+				<button class="remove form-button" ng-click="removeFromStep(item, step.fermentables)">X</button>
+			</div>
+
+			<div class="left-circle">
+				<span class="minibubble" style="background: url('images/hops-large.png') center center;background-size:contain;background-color:rgba(0,128,64,1);"></span>
+			</div>
+			<span class="amount">
+				<mb-convert modelunit="grams" localunit="{{user.settings.largeWeight}}" ingredient="item" modelvalue="item.amount"></mb-convert>
+			</span>
+			<h3 class="name">
+				<ui-select ng-model="item.original" on-select="refreshIngredient(item, $model)" ng-disabled="disabled" style="min-width: 300px;" title="Choose a hop">
+					<ui-select-match placeholder="Select a hop in the list or search">{{$select.selected.name}}</ui-select-match>
+					<ui-select-choices group-by="groupHops" ng-show="$select.open && " repeat="result in hops | filter: {name: $select.search}">
+						{{result.name}} ({{result.aaLow}} - {{result.aaHigh}} % AA)
+					</ui-select-choices>
+				</ui-select>
+			</h3>
+			<span class="form">
+				<select ng-model="item.hopForm" ng-options="type.name for type in hopForms"></select>
+			</span>
+		</div>
+	</li>
+
+	<li ng-repeat="item in step.others">
+		<div class="other list-item">
+			<div class="meta-wrapper">
+				<button class="remove form-button" ng-click="removeFromStep(other, step.others)">X</button>
+			</div>
+
+			<div class="left-circle">
+				<span class="minibubble" style="background: url('images/yeast-large.png') center center;background-size:contain;background-color:rgba(231,200,126,1);"></span>
+			</div>
+			<span class="amount">
+				<mb-convert modelunit="grams" localunit="{{user.settings.largeWeight}}" ingredient="item" modelvalue="item.amount"></mb-convert>
+			</span>
+			<h3 class="name">
+				<ui-select ng-model="item.original" on-select="refreshIngredient(item, $model)" ng-disabled="disabled" title="Other ingredients">
+					<ui-select-match placeholder="Select an ingredient in the list or search">{{$select.selected.name}}</ui-select-match>
+					<ui-select-choices group-by="groupOthers" ng-show="$select.open && " repeat="result in others | propsFilter: {name: $select.search, productCode: $select.search}">
+						{{result.name}}
+					</ui-select-choices>
+				</ui-select>
+			</h3>
+		</div>
+	</li>
+
+	<li ng-repeat="item in step.yeasts">
+		<div class="yeast list-item">
+			<div class="meta-wrapper">
+				<span class="meta attenuation">{{item.attenutionRange}}</span>
+				<span class="meta flocculation">{{item.flocculation}}</span>
+				<span class="meta alcoholTolerance">{{item.alcoholTolerance}}</span>
+				<span class="meta temperature">{{item.temperatureLow}}{{user.settings.measurements.temperature.short}} - {{item.temperatureHigh}}{{user.settings.measurements.temperature.short}}</span>
+				<button class="remove form-button" ng-click="removeFromStep(yeast, step.yeast)">X</button>
+			</div>
+
+			<div class="left-circle">
+				<span class="minibubble" style="background: url('images/yeast-large.png') center center;background-size:contain;background-color:rgba(231,200,126,1);"></span>
+			</div>
+			<span class="amount">
+				<mb-convert modelunit="grams" localunit="{{user.settings.largeWeight}}" ingredient="item" modelvalue="item.amount"></mb-convert>
+			</span>
+			<h3 class="name">
+				<ui-select ng-model="item.original" on-select="refreshIngredient(item, $model)" ng-disabled="disabled" title="Choose a yeast">
+					<ui-select-match placeholder="Select a yeast in the list or search">{{$select.selected.name}} ({{$select.selected.productCode}})</ui-select-match>
+					<ui-select-choices group-by="groupYeasts" ng-show="$select.open && " repeat="result in yeasts | propsFilter: {name: $select.search, productCode: $select.search}">
+						{{result.name}} ({{result.productCode}})
+					</ui-select-choices>
+				</ui-select>
+			</h3>
+		</div>
+	</li>
+
+<div class="add-ingredient-wrapper">
+	<span class="add-ingredient" ng-click="addIngredientToStep(step, 'fermentable')" title="Malt/Sugar/Extract">Fermentable</span>
+	<span class="add-ingredient" ng-click="addIngredientToStep(step, 'hop')" title="">Hop</span>
+	<span class="add-ingredient" ng-show="step.stepType === 'fermentationSteps'" ng-click="addIngredientToStep(step, 'yeast')">Yeast</span>
+	<span class="add-ingredient" ng-click="addIngredientToStep(step, 'others')" title="">Other Ingredients</span>
+</div>
+	
+<textarea class="step-notes" ng-model="step.notes" placeholder="notes"></textarea>

@@ -1,0 +1,6 @@
+a.user.minidisplay(href='users/#{result.username}')
+	if result.gravatar
+		span(class='microbubble' style="background: url('#{result.gravatar}') center center;background-size: contain;")
+	else
+		span(class='microbubble' style="background: url('/random/#{result.username}?size=50') center center;background-size: contain;")
+	span #{result.username}

@@ -14,7 +14,44 @@ exports.getRoutes = () ->
 			path: '/beers/{id}'
 			handler: singleHandler
 		}
+		{
+			method: 'GET'
+			path: '/beers/add'
+			handler: (req, reply) ->
+				showRecipeApp(req, reply, "Add new beer", 'recipe')
+		}
+		{
+			method: 'POST'
+			path: '/beers/add'
+			handler: () ->
+				# Serve Angular files
+		}
+		{
+			method: 'GET'
+			path: '/beers/{id}/edit'
+			handler: (req, reply) ->
+				showRecipeApp(req, reply, "Edit #{req.params.id}", 'beers')
+		}
+		{
+			method: 'GET'
+			path: '/beers/{id}/fork'
+			handler: (req, reply) ->
+				showRecipeApp(req, reply, "Fork #{req.params.id}", 'beers')
+		}
+			
 	]
+
+showRecipeApp = (req, reply, title, navigationState) =>
+	reply @renderer.page
+		title: title
+		navigationState: navigationState
+		user: req?.auth?.credentials?.user
+		html: @renderer.render
+			template: "public/templates/beers/index.jade"
+			data:
+				type:'beers'
+				mode: 'add'
+				user: req?.auth?.credentials?.user
 
 makePrevNextLink = (query, pathname, currentResults) ->
 	query = JSON.parse JSON.stringify query
@@ -90,7 +127,7 @@ singleHandler = (req, reply) =>
 		beer = response.beers[0]
 		brewers = []
 		for brewer in beer.brewers
-			brewers.push "<a href=\"users/brewer.username\">#{brewer.username}</a>"
+			brewers.push "<a href=\"users/#{brewer.username}\">#{brewer.username}</a>"
 		reply @renderer.page
 			title: beer.name
 			navigationState: 'beers'
@@ -99,7 +136,17 @@ singleHandler = (req, reply) =>
 				template: "public/templates/beers/index.jade"
 				data:
 					type:'beers'
-					headline: @renderer.headline beer.name, 'by ' + brewers.join(', ')
+					subNavState: 'recipe'
+					subnav: [
+						{href: "/beers/#{beer.id}", label: 'Recipe', activeState: 'recipe'}
+						{href: "/beers/#{beer.id}/edit", label: 'Edit', activeState: 'edit'}
+						{href: "/beers/#{beer.id}/fork", label: 'Fork', activeState: 'fork'}
+					]
+					headline: 
+						headline: beer.name
+						subheader: "<a href=\"beerstyles/#{beer.beerStyle.beerStyleId}\">#{beer.beerStyle.name}</a><br /> <small>by #{brewers.join(',')}</small>"
+						# minidisplay:
+						# 	results: beer.brewers
 					mode: 'single'
 					user: req?.auth?.credentials?.user
 					item: beer

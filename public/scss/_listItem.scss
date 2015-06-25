@@ -2,7 +2,8 @@
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	border: 1px solid rgba(0,0,0,0.2);
+	margin-bottom: 15px;
+	border: 1px solid rgba(0,0,0,0.03);
 
 	li {
 		padding: 0;
@@ -16,6 +17,16 @@
 			background: rgba(0, 0, 0, 0.05);
 		}
 	}
+
+	&.edit {
+		.meta {
+			width: auto;
+		}
+		.amount {
+			width: auto;
+		}
+
+	}
 }
 
 .list-item {
@@ -25,13 +36,60 @@
 	line-height: 50px;
 	//background:rgba(#{convert(result.lovibond, 'lovibond', 'rgb')},0.3);
 	margin: 0;
+	position: relative;
 
 	input,input.name,input.amount {
 		background: rgba(255,255,255,0.6);
-		border: rgba(0,0,0,0.8);
+		border: 1px solid rgba(0,0,0,0.1);
 		height: 30px;
-		padding-left: 10px;
-		line-height: 30px
+		line-height: 30px;
+		text-align: center;
+
+		&:hover, &:active, &:focus {
+			cursor: pointer;
+			background: rgba(255,255,255,1);
+			border-color: rgba(0,0,0,0.2);
+		}
+	}
+
+	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		border-radius: 0;
+		height: 34px;
+		margin-top: -1px;
+		line-height: 30px;
+		padding-left: 5px;
+		padding-right: 15px;
+		background: transparent;
+		border: 1px solid transparent;
+		position: relative;
+
+		&:hover {
+			cursor: pointer;
+			background: rgba(0,0,0,0.1);
+			//border-color: rgba(0,0,0,0.2);
+		}
+
+		&:after {
+			position: absolute;
+			right: 10px;
+			top: 15px;
+			width: 2000px; 
+			height: 1000px;
+			background: red;
+			z-index: 3000; 
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+			
+			border-top: 8px solid #666;
+			content: '';
+		}
+	}
+	select::-ms-expand { /* for IE 11 */
+		display: none;
 	}
 
 	.ba,.aa {
@@ -41,7 +99,6 @@
 
 	.name {
 		display:inline-block;
-		width: 300px;
 		padding: 0;
 		margin: 0;
 		margin-right: 20px;
@@ -52,9 +109,13 @@
 
 	.amount {
 		display: inline-block;
-		width: 90px;
+		width: 120px;
 		margin-right: 20px;
 		font-size: 110%;
+
+		input[type="text"] {
+			width: 40px;
+		}
 	}
 
 	.lovibond {
@@ -76,9 +137,14 @@
 	.meta-wrapper {
 		float:right;
 	}
+
 	.meta {
 		margin-right: 20px;
 		display: inline-block;
+
+		input[type="text"] {
+			width: 20px;
+		}
 	}
 
 	.left-circle {

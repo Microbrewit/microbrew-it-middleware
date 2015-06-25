@@ -1,0 +1,101 @@
+.meta-info {
+	text-align:center;
+
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 25px;
+	padding: 25px;
+}
+
+.meta-bubble {
+	position: relative;
+	height: 32px;
+	line-height: 32px;
+	display: inline-block;
+	padding: 0 15px;
+
+	border-right: 1px solid #ccc;
+
+	&:last-child {
+		border-right: 0;
+	}
+
+	.value {
+		display: inline-block;
+		background: transparent !important;
+
+		font-size: 160%;
+	}
+	.label {
+		margin-left: 5px;
+	}
+
+	input,input.name,input.amount {
+		background: rgba(255,255,255,0.6);
+		border: 1px solid rgba(0,0,0,0.1);
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		width: 40px;
+
+		&:hover, &:active, &:focus {
+			cursor: pointer;
+			background: rgba(255,255,255,1);
+			border-color: rgba(0,0,0,0.2);
+		}
+	}
+
+	label {
+		display: inline-block;
+		font-size: 15px;
+		line-height: 40px;
+		margin-right: 5px;
+		margin-left: 15px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		border-radius: 0;
+		height: 30px;
+		margin-top: -1px;
+		line-height: 30px;
+		padding-left: 5px;
+		padding-right: 15px;
+		background: transparent;
+		border: 1px solid transparent;
+		position: relative;
+
+		&:hover {
+			cursor: pointer;
+			background: rgba(0,0,0,0.1);
+			//border-color: rgba(0,0,0,0.2);
+		}
+
+		&:after {
+			position: absolute;
+			right: 10px;
+			top: 15px;
+			width: 2000px; 
+			height: 1000px;
+			background: red;
+			z-index: 3000; 
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+			
+			border-top: 8px solid #666;
+			content: '';
+		}
+	}
+	select::-ms-expand { /* for IE 11 */
+		display: none;
+	}
+}

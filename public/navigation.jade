@@ -1,10 +1,10 @@
 
 nav#main-navigation
-	ul
+	ul.inner-wrapper
 		li.logo-text
 			a(href="/" class=navigationState === 'home' ? 'active':'') Microbrew.it
 		li
-			a(href='/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
+			a(href='/beers/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
 		li
 			a(href='/beers', class=navigationState === 'beers' ? 'active':'') Beer
 		li

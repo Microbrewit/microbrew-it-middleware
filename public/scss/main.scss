@@ -23,12 +23,23 @@ a {
 body {
 	margin: 0;
 	color: #333;
+	background: #fbfbfb;
+}
+
+h2 {
+	text-align:center;
+	font-weight: normal;
+	font-size: 160%;
 }
 
 .the-content {
 	padding: 25px 0;
 	background: #efefef;
 	border-top: 1px solid #ccc;
+}
+
+.sub-nav + .the-content {
+	border-top-width: 4px;
 }
 
 .center {
@@ -40,6 +51,9 @@ body {
 	max-width: 1000px;
 	margin: 0 auto;
 }
+
+@import "spinner";
+@import "metabubble";
 
 @import "buttons";
 
@@ -53,5 +67,6 @@ body {
 
 @import "gridItem";
 @import "listItem";
+@import "minidisplay";
 
 @import "footer";

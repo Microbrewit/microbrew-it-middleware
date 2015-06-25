@@ -10,6 +10,19 @@ exports.getRoutes = () ->
 		}
 		{
 			method: 'GET'
+			path:'/getloggeduser' 
+			config:
+				handler: loggedUser
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false
+		}
+		{
+			method: 'GET'
 			path: '/logout'
 			config: 
 				handler: logoutHandler
@@ -36,6 +49,22 @@ exports.getRoutes = () ->
 	]
 
 navigationElement = 'account'
+
+# Get user object for logged in user
+loggedUser = (req, reply) =>
+	if req?.auth?.credentials?.user
+		@get("/users/#{req.auth.credentials.user.username}", (status, userObj) =>
+			replyString = ''
+			if req.query.callback
+				replyString += "#{req.query.callback}("
+			replyString += JSON.stringify(userObj.users[0])
+			if req.query.callback
+				replyString += ')'
+			reply replyString
+		)
+	else
+		reply JSON.stringify { error: "not authenticated" }
+
 
 # Gets the login page
 loginGetHandler = (req, reply) =>
