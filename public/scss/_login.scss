@@ -1,0 +1,72 @@
+@-webkit-keyframes error {
+	0% { background: transparent; }
+	50% { background: red; }
+	100% { background: transparent; }
+}
+@-moz-keyframes error {
+	0% { background: transparent; }
+	50% { background: red; }
+	100% { background: transparent; }
+}
+@-o-keyframes error {
+	0% { background: transparent; }
+	50% { background: red; }
+	100% { background: transparent; }
+}
+@keyframes error {
+	0% { background: transparent; }
+	50% { background: red; }
+	100% { background: transparent; }
+}
+
+.login-form {
+
+	input {
+		margin: 0 auto;
+		display: block;
+		margin-bottom: 25px;
+		line-height: 30px;
+		font-size: 130%;
+		width: 290px;
+		border: 1px solid #ccc;
+		background: white;
+		padding: 5px;
+	}
+	label {
+		width: 300px;
+		margin: 0 auto;
+		display: block;
+		font-size: 90%;
+	}
+
+	.error {
+
+		input, label {
+			-webkit-animation-name: error;
+			-webkit-animation-duration: 1000ms;
+			-webkit-transform-origin: 50% 50%;
+			-webkit-animation-iteration-count: 1;
+			-webkit-animation-timing-function: ease-in-out;
+
+			-o-animation-name: error;
+			-o-animation-duration: 1000ms;
+			-o-transform-origin: 50% 50%;
+			-o-animation-iteration-count: 1;
+			-o-animation-timing-function: easeout;
+
+			-moz-animation-name: error;
+			-moz-animation-duration: 1000ms;
+			-moz-transform-origin: 50% 50%;
+			-moz-animation-iteration-count: 1;
+			-moz-animation-timing-function: easeout;
+
+			animation-name: error;
+			animation-duration: 1000ms;
+			transform-origin: 50% 50%;
+			animation-iteration-count: 1;
+			animation-timing-function: easeout;
+			
+		}
+
+	}
+}

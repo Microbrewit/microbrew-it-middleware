@@ -130,6 +130,7 @@
 }
 .add-ingredient-wrapper {
 	margin-bottom: 15px;
+	margin-left: 40px;
 	float: left;
 
 	// &:before {
@@ -167,10 +168,13 @@ h1 input {
 .add-step {
 	color: white;
 	padding: 0 10px;
-	height: 50px;
-	line-height: 50px;
+	line-height: 40px;
 	cursor: pointer;
 	border: 0;
+	font-size: 130%;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 25px;
 }
 .the-content.recipe {
 	padding: 0;

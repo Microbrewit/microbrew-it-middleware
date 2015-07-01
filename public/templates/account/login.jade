@@ -1,8 +1,9 @@
 article.login
-	include ../../headline.jade
+	header
+		h1 #{headline.headline}
 	section.login-form
-		.inner-wrapper
-			form( action="/login", method="POST")
+		.inner-wrapper(class=error ? 'error' : '')
+			form(action="/login", method="POST")
 				label(for="username") Username
 				input(type="text" id="password" name="username" placeholder="johnfredrik" value = "johnfredrik" required)
 

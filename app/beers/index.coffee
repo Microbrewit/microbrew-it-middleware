@@ -3,43 +3,115 @@ exports.getRoutes = () ->
 		{
 			method: 'GET'
 			path:'/beers' 
-			handler: (req, reply) -> 
-				try
-					handler(req, reply)
-				catch e 
-					console.log e
+			config:
+				handler: (req, reply) -> 
+					try
+						handler(req, reply)
+					catch e 
+						console.log e
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false  
+
 		}
 		{
 			method: 'GET'
 			path: '/beers/{id}'
-			handler: singleHandler
+			config:
+				handler: singleHandler
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
+
 		}
 		{
 			method: 'GET'
 			path: '/beers/add'
-			handler: (req, reply) ->
-				showRecipeApp(req, reply, "Add new beer", 'recipe')
+			config:
+				handler: (req, reply) ->
+					showRecipeApp(req, reply, "Add new beer", 'recipe')
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 		}
 		{
 			method: 'POST'
 			path: '/beers/add'
-			handler: () ->
-				# Serve Angular files
+			config:
+				handler: addBeer
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 		}
 		{
 			method: 'GET'
 			path: '/beers/{id}/edit'
-			handler: (req, reply) ->
-				showRecipeApp(req, reply, "Edit #{req.params.id}", 'beers')
+			config:
+				handler: (req, reply) ->
+					showRecipeApp(req, reply, "Edit #{req.params.id}", 'beers')
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 		}
 		{
 			method: 'GET'
 			path: '/beers/{id}/fork'
-			handler: (req, reply) ->
-				showRecipeApp(req, reply, "Fork #{req.params.id}", 'beers')
+			config:
+				handler: (req, reply) ->
+					showRecipeApp(req, reply, "Fork #{req.params.id}", 'beers')
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 		}
 			
 	]
+
+addBeer = (req, reply) =>
+	query = 
+		headers:
+			"content-type": "application/json"
+			accept: "application/json"
+		body: JSON.stringify(req.payload)
+		url: '/beers'
+
+	console.log req.payload.custom
+	console.log req.auth.isAuthenticated
+	if(req.auth.isAuthenticated)
+		query.headers['Authorization'] = "Bearer #{req.auth.credentials.token.access_token}"
+
+	@post query, (status, response) =>
+		if status > 200 and status < 300
+			console.log response	
+			console.log "REDIRECT: to /beers/#{response.id}"
+			reply.redirect("/beers/#{response.id}")
+		else
+			reply "<div>#{status}</div><div>#{JSON.stringify(response)}</div>"
+
+	# Serve Angular files
 
 showRecipeApp = (req, reply, title, navigationState) =>
 	reply @renderer.page

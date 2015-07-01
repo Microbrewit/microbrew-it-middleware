@@ -1,20 +1,58 @@
-.the-list
-	h2 Beers
-	.inner-wrapper
-		if item.beers.length > 0
-			ul.search-grid-results
-				each result in item.beers
-					li
-						include ../beers/gridItem.jade
-		else
-			p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has not added any beers.
-.the-list
-	h2 Brewers
-	.inner-wrapper
-		if item.members.length > 0
-			ul.search-grid-results
-				each result in item.members
-					li
-						include ../users/gridItem.jade
-		else
-			p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has no registered brewers.
+.inner-wrapper
+	section.meta-info
+		.inner-wrapper
+			.meta-bubble
+				span(class='value' title="") #{item.beers.length}
+				span.label Beers
+			.meta-bubble
+				span(class='value' title="") #{item.members.length}
+				span.label Brewers
+			.meta-bubble
+				span(class='value minibubble' title="" style="background: url('#{country.getImageByName(item.origin.name)}') center center !important;background-size: 152%;width: 25px;height:25px;border-radius:50%;")
+				span.label #{item.origin.name}
+			if item.socials
+				if item.socials.twitter
+					a.meta-bubble(href="#{item.socials.twitter}" title="#{item.name} on Twitter")
+						span(class='value minibubble' title="" style="background: url('https://logo.clearbit.com/twitter.com?size=25') center center !important;width: 25px;height:25px;border-radius:50%;")
+						span.label Twitter
+				if item.socials.facebook
+					a.meta-bubble(href="#{item.socials.facebook}" title="#{item.name} on Facebook")
+						span(class='value minibubble' title="" style="background: url('https://logo.clearbit.com/facebook.com?size=25') center center !important;width: 25px;height:25px;border-radius:50%;")
+						span.label Facebook
+				if item.socials.untappd
+					a.meta-bubble(href="#{item.socials.untappd}" title="#{item.name} on Untappd")
+						span(class='value minibubble' title="" style="background: url('https://logo.clearbit.com/untappd.com?size=25') center center !important;width: 25px;height:25px;border-radius:50%;")
+						span.label Untappd
+				if item.socials.ratebeer
+					a.meta-bubble(href="#{item.socials.ratebeer}" title="#{item.name} on RateBeer")
+						span(class='value minibubble' title="" style="background: url('https://logo.clearbit.com/ratebeer.com?size=25') center center !important;width: 25px;height:25px;border-radius:50%;")
+						span.label RateBeer
+				if item.socials.brewerydb
+					a.meta-bubble(href="#{item.socials.brewerydb}" title="#{item.name} on BreweryDB")
+						span(class='value')
+						span.label BreweryDB
+if subnav
+	include ../../subnavigation.jade
+section.the-content
+	.subSection(id='details')
+		.inner-wrapper.description !{item.description}
+	.subSection.the-list(id='beer')
+		h2 Beers
+		.inner-wrapper
+			if item.beers.length > 0
+				ul.search-grid-results
+					each result in item.beers
+						li
+							include ../beers/gridItem.jade
+			else
+				p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has not added any beers.
+	.subSection.the-list(id='brewers')
+		h2 Brewers
+		.inner-wrapper
+			if item.members.length > 0
+				ul.search-grid-results
+					each result in item.members
+						li
+							include ../users/gridItem.jade
+			else
+				p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has no registered brewers.

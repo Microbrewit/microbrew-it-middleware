@@ -2,13 +2,29 @@ exports.getRoutes = () ->
 	return [
 		{
 			method: 'GET'
-			path:'/users' 
-			handler: list
+			path:'/users'
+			config:
+				handler: list
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 		}
 		{
 			method: 'GET'
 			path: '/users/{username}'
-			handler: show
+			config:
+				handler: show
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
 		}
 	]
 
@@ -66,7 +82,7 @@ show = (req, reply) =>
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
 			title: "#{response.users[0].username} - users - Users"
-			navigationState: 'ingredients'
+			navigationState: 'brewers'
 			user: user
 			html: @renderer.render
 				template: "public/templates/users/index.jade"

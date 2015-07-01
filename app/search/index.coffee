@@ -15,6 +15,36 @@ exports.getRoutes = () ->
 		}
 	]
 
+makePrevNextLink = (query, pathname, currentResults) ->
+	query = JSON.parse JSON.stringify query
+
+	query.size ?= 50
+	query.from ?= 0
+
+	next = JSON.parse JSON.stringify query
+	next.from = parseInt(query.from, 10) + parseInt(query.size,10)
+
+	nextLink = pathname + '?'
+	for key, val of next
+		nextLink += "#{key}=#{val}&"
+
+
+
+	prev = JSON.parse JSON.stringify query
+	prev.from = parseInt(query.from, 10) - parseInt(query.size,10)
+
+	if prev.from >= 0 and query.size <= currentResults
+		prevLink = pathname + '?'
+		for key, val of prev
+			prevLink += "#{key}=#{val}&"
+	else
+		prevLink = undefined
+
+	return {
+		next: nextLink
+		prev: prevLink
+	}
+
 searchHandler = (req, reply) =>
 	if req.query?.query
 		@get req.url.path, (status, response) =>
@@ -31,6 +61,7 @@ searchHandler = (req, reply) =>
 		handler(req,reply)
 
 handler = (req, reply, results = undefined, query, hits) =>
+	pagination = makePrevNextLink(req.url.query, req.url.pathname, results?.length)
 	reply @renderer.page
 		title: "Search"
 		navigationState: 'search'
@@ -39,7 +70,9 @@ handler = (req, reply, results = undefined, query, hits) =>
 			template: "public/templates/search/index.jade"
 			data: 
 				type:'search' 
-				headline: @renderer.headline "Search"
+				#headline: @renderer.headline "Search"
 				results: results
 				query: query
 				hits: hits
+				nextPage: pagination.next
+				prevPage: pagination.prev

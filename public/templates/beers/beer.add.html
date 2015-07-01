@@ -81,6 +81,7 @@
 
 	<section class="mash steps">
 		<div class="inner-wrapper">
+			<h2>Mash</h2>
 			<ul>
 				<li class="step-wrapper" ng-repeat="step in beer.recipe.mashSteps">
 					<div class="step-number">{{step.stepNumber}}</div>
@@ -102,6 +103,7 @@
 
 	<section class="sparge steps">
 		<div class="inner-wrapper">
+			<h2>Sparge</h2>
 			<div class="step-number">{{beer.recipe.spargeStep.stepNumber}}</div>
 			<div class="step-meta" title="Fly sparge is when you add water slowly to the malt which then trickles into the boil kettle. Batch sparge is when you submerge the malt in the sparge water and then add it to the boil kettle.">
 				<span class="values">
@@ -119,6 +121,7 @@
 
 	<section class="boil steps">
 		<div class="inner-wrapper">
+			<h2>Boil</h2>
 			<ul>
 				<li class="step-wrapper" ng-repeat="step in beer.recipe.boilSteps" >
 					<div class="step-number">{{step.stepNumber}}</div>
@@ -139,6 +142,7 @@
 
 	<section class="fermentation steps">
 		<div class="inner-wrapper">
+			<h2>Fermentation</h2>
 			<ul>
 				<li class="step-wrapper" ng-repeat="step in beer.recipe.fermentationSteps">
 					<div class="step-number">{{step.stepNumber}}</div>

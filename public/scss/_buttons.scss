@@ -1,5 +1,14 @@
-.add,.save {
-
+.add, .save, .submit {
+	background: $strong-brand-color;
+	color: white;
+	text-transform: uppercase;
+	border: 0;
+	font-size: 140%;
+	padding: 0 15px;
+	line-height: 40px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 25px;
 }
 
 .prev, .next {

@@ -33,17 +33,21 @@ if headline
 						img(src='images/tulip-large.png', width='72', height='72', alt='Beer')
 
 					when 'origins'
-						span(class='bubble', style="background: url('#{country.getImageByName(item.name)}') center center;background-size: 152%;")
+						if item
+							span(class='bubble', style="background: url('#{country.getImageByName(item.name)}') center center;background-size: 152%;")
 
 					when 'beerstyles'
-						span(class='bubble' style="background:rgba(#{convert((item.srmLow+item.srmHigh)/2, 'srm', 'rgb')},1);")
-						img(src='images/fermentable-large.png', width='72', height='72', alt='Hop')
+						if item
+							span(class='bubble' style="background:rgba(#{convert((item.srmLow+item.srmHigh)/2, 'srm', 'rgb')},1);")
+							img(src='images/fermentable-large.png', width='72', height='72', alt='Hop')
 					when 'suppliers'
-						span(class='bubble', style="background: url('#{country.getImageByName(item.origin.name)}') center center;background-size: 152%;")
+						if item
+							span(class='bubble', style="background: url('#{country.getImageByName(item.origin.name)}') center center;background-size: 152%;")
 
 					when 'glasses'
-						span(class='bubble', style="background:#333;")
-						img(src='images/tulip-large.png', width='72', height='72', alt='#{item.name}')
+						if item
+							span(class='bubble', style="background:#333;")
+							img(src='images/tulip-large.png', width='72', height='72', alt='#{item.name}')
 
 					when 'users'
 						if item

@@ -39,9 +39,6 @@ exports.getRoutes = () ->
 			path: '/login'
 			config: 
 				handler: loginPostHandler
-				# auth: 
-				# 	mode: 'try',
-				# 	strategy: 'session'
 			
 				plugins: 
 					'hapi-auth-cookie': {}                         
@@ -68,13 +65,16 @@ loggedUser = (req, reply) =>
 
 # Gets the login page
 loginGetHandler = (req, reply) =>
-	console.log 'loginGetHandler'
-	html = @renderer.render
-		data: 
-			results: ""
-		template: "#{__dirname}/login.jade"
+	reply @renderer.page
+		title: "Login"
+		navigationState: 'login'
+		user: req?.auth?.credentials?.user
+		html: @renderer.render
+			template: "public/templates/account/login.jade"
+			data: 	
+				headline: 
+					headline: 'Login'
 
-	reply html
 # Sends a post to the api logging ing the user and starting a session.
 loginPostHandler = (req, reply) =>
 	console.log 'loginPostHandler'
@@ -107,13 +107,32 @@ loginPostHandler = (req, reply) =>
 					reply.redirect('/')
 					# reply '<h2>Welcome </h2><a href="/logout">Logout</a>'
 				else
-					reply '<h2> Failed duh duh duuuuuhhh</h2>'
+					reply @renderer.page
+						title: "Login"
+						navigationState: 'login'
+						user: req?.auth?.credentials?.user
+						html: @renderer.render
+							template: "public/templates/account/login.jade"
+							data: 
+								error: true
+								headline: 
+									headline: 'Login'
 		else 
-			reply '<h2> Failed duh duh duuuuuhhh</h2>'
+			reply @renderer.page
+				title: "Login"
+				navigationState: 'login'
+				user: req?.auth?.credentials?.user
+				html: @renderer.render
+					template: "public/templates/account/login.jade"
+					data: 
+						error: true
+						headline: 
+							headline: 'Login'
 
 #Logout the use, by clearing the session.
 logoutHandler = (req, reply) =>
 	req.auth.session.clear()
-	html = "Logout"
+	reply.redirect('/')
 
-	reply html
+showSettings = (req, reply) =>
+updateSettings = (req, reply) =>

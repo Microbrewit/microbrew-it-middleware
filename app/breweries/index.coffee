@@ -61,3 +61,9 @@ show = (req, reply) =>
 					mode: 'single'
 					item: response.breweries[0]
 
+					subnav: [
+						{href: "breweries/#{response.breweries[0].breweryId}#details", label: 'Details', activeState: 'details'}
+						{href: "breweries/#{response.breweries[0].breweryId}#beer", label: 'Beer', activeState: 'beer'}
+						{href: "breweries/#{response.breweries[0].breweryId}#brewers", label: 'Brewers', activeState: 'brewers'}
+					]
+

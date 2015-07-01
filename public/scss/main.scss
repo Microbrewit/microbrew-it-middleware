@@ -7,6 +7,7 @@ $default-grid-gutter: 25px;
 @import "fonts";
 $normal-font-size: 15px;
 $link-color: #00ABD6;
+$strong-brand-color: #CC2F2F;
 
 html {
 	margin:0;
@@ -52,6 +53,20 @@ h2 {
 	margin: 0 auto;
 }
 
+.subnavItem {
+	&:target {
+		color: black;
+	}
+}
+
+.subSection {
+	display: none;
+
+	&:target {
+		display: block;
+	}
+}
+
 @import "spinner";
 @import "metabubble";
 
@@ -68,5 +83,8 @@ h2 {
 @import "gridItem";
 @import "listItem";
 @import "minidisplay";
+
+@import "frontpage";
+@import "login";
 
 @import "footer";

@@ -1,12 +1,14 @@
 article.breweries
 	include ../../headline.jade
-	section.the-content
-		case mode
-			when 'list'
+	case mode
+		when 'list'
+			section.the-content
 				include ../gridList.jade
-			when 'edit'
+		when 'edit'
+			section.the-content
 				include edit.jade
-			when 'new'
+		when 'new'
+			section.the-content
 				include edit.jade
-			default
-				include single.jade
+		default
+			include single.jade

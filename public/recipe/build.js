@@ -42480,7 +42480,7 @@ refreshIngredient = function(ingredient, model) {
   }
 };
 
-angular.module('Microbrewit/core/Network', []).value('ApiUrl', 'http://dev.asphaug.io').value('ClientUrl', 'localhost:3000');
+angular.module('Microbrewit/core/Network', []).value('ApiUrl', '').value('ClientUrl', 'localhost:3000');
 
 angular.module('Microbrewit/core/Network').factory('mbAccount', [
   'mbRequest', 'notification', '$rootScope', function(mbRequest, notification, $rootScope) {
@@ -42659,7 +42659,7 @@ angular.module('Microbrewit/core/Network').factory('mbBeer', [
       var requestUrl;
       beer = parseBeerPostObject(beer);
       requestUrl = "/" + endpoint;
-      return mbRequest.post(requestUrl, beer);
+      return mbRequest.post('/beers/add', beer);
     };
     factory["delete"] = function(id) {
       var requestUrl;
@@ -43561,12 +43561,7 @@ angular.module('Microbrewit/core/Network').factory('mbRequest', [
       var promise;
       requestUrl = "" + ApiUrl + requestUrl;
       $rootScope.loading++;
-      promise = $http.post(requestUrl, object, {
-        withCredentials: true,
-        headers: {
-          "Authorization": "Bearer " + $rootScope.token.token
-        }
-      }).error(function(data, status, headers) {
+      promise = $http.post(requestUrl, object, {}).error(function(data, status, headers) {
         var body, key, title, token, value, _ref;
         $rootScope.loading--;
         console.log(data);

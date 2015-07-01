@@ -23,12 +23,14 @@
 	}
 
 	.value {
-		display: inline-block;
+		float:left;
 		background: transparent !important;
-
-		font-size: 160%;
+		line-height: 32px;
+		font-size: 170%;
 	}
 	.label {
+		float:left;
+		line-height: 32px;
 		margin-left: 5px;
 	}
 

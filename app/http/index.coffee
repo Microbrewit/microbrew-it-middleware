@@ -27,11 +27,15 @@ exports.get = (url, onSuccess, onError) ->
 #Takes a query that is posted to the api
 #@param [Object] query, the query contining, url, body, headers.
 exports.post = (query, onSuccess, onError) ->
+	console.log 'POST'
+	console.log "POST: #{@settings.api}/#{query.url}"
 	request.post(
 		headers: query.headers
 		url: "#{@settings.api}#{query.url}"
 		body: query.body
-	,(error, response, body) ->
+	, (error, response, body) ->
+		console.log body
+		console.log response
 		if(error)
   			onError?(error)	
 		onSuccess?(response.statusCode, JSON.parse(body))
