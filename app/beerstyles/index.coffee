@@ -70,14 +70,14 @@ list = (req, reply) =>
 	@get req.url.path, (status, response) =>
 		console.log response.beerStyles
 		reply @renderer.page
-			title: " beerStyles - Beer Styles"
+			title: "Beer Styles"
 			navigationState: 'beerStyles'
 			user: req?.auth?.credentials?.user
 			html: @renderer.render
-				template: "public/templates/beerStyles/index.jade"
+				template: "public/templates/beerstyles/index.jade"
 				data: 
 					type:'beerstyles' 
-					headline: @renderer.headline 'beerStyles', ''
+					headline: @renderer.headline 'beerstyles', ''
 					mode: 'list'
 					results: response.beerStyles
 
@@ -86,11 +86,11 @@ show = (req, reply) =>
 		user = req.auth.credentials.user
 	@get req.url.path, (status, response) =>
 		reply @renderer.page
-			title: "#{response.beerStyles[0].name} - beerStyles - Beer Styles"
+			title: "#{response.beerStyles[0].name} - Beer Styles"
 			navigationState: 'beerStyles'
 			user: req?.auth?.credentials?.user
 			html: @renderer.render
-				template: "public/templates/beerStyles/index.jade"
+				template: "public/templates/beerstyles/index.jade"
 				data: 
 					type:'beerstyles' 
 					headline: @renderer.headline "#{response.beerStyles[0].name}", "#{response.beerStyles[0].type}"
@@ -101,21 +101,21 @@ showEdit = (req, reply) =>
 	url = req.url.path.substring(0,req.url.path.length - 5)
 	@get url, (status, response) =>
 		reply @renderer.page
-			title: "#{response.beerStyles[0].name} - beerStyles - Beer Styles"
+			title: "#{response.beerStyles[0].name} - Beer Styles"
 			navigationState: 'beerStyles'
 			user: req?.auth?.credentials?.user
 			html: @renderer.render
-				template: "public/templates/beerStyles/index.jade"
+				template: "public/templates/beerstyles/index.jade"
 				data: 
 					type:'beerstyles' 
 					headline: @renderer.headline "#{response.beerStyles[0].name}", "#{response.beerStyles[0].type}"
 					mode: 'edit'
 					item: response.beerStyles[0]
-					action: "/beerStyles/#{response.beerStyles[0].beerstyleId}"
+					action: "/beerstyles/#{response.beerStyles[0].beerstyleId}"
 
 showNew = (req, reply) =>
 	reply @renderer.page
-			title: "Add - beerStyles - Ingredients"
+			title: "Add - Beer Styles"
 			navigationState: 'beerStyles'
 			html: @renderer.render
 				template: "public/templates/beerStyles/index.jade"
@@ -124,7 +124,7 @@ showNew = (req, reply) =>
 					headline: @renderer.headline "Add beerstyle"
 					mode: 'edit'
 					item: {}
-					action: "/beerStyles"
+					action: "/beerstyles"
 
 
 performEdit = (req, reply) =>
