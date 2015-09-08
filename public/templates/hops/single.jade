@@ -7,7 +7,7 @@
 		if item.betaLow || item.betaHigh
 		span.beta-acids(title="Beta acids contribute to a beer's aroma. over Time they may oxidise into compounds that can give beer off-flavours.")
 			| Beta acids: 
-			strong #{item.betaLow}} - #{item.betaHigh}}%
+			strong #{item.betaLow}} - #{item.betaHigh}%
 
 	if item.flavours.length > 0
 		.meta
@@ -17,10 +17,12 @@
 					strong #{flavour},
 	.meta
 		p #{item.flavourDescription}
-section.substitutes
-h2 Substitutes
-.inner-wrapper
-	.center
-		| Sorry, there are no substitutes registered for 
-		strong #{item.name}
-		| .
+if item.substitutes && item.substitutes.length > 0
+	section.substitutes
+		h2 Substitutes
+		.inner-wrapper
+			.center
+				| Sorry, there are no substitutes registered for 
+				strong #{item.name}
+				| .
+

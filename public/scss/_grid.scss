@@ -12,3 +12,11 @@ div, article, section, footer, header {
 	margin: 25px auto;
 	clear: both;
 }
+
+.half {
+	@include col(1/2);
+}
+
+.third {
+	@include col(1/3);
+}

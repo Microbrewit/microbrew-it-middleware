@@ -1,0 +1,11 @@
+article.error
+	if headline
+		header
+			.inner-wrapper
+				h1 #{headline.headline}
+				if headline.subheader && headline.subheader !== "undefined"
+					.subheader
+						span !{headline.subheader}
+
+	if error
+		.inner-wrapper !{error}

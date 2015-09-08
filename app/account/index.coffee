@@ -43,6 +43,18 @@ exports.getRoutes = () ->
 				plugins: 
 					'hapi-auth-cookie': {}                         
 		}
+		method: 'GET'
+		path: '/account/settings'
+		config: 
+			handler: showSettings
+			auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
+
 	]
 
 navigationElement = 'account'
@@ -134,5 +146,31 @@ logoutHandler = (req, reply) =>
 	req.auth.session.clear()
 	reply.redirect('/')
 
+# @todo implement user settings
 showSettings = (req, reply) =>
+	user = req?.auth?.credentials?.user
+
+	if user
+		reply @renderer.page
+			title: "Settings"
+			navigationState: 'settings'
+			user: user
+			html: @renderer.render
+				template: "public/templates/account/settings.jade"
+				data: 
+					error: true
+					headline: 
+						user: user
+						headline: 'Settings'
+						subheader: 'Todo'
+	else 
+		reply @renderer.page
+			title: 'You need to be logged in'
+			html: @renderer.render
+				template: "public/templates/error.jade"
+				data:
+					headline: 
+						headline: 'Please log in'
+						subheader: 'You need to log in to change settings'
+
 updateSettings = (req, reply) =>

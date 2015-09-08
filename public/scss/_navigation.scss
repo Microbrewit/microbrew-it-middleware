@@ -69,6 +69,10 @@
 			background: #333;
 		}
 	}
+
+	.user.minidisplay {
+		font-size: $normal-font-size;
+	}
 }
 
 @media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px)  {

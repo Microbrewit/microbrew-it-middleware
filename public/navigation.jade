@@ -18,9 +18,12 @@ nav#main-navigation
 		
 		if user
 			li.right
-				a(href='/account/settings', class=navigationState === 'account' ? 'active':'')
-					gravatar(url='#{user.gravatar}', size='20px', style='display: inline-block;margin-right: 5px;')
-					| #{user.username}
+				a.user.minidisplay(href='account/settings')
+					if user.gravatar
+						span(class='microbubble' style="background: url('#{user.gravatar}') center center;background-size: contain;")
+					else
+						span(class='microbubble' style="background: url('/random/#{user.username}?size=50') center center;background-size: contain;")
+					span #{user.username}
 		else
 			li.right
 				a(href='login', class=navigationState === 'login' ? 'active':'') Login
