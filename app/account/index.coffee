@@ -43,17 +43,58 @@ exports.getRoutes = () ->
 				plugins: 
 					'hapi-auth-cookie': {}                         
 		}
-		method: 'GET'
-		path: '/account/settings'
-		config: 
-			handler: showSettings
-			auth: 
+		{
+			method: 'GET'
+			path: '/account/settings'
+			config: 
+				handler: showSettings
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false
+		}
+		{
+			method: 'GET'
+			path: '/account/beers'
+			config: 
+				handler: showBeers
+				auth: 
 					mode: 'try',
 					strategy: 'session'
 			
 				plugins: 
 					'hapi-auth-cookie': 
 						redirectTo: false 
+		}
+		{
+			method: 'GET'
+			path: '/account'
+			config: 
+				handler: showBeers
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: '/account/beers' 
+		}
+		{
+			method: 'GET'
+			path: '/account/breweries'
+			config: 
+				handler: showBreweries
+				auth: 
+					mode: 'try',
+					strategy: 'session'
+			
+				plugins: 
+					'hapi-auth-cookie': 
+						redirectTo: false 
+		}
 
 	]
 
@@ -157,12 +198,18 @@ showSettings = (req, reply) =>
 			user: user
 			html: @renderer.render
 				template: "public/templates/account/settings.jade"
-				data: 
-					error: true
+				data:
+					type: 'account'
+					user: user
 					headline: 
-						user: user
-						headline: 'Settings'
-						subheader: 'Todo'
+						headline: user.username
+					subNavState: 'settings'
+					subnav: [
+						{href: "/account/beers", label: 'My Recipes', activeState: 'recipes'}
+						{href: "/account/breweries", label: 'My Breweries', activeState: 'breweries'}
+						{href: "/account/settings", label: 'Settings', activeState: 'settings'}
+						{href: "/logout", label: 'Logout', activeState: 'logout'}
+					]
 	else 
 		reply @renderer.page
 			title: 'You need to be logged in'
@@ -172,5 +219,56 @@ showSettings = (req, reply) =>
 					headline: 
 						headline: 'Please log in'
 						subheader: 'You need to log in to change settings'
+
+showBeers = (req, reply) =>
+	user = req?.auth?.credentials?.user
+
+	if user
+		@get "/users/#{user.username}", (status, response) =>
+			reply @renderer.page
+				title: "Settings"
+				navigationState: 'settings'
+				user: user
+				html: @renderer.render
+					template: "public/templates/account/list.jade"
+					data:
+						type: 'account'
+						user: user
+						results: response.users[0].beers
+						headline: 
+							headline: user.username
+						subNavState: 'recipes'
+						subnav: [
+							{href: "/account/beers", label: 'My Recipes', activeState: 'recipes'}
+							{href: "/account/breweries", label: 'My Breweries', activeState: 'breweries'}
+							{href: "/account/settings", label: 'Settings', activeState: 'settings'}
+							{href: "/logout", label: 'Logout', activeState: 'logout'}
+						]
+
+# @todo implement user settings
+showBreweries = (req, reply) =>
+	user = req?.auth?.credentials?.user
+
+	if user
+		@get "/users/#{user.username}", (status, response) =>
+			reply @renderer.page
+				title: "Settings"
+				navigationState: 'settings'
+				user: user
+				html: @renderer.render
+					template: "public/templates/account/list.jade"
+					data:
+						type: 'account'
+						user: user
+						results: response.users[0].breweries
+						headline: 
+							headline: user.username
+						subNavState: 'breweries'
+						subnav: [
+							{href: "/account/beers", label: 'My Recipes', activeState: 'recipes'}
+							{href: "/account/breweries", label: 'My Breweries', activeState: 'breweries'}
+							{href: "/account/settings", label: 'Settings', activeState: 'settings'}
+							{href: "/logout", label: 'Logout', activeState: 'logout'}
+						]
 
 updateSettings = (req, reply) =>

@@ -58,6 +58,15 @@ if headline
 						else
 							span(class='bubble', style="background: url('/random/brewers?size=72') center center;background-size: contain;")
 
+					when 'account'
+						if user
+							if user.gravatar
+								span(class='bubble', style="background: url('#{user.gravatar}') center center;background-size: contain;")
+							else
+								span(class='bubble', style="background: url('/random/#{user.username}?size=72') center center;background-size: contain;")
+						else
+							span(class='bubble', style="background: url('/random/brewers?size=72') center center;background-size: contain;")
+
 					when 'yeasts'
 						span(class='bubble' style="background:rgba(231,200,126,1);")
 						img(src='images/yeast-large.png', width='72', height='72', alt='Yeast')
