@@ -5,10 +5,10 @@ article.login
 		.inner-wrapper(class=error ? 'error' : '')
 			form(action="/login", method="POST")
 				label(for="username") Username
-				input(type="text" id="password" name="username" placeholder="johnfredrik" value = "johnfredrik" required)
+				input(type="text" id="password" name="username" placeholder="username" value="" required)
 
 				label(for="password") Password
-				input(type="password" id="password" name="password" placeholder="password" value="SuperPass" required)
+				input(type="password" id="password" name="password" placeholder="password" value="" required)
 				
 				label(for="remember") keep logged in
 				input(type="checkbox" id="remember")
