@@ -65,6 +65,28 @@ getRoutes = () ->
 
 injectHelpers()
 
+# Handle all server errors with the default error page
+# @todo more granular error handling
+server.ext 'onPreResponse', (request, reply) ->
+	if request.response.isBoom
+		err = request.response
+		errName = err.output.payload.error
+		message = err.output.payload.message or= ''
+		statusCode = err.output.payload.statusCode
+		if err.isDeveloperError then ourFault = 'This is probably our fault.' else ourFault = ''
+
+		reply utils.renderer.page
+			title: "#{statusCode} #{errName}"
+			html: utils.renderer.render
+				template: "public/templates/error.jade"
+				data:
+					headline: 
+						headline: "HTTP #{statusCode} =("
+						subheader: "#{errName}"
+					error: "<p class=\"center\">#{message}<br /> #{ourFault}</p>"
+	else
+    	reply.continue()
+
 #Registers a plugin for hapi
 server.register( register: require('hapi-auth-cookie'), (err) ->
 	if err 
