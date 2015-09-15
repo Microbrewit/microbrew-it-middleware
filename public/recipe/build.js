@@ -40777,7 +40777,7 @@ $templateCache.put("selectize/select.tpl.html","<div class=\"ui-select-container
     }]);
 
 }());
-angular.module('Microbrewit', ['ui.router', 'ui.select', 'ui.sortable', 'Microbrewit/core/Calculation', 'Microbrewit/core/Network', 'Microbrewit/core/Notifications', 'Microbrewit/core/Utils']).config(function($httpProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+angular.module('Microbrewit', ['ui.router', 'ui.select', 'ui.sortable', 'Microbrewit/core/Calculation', 'Microbrewit/core/Network', 'Microbrewit/core/Notifications', 'Microbrewit/core/Utils']).config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function($httpProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
   $httpProvider.defaults.useXDomain = true;
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("/");
@@ -40790,11 +40790,11 @@ angular.module('Microbrewit', ['ui.router', 'ui.select', 'ui.sortable', 'Microbr
     templateUrl: "templates/beers/beer.add.html",
     controller: "RecipeController"
   }).state('edit', {
-    url: "/beers/edit/:id",
+    url: "/beers/:id/edit",
     templateUrl: "templates/beers/beer.add.html",
     controller: "RecipeController"
   });
-});
+}]);
 
 angular.module('Microbrewit/core/Calculation', []);
 
@@ -41203,7 +41203,7 @@ angular.module('Microbrewit/core/Calculation').directive('mbUnit', [
   }
 ]);
 
-angular.module('Microbrewit/core/Calculation').factory('abv', function(convert, _) {
+angular.module('Microbrewit/core/Calculation').factory('abv', ['convert', '_', function(convert, _) {
   var formulas;
   formulas = {};
   formulas.available = function() {
@@ -41241,7 +41241,7 @@ angular.module('Microbrewit/core/Calculation').factory('abv', function(convert, 
     }
   };
   return formulas;
-});
+}]);
 
 angular.module('Microbrewit/core/Calculation').factory('bitterness', [
   'convert', function(convert) {
@@ -42480,7 +42480,7 @@ refreshIngredient = function(ingredient, model) {
   }
 };
 
-angular.module('Microbrewit/core/Network', []).value('ApiUrl', '').value('ClientUrl', 'localhost:3000');
+angular.module('Microbrewit/core/Network', []).value('ApiUrl', 'http://dev.microbrew.it').value('ClientUrl', 'localhost:3000');
 
 angular.module('Microbrewit/core/Network').factory('mbAccount', [
   'mbRequest', 'notification', '$rootScope', function(mbRequest, notification, $rootScope) {
@@ -42574,7 +42574,7 @@ angular.module('Microbrewit/core/Network').factory('mbAccount', [
 var parseBeerPostObject;
 
 angular.module('Microbrewit/core/Network').factory('mbBeer', [
-  'mbRequest', 'notification', function(mbRequest, notification) {
+  'mbRequest', 'ApiUrl', 'notification', function(mbRequest, ApiUrl, notification) {
     var endpoint, factory;
     factory = {};
     endpoint = 'beers';
@@ -42584,7 +42584,7 @@ angular.module('Microbrewit/core/Network').factory('mbBeer', [
         query = {};
       }
       if (query.id) {
-        requestUrl = "/" + endpoint + "/" + query.id;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "/" + query.id;
         options = {
           fullscreenLoading: true,
           returnProperty: endpoint
@@ -42632,7 +42632,7 @@ angular.module('Microbrewit/core/Network').factory('mbBeer', [
           time: 2000
         });
       } else {
-        requestUrl = "/" + endpoint + "/" + id;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "/" + id;
         console.log("mbRequest.get = " + (mbRequest.get != null));
         return mbRequest.get(requestUrl);
       }
@@ -42649,7 +42649,7 @@ angular.module('Microbrewit/core/Network').factory('mbBeer', [
       }
       beerParsed = parseBeerPostObject(beer);
       beerParsed.id = beer.id;
-      requestUrl = "/" + endpoint + "/" + beer.id;
+      requestUrl = "" + ApiUrl + "/" + endpoint + "/" + beer.id;
       return mbRequest.put(requestUrl, beerParsed);
     };
     factory.edit = function(beer) {
@@ -42663,7 +42663,7 @@ angular.module('Microbrewit/core/Network').factory('mbBeer', [
     };
     factory["delete"] = function(id) {
       var requestUrl;
-      requestUrl = "/" + endpoint + "/" + id;
+      requestUrl = "" + ApiUrl + "/" + endpoint + "/" + id;
       return mbRequest["delete"](requestUrl);
     };
     return factory;
@@ -42953,7 +42953,7 @@ parseBreweryPostObject = function(brewery) {
 };
 
 angular.module('Microbrewit/core/Network').factory('mbFermentable', [
-  'mbRequest', 'notification', 'localStorage', function(mbRequest, notification, localStorage) {
+  'mbRequest', 'ApiUrl', 'notification', 'localStorage', function(mbRequest, ApiUrl, notification, localStorage) {
     var endpoint, factory;
     endpoint = 'fermentables';
     factory = {};
@@ -42969,12 +42969,12 @@ angular.module('Microbrewit/core/Network').factory('mbFermentable', [
         size = 20;
       }
       if (id) {
-        requestUrl = "/" + endpoint + "/" + id;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "/" + id;
         return mbRequest.get(requestUrl, {
           returnProperty: endpoint
         });
       } else {
-        requestUrl = "/" + endpoint;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "?size=1000";
         return mbRequest.get(requestUrl, {
           cache: endpoint,
           returnProperty: endpoint,
@@ -42992,12 +42992,12 @@ angular.module('Microbrewit/core/Network').factory('mbFermentable', [
           time: 2000
         });
       }
-      requestUrl = "/" + endpoint + "/" + fermentable.id;
+      requestUrl = "" + ApiUrl + "/" + endpoint + "/" + fermentable.id;
       return mbRequest.put(requestUrl, fermentable);
     };
     factory.add = function(fermentable) {
       var requestUrl;
-      requestUrl = "/" + endpoint;
+      requestUrl = "" + ApiUrl + "/" + endpoint;
       return mbRequest.post(requestUrl, fermentable);
     };
     factory["delete"] = function(fermentable) {};
@@ -43014,7 +43014,7 @@ angular.module('Microbrewit/core/Network').factory('mbGlass', [
 ]);
 
 angular.module('Microbrewit/core/Network').factory('mbHop', [
-  'mbRequest', 'notification', 'localStorage', function(mbRequest, notification, localStorage) {
+  'mbRequest', 'ApiUrl', 'notification', 'localStorage', function(mbRequest, ApiUrl, notification, localStorage) {
     var endpoint, factory;
     endpoint = 'hops';
     factory = {};
@@ -43030,12 +43030,12 @@ angular.module('Microbrewit/core/Network').factory('mbHop', [
         size = 20;
       }
       if (id) {
-        requestUrl = "/" + endpoint + "/" + id;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "/" + id;
         return mbRequest.get(requestUrl, {
           returnProperty: endpoint
         });
       } else {
-        requestUrl = "/" + endpoint;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "?size=1000";
         return mbRequest.get(requestUrl, {
           cache: endpoint,
           returnProperty: endpoint,
@@ -43053,17 +43053,17 @@ angular.module('Microbrewit/core/Network').factory('mbHop', [
           time: 2000
         });
       }
-      requestUrl = "/" + endpoint + "/" + ingredient.id;
+      requestUrl = "" + ApiUrl + "/" + endpoint + "/" + ingredient.id;
       return mbRequest.put(requestUrl, ingredient);
     };
     factory.add = function(ingredient) {
       var requestUrl;
-      requestUrl = "/" + endpoint;
+      requestUrl = "" + ApiUrl + "/" + endpoint;
       return mbRequest.post(requestUrl, ingredient);
     };
     factory["delete"] = function(ingredient) {
       var requestUrl;
-      requestUrl = "/" + endpoint;
+      requestUrl = "" + ApiUrl + "/" + endpoint;
       return mbRequest["delete"](requestUrl, ingredient.id);
     };
     return factory;
@@ -43095,7 +43095,7 @@ angular.module('Microbrewit/core/Network').factory('mbSupplier', [
 ]);
 
 angular.module('Microbrewit/core/Network').factory('mbYeast', [
-  'mbRequest', 'notification', 'localStorage', function(mbRequest, notification, localStorage) {
+  'mbRequest', 'ApiUrl', 'notification', 'localStorage', function(mbRequest, ApiUrl, notification, localStorage) {
     var endpoint, factory;
     endpoint = 'yeasts';
     factory = {};
@@ -43111,12 +43111,12 @@ angular.module('Microbrewit/core/Network').factory('mbYeast', [
         size = 20;
       }
       if (id) {
-        requestUrl = "/" + endpoint + "/" + id;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "/" + id;
         return mbRequest.get(requestUrl, {
           returnProperty: endpoint
         });
       } else {
-        requestUrl = "/" + endpoint;
+        requestUrl = "" + ApiUrl + "/" + endpoint + "?size=1000";
         return mbRequest.get(requestUrl, {
           cache: endpoint,
           returnProperty: endpoint,
@@ -43134,12 +43134,12 @@ angular.module('Microbrewit/core/Network').factory('mbYeast', [
           time: 2000
         });
       }
-      requestUrl = "/" + endpoint + "/" + ingredient.id;
+      requestUrl = "" + ApiUrl + "/" + endpoint + "/" + ingredient.id;
       return mbRequest.put(requestUrl, ingredient);
     };
     factory.add = function(ingredient) {
       var requestUrl;
-      requestUrl = "/" + endpoint;
+      requestUrl = "" + ApiUrl + "/" + endpoint;
       return mbRequest.post(requestUrl, ingredient);
     };
     factory["delete"] = function(ingredient) {};
@@ -43484,7 +43484,7 @@ angular.module('Microbrewit/core/Network').factory('mbRequest', [
       if (options == null) {
         options = {};
       }
-      requestUrl = "" + ApiUrl + requestUrl;
+      requestUrl = "" + requestUrl;
       if (options.fullscreenLoading) {
         $rootScope.loading++;
       }
@@ -43559,7 +43559,7 @@ angular.module('Microbrewit/core/Network').factory('mbRequest', [
     };
     request.post = function(requestUrl, object) {
       var promise;
-      requestUrl = "" + ApiUrl + requestUrl;
+      requestUrl = "" + requestUrl;
       $rootScope.loading++;
       promise = $http.post(requestUrl, object, {}).error(function(data, status, headers) {
         var body, key, title, token, value, _ref;
@@ -43623,7 +43623,7 @@ angular.module('Microbrewit/core/Network').factory('mbRequest', [
       return promise;
     };
     request.put = function(requestUrl, object) {
-      requestUrl = "" + ApiUrl + requestUrl;
+      requestUrl = "" + requestUrl;
       console.log("mbRequest.put: " + requestUrl);
       $rootScope.loading++;
       request = $http.put(requestUrl, object, {
@@ -44042,7 +44042,7 @@ angular.module('Microbrewit/core/Utils').service('validJSON', function() {
     }
     return false;
   };
-}).factory('localStorage', function(validJSON) {
+}).factory('localStorage', ['validJSON', function(validJSON) {
   var storageApi;
   storageApi = {};
   storageApi.getItem = function(key) {
@@ -44065,7 +44065,7 @@ angular.module('Microbrewit/core/Utils').service('validJSON', function() {
     return window.localStorage.removeItem(key);
   };
   return storageApi;
-}).factory('sessionStorage', function(validJSON) {
+}]).factory('sessionStorage', ['validJSON', function(validJSON) {
   var storageApi;
   storageApi = {};
   storageApi.getItem = function(key) {
@@ -44088,7 +44088,7 @@ angular.module('Microbrewit/core/Utils').service('validJSON', function() {
     return window.localStorage.removeItem(key);
   };
   return storageApi;
-});
+}]);
 
 angular.module('Microbrewit/core/Utils').factory('_', [
   '$window', function($window) {
