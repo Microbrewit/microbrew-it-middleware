@@ -11,4 +11,5 @@ div.fermentable.list-item
 	else
 		if result.amount
 			span.amount #{result.amount} grams
-		h3.name #{result.name}
+		h3.name 
+			a(href="fermentables/#{result.fermentableId}") #{result.name}
