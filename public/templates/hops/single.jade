@@ -1,26 +1,40 @@
 .inner-wrapper
-	.meta
-		if item.aaLow || item.aaHigh
-			span.alpha-acids(title='Alpha acids contribute bitterness in addition to having a mild anti bacterial effect.')
-				| Alpha acids: 
-				strong #{item.aaLow} - #{item.aaHigh}%
-		if item.betaLow || item.betaHigh
-		span.beta-acids(title="Beta acids contribute to a beer's aroma. over Time they may oxidise into compounds that can give beer off-flavours.")
-			| Beta acids: 
-			strong #{item.betaLow}} - #{item.betaHigh}%
+	section.hop-meta.meta-info
+		.inner-wrapper
+			if item.aaLow || item.aaHigh
+				.meta-bubble.alpha-acids(title='Alpha acids contribute bitterness in addition to having a mild anti bacterial effect.')
+					span(class='value') #{item.aaLow} - #{item.aaHigh}%
+					span.label Alpha Acids (AA)
+			if item.betaLow || item.betaHigh
+				.meta-bubble.beta-acids(title="Beta acids contribute to a beer's aroma. over Time they may oxidise into compounds that can give beer off-flavours.")
+					span(class='value') #{item.betaLow} - #{item.betaHigh}%
+					span.label Beta Acids (BA)
+			if item.origin
+				.meta-bubble.origin(title='Origin')
+					span.value.minibubble(style="background: url('#{country.getImageByName(item.origin.name)}') center center !important;background-size: 152% !important;width:30px;height:30px;border-radius:50%;")
+					span.label #{item.origin.name}
+			if item.supplier
+				.meta-bubble(title='Maltster/supplier')
+					span(class='value') 
+						a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
+					span.label SUPPLIER
 
 	if item.flavours.length > 0
 		.meta
 			span.flavours
-				| Tastes of 
-				each flavour in item.flavours
-					strong #{flavour},
+				| Tastes of  #{ item.flavours.join(', ')}
 	.meta
 		p #{item.flavourDescription}
-if item.substitutes && item.substitutes.length > 0
-	section.substitutes
-		h2 Substitutes
-		.inner-wrapper
+
+section.substitutes.the-content
+	h2 Substitutes
+	.inner-wrapper
+		if item.substitutes && item.substitutes.length > 0
+			ul.grid-list
+				each result in item.substitutes
+					li
+						include gridItem.jade
+		else
 			.center
 				| Sorry, there are no substitutes registered for 
 				strong #{item.name}

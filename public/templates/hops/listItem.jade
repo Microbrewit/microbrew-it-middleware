@@ -15,6 +15,7 @@ div.hop.list-item
 	else
 		if result.amount
 			span.amount #{result.amount} grams
-		h3.name #{result.name}
+		h3.name 
+			a(href="hops/#{result.hopId}") #{result.name}
 		if result.hopForm
 			span.form #{result.hopForm.name}

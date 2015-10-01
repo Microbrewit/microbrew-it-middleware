@@ -198,8 +198,21 @@ singleHandler = (req, reply) =>
 	@get req.url.path, (status, response) =>
 		beer = response.beers[0]
 		brewers = []
+
+		user = @userUtils.getUserFromRequest(req)
+
 		for brewer in beer.brewers
 			brewers.push "<a href=\"users/#{brewer.username}\">#{brewer.username}</a>"
+
+		if user
+			subNav = [
+				{href: "/beers/#{beer.id}", label: 'Recipe', activeState: 'recipe'}
+				{href: "/beers/#{beer.id}/fork", label: 'Fork', activeState: 'fork'}
+			]
+
+			if @userUtils.canEdit(user, beer)
+				subNav.push {href: "/beers/#{beer.id}/edit", label: 'Edit', activeState: 'edit'}
+
 		reply @renderer.page
 			title: beer.name
 			navigationState: 'beers'
@@ -209,16 +222,10 @@ singleHandler = (req, reply) =>
 				data:
 					type:'beers'
 					subNavState: 'recipe'
-					subnav: [
-						{href: "/beers/#{beer.id}", label: 'Recipe', activeState: 'recipe'}
-						{href: "/beers/#{beer.id}/edit", label: 'Edit', activeState: 'edit'}
-						{href: "/beers/#{beer.id}/fork", label: 'Fork', activeState: 'fork'}
-					]
+					subnav: subNav
 					headline: 
 						headline: beer.name
 						subheader: "<a href=\"beerstyles/#{beer.beerStyle.beerStyleId}\">#{beer.beerStyle.name}</a><br /> <small>by #{brewers.join(',')}</small>"
-						# minidisplay:
-						# 	results: beer.brewers
 					mode: 'single'
 					user: req?.auth?.credentials?.user
 					item: beer
