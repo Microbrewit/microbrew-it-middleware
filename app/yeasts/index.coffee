@@ -100,7 +100,7 @@ show = (req, reply) =>
 				template: "public/templates/yeasts/index.jade"
 				data: 
 					type:'yeasts' 
-					headline: @renderer.headline "#{response.yeasts[0].name}", "#{response.yeasts[0].type}"
+					headline: @renderer.headline "#{response.yeasts[0].name}", "#{response.yeasts[0].species} - #{response.yeasts[0].productCode}"
 					mode: 'single'
 					item: response.yeasts[0]
 

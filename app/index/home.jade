@@ -1,7 +1,6 @@
 article.frontpage
 	header
 		.header-content-wrapper
-			
 			if !user
 				h1 Welcome to the alpha
 				.subheader
@@ -11,18 +10,27 @@ article.frontpage
 				h1 Welcome back, #{user.username}!
 				.subheader
 				a.call-to-action.create(href='/beers/add') CREATE NEW RECIPE
+			
+			section(style="color:white;font-size:120%;bottom:0")
+				section.inner-wrapper
+					.third
+						h3.center Customisability
+						p Set your account to use imperial or metric values and the beer formulas you prefer.
+					.third
+						h3.center Clones & forks
+						p Easily create your own variations of any recipe on the site through the fork-button.
+
+					.third
+						h3.center Homebreweries
+						p Create your own home brewery and create recipes with your friends.
+article.beers
 	section.the-content
-		section.inner-wrapper
-			.third
-				h3 Customisability
-				p Set your account to use imperial or metric values and the beer formulas you prefer. The whole site will adapt.
-			.third
-				h3 Clones
-				p Find or add recipes for commercial beer through the clone button, or tweak existing recipes through the fork button. It's never been easier to find and tweak beer recipes.
-
-			.third
-				h3 Homebreweries
-				p Create your own home brewery and create recipes with your friends.
-
+		h2 A sample of our recipes
+		include ../../public/templates/gridList.jade
+article.frontpage
 	section.huge-call-to-action
-		h2 Stay tuned for the open beta
+		h2.center
+			a(class="button" href="/beers") See more recipes
+			|  or 
+			a(class="button" href="/register") register a user 
+			| and get brewing!

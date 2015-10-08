@@ -41,4 +41,3 @@ exports.abv = () ->
 			return if not _.isNaN(calc) then calc else 0
 
 		return formulas
-	)

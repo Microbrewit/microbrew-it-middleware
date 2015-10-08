@@ -53,6 +53,11 @@ section.recipe.the-content
 						.step-meta #{step.volume} liters for #{step.length} minutes at #{step.temperature} celcius
 
 						include recipeStep.jade
+	if item.recipe.spargeStep
+		section.sparge.steps
+			.inner-wrapper
+				h2 Sparge
+				p TODO
 	section.boil.steps
 		.inner-wrapper
 			h2 Boil

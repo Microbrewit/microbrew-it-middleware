@@ -6,18 +6,8 @@ argv.environment ?= 'dev'
 console.log 'settings', settings[argv.environment].connection
 server.connection settings[argv.environment].connection
 
-# sass = require 'node-sass'
-# fs = require 'fs'
-# sassRes = sass.renderSync
-# 	file: 'public/scss/main.scss'
-# 	outputStyle: 'compressed'
-# 	outFile: 'public/css/main.css'
-# 	sourceMap: false
-
-# fs.writeFile 'public/css/main.css', sassRes.css, () ->
-# 	console.log 'done'
-
 modules =
+	api: require './app/api'
 	static: require './app/static'
 	index: require './app/index'
 
@@ -46,9 +36,11 @@ modules =
 utils =
 	renderer: require './app/renderer'
 	http: require './app/http'
+	userUtils: require './app/utils/userUtils'
 
 injectHelpers = () ->
 	for key, module of modules
+		console.log key + ' ' + module?
 		if module?
 			module.settings = settings[argv.environment]
 			module.get = utils.http.get
@@ -56,6 +48,8 @@ injectHelpers = () ->
 			module.post = utils.http.post
 			module.put = utils.http.put
 			module.delete = utils.http.delete
+			module.userUtils = utils.userUtils
+			console.log module.get?
 
 getRoutes = () ->
 	availableRoutes = []
@@ -67,25 +61,27 @@ injectHelpers()
 
 # Handle all server errors with the default error page
 # @todo more granular error handling
-server.ext 'onPreResponse', (request, reply) ->
-	if request.response.isBoom
-		err = request.response
-		errName = err.output.payload.error
-		message = err.output.payload.message or= ''
-		statusCode = err.output.payload.statusCode
-		if err.isDeveloperError then ourFault = 'This is probably our fault.' else ourFault = ''
+# server.ext 'onPreResponse', (request, reply) ->
+# 	if request.response.isBoom
+# 		err = request.response
+# 		errName = err.output.payload.error
+# 		message = err.output.payload.message or= ''
+# 		statusCode = err.output.payload.statusCode
+# 		if err.isDeveloperError then ourFault = 'This is probably our fault.' else ourFault = ''
 
-		reply utils.renderer.page
-			title: "#{statusCode} #{errName}"
-			html: utils.renderer.render
-				template: "public/templates/error.jade"
-				data:
-					headline: 
-						headline: "HTTP #{statusCode} =("
-						subheader: "#{errName}"
-					error: "<p class=\"center\">#{message}<br /> #{ourFault}</p>"
-	else
-    	reply.continue()
+# 		console.log JSON.stringify err, false, '\t'
+
+# 		reply utils.renderer.page
+# 			title: "#{statusCode} #{errName}"
+# 			html: utils.renderer.render
+# 				template: "public/templates/error.jade"
+# 				data:
+# 					headline: 
+# 						headline: "HTTP #{statusCode} =("
+# 						subheader: "#{errName}"
+# 					error: "<p class=\"center\">#{message}<br /> #{ourFault}</p>"
+# 	else
+#     	reply.continue()
 
 #Registers a plugin for hapi
 server.register( register: require('hapi-auth-cookie'), (err) ->

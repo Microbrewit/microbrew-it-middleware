@@ -67,6 +67,23 @@ h2 {
 	}
 }
 
+.notes.text {
+	border: none;
+	background: none;
+
+	.inner-wrapper {
+		p {
+			width: 90%;
+			padding: 0 25px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 25px;
+			
+		}
+		margin-bottom: 25px;
+	}
+}
+
 @import "spinner";
 @import "metabubble";
 

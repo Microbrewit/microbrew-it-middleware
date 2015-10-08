@@ -246,9 +246,7 @@ countries = [
 
 exports.getCode = (name) ->
 	for country in countries
-		console.log "#{country.name.toLowerCase()} is #{name.toLowerCase()}"
 		if country.name.toLowerCase() is name.toLowerCase()
-			console.log "YES! #{country.code}"
 			return country.code
 
 exports.getName = (code) ->
