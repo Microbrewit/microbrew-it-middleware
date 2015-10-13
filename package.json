@@ -1,22 +1,21 @@
 {
-  "name": "microbrew-it-node",
+  "name": "microbrewit-middleware",
   "version": "1.0.0",
   "description": "Server middleware for Microbrew.it",
-  "main": "index.js",
+  "main": "src/bootstrap.coffee",
   "scripts": {
+    "start": "coffee src/bootstrap.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Torstein Thune <torstein@gmail.com> (http://thune.io/)",
   "license": "MIT",
   "dependencies": {
     "avatar-generator": "^1.0.6",
-    "handlebars": "^3.0.3",
     "hapi": "^8.6.1",
     "hapi-auth-cookie": "2.2.0",
     "jade": "^1.9.2",
     "lodash": "^3.9.3",
-    "minimist": "^1.1.1",
-    "node-sass": "^3.2.0",
-    "request": "2.57.0"
+    "microbrewit-node": "latest",
+    "microbrewit-formulas": "latest"
   }
 }

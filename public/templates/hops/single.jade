@@ -1,13 +1,13 @@
 .inner-wrapper
 	section.hop-meta.meta-info
 		.inner-wrapper
-			if item.aaLow || item.aaHigh
+			if item.acids.alpha.low || item.acids.alpha.high
 				.meta-bubble.alpha-acids(title='Alpha acids contribute bitterness in addition to having a mild anti bacterial effect.')
-					span(class='value') #{item.aaLow} - #{item.aaHigh}%
+					span(class='value') #{item.acids.alpha.low} - #{item.acids.alpha.high}%
 					span.label Alpha Acids (AA)
-			if item.betaLow || item.betaHigh
+			if item.acids.beta.low || item.acids.beta.high
 				.meta-bubble.beta-acids(title="Beta acids contribute to a beer's aroma. over Time they may oxidise into compounds that can give beer off-flavours.")
-					span(class='value') #{item.betaLow} - #{item.betaHigh}%
+					span(class='value') #{item.acids.beta.low} - #{item.acids.beta.high}%
 					span.label Beta Acids (BA)
 			if item.origin
 				.meta-bubble.origin(title='Origin')
@@ -19,12 +19,51 @@
 						a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
 					span.label SUPPLIER
 
-	if item.flavours.length > 0
-		.meta
-			span.flavours
-				| Tastes of  #{ item.flavours.join(', ')}
-	.meta
-		p #{item.flavourDescription}
+	section.flavours
+		.inner-wrapper
+			h2 Flavours and aroma
+
+			if item.flavours.length > 0
+				.meta
+					span.flavours
+						| Tastes of  #{ item.flavours.join(', ')}
+			.meta
+				p #{item.flavourDescription}
+
+	section.acids
+		.inner-wrapper
+			h2 Acid breakdown
+			table.zebra.oils
+				tr
+					th Acid
+					th minimum
+					th maximum
+				each range, name in item.acids
+					tr 
+						td #{name}
+						td #{range.low}%
+						td #{range.high}%
+	section.oils
+		.inner-wrapper
+			h2 Oil breakdown
+			table.zebra.oils
+				tr
+					th Oil
+					th minimum
+					th maximum
+				each range, name in item.oils
+					tr 
+						td #{name}
+						td #{range.low}%
+						td #{range.high}%
+
+	section.notes.text 
+		.inner-wrapper
+			h2 Notes
+			p #{item.name} is generally used for #{item.purpose}.
+			p #{item.notes}
+			p #{item.name} is often used in !{beerStylesPretty} style beers.
+
 
 section.substitutes.the-content
 	h2 Substitutes

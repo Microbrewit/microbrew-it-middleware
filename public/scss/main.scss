@@ -84,6 +84,30 @@ h2 {
 	}
 }
 
+.zebra {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+
+	th {
+		background: #666;
+		color: #fff;
+		text-align: left;
+		font-weight: normal;
+		padding: 5px;
+	}
+
+	tr:nth-child(odd) {
+		background: #efefef;
+	}
+	tr {
+		background: #fff;
+	}
+	td {
+		padding: 5px;
+	}
+}
+
 @import "spinner";
 @import "metabubble";
 

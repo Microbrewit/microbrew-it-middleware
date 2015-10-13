@@ -113,6 +113,23 @@ h2 {
       margin-right: auto;
       margin-bottom: 25px; }
 
+.zebra {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; }
+  .zebra th {
+    background: #666;
+    color: #fff;
+    text-align: left;
+    font-weight: normal;
+    padding: 5px; }
+  .zebra tr:nth-child(odd) {
+    background: #efefef; }
+  .zebra tr {
+    background: #fff; }
+  .zebra td {
+    padding: 5px; }
+
 .spinner-icon {
   width: 14px;
   height: 14px;
