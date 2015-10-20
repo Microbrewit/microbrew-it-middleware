@@ -22,7 +22,7 @@
 					</ui-select-choices>
 				</ui-select>
 			</td>
-			<td><mb-convert modelunit="grams" localunit="{{user.settings.largeWeight}}" ingredient="fermentable" modelvalue="fermentable.amount"></mb-convert></td>
+			<td><mb-calc.convert.convert modelunit="grams" localunit="{{user.settings.largeWeight}}" ingredient="fermentable" modelvalue="fermentable.amount"></mb-calc.convert.convert></td>
 			<td><mb-colour-box style="float:left;" amount="{{fermentable.amount}}" weightUnit="grams" liquidUnit="liters" ingredient="fermentable" volume="{{beer.recipe.volume}}" type="lovibond" colour="{{fermentable.lovibond}}"></mb-colour-box>
 				<span style="display:inline-block;line-height: 50px;">{{fermentable.lovibond}}°L</span></td>
 			<td>{{fermentable.ppg}}</td>
@@ -53,7 +53,7 @@
 					</ui-select-choices>
 				</ui-select>
 			</td>
-			<td><mb-convert modelunit="grams" localunit="{{user.settings.smallWeight}}" modelvalue="hop.amount"></mb-convert></td>
+			<td><mb-calc.convert.convert modelunit="grams" localunit="{{user.settings.smallWeight}}" modelvalue="hop.amount"></mb-calc.convert.convert></td>
 			<td><select ng-model="hop.hopForm" ng-options="type.name for type in hopForms"></select></td>
 			<td><input type="text" ng-model="hop.aaValue"/>%</td>
 			<td><input type="text" ng-model="hop.betaValue"/>%</td>
@@ -73,7 +73,7 @@
 				<button class="edit form-button" ng-click="editFermentable(fermentable)">Edit</button>
 				{{other.name}} ({{other.type}})
 			</td>
-			<td><mb-convert modelunit="grams" localunit="{{user.settings.smallWeight}}" modelvalue="other.amount"></mb-convert></td>
+			<td><mb-calc.convert.convert modelunit="grams" localunit="{{user.settings.smallWeight}}" modelvalue="other.amount"></mb-calc.convert.convert></td>
 			<td><button class="remove form-button" ng-click="removeFromStep(other, step.others)">X</button></td>
 		</tr>
 	</table>

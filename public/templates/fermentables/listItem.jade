@@ -4,7 +4,7 @@ div.fermentable.list-item
 		span.meta.ppg(title='PPG is the amount of sugar') #{result.ppg} PPG
 		span.meta.gp(title='PPG is the amount of sugar') 5 GP (7.8%)
 	.left-circle
-		span(class='minibubble' style="background: url('images/fermentable-large.png') center center;background-size:contain;background-color:rgba(#{convert(result.lovibond, 'lovibond', 'rgb')},1);" alt='#{result.type}' title="#{result.type} has colour of #{result.lovibond}°L")
+		span(class='minibubble' style="background: url('images/fermentable-large.png') center center;background-size:contain;background-color:rgba(#{calc.convert.convert(result.lovibond, 'lovibond', 'rgb')},1);" alt='#{result.type}' title="#{result.type} has colour of #{result.lovibond}°L")
 	if showStatic
 		input.amount(value="#{result.amount}")
 		input.name(value="#{result.name}")

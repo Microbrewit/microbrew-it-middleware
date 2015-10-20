@@ -4,7 +4,7 @@
 			.meta-bubble(title="Lovibond is a measure of a grain's colour.")
 				span(class='value') 
 					.left-circle
-						span(class='minibubble' style="background:rgba(#{convert(item.lovibond, 'lovibond', 'rgb')},1);")
+						span(class='minibubble' style="background:rgba(#{calc.convert.convert(item.lovibond, 'lovibond', 'rgb')},1);")
 					| #{item.lovibond}
 				span.label °L 
 			.meta-bubble(title='PPG describes the sugar contents of a malt')

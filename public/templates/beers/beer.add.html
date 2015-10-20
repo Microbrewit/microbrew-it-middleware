@@ -64,7 +64,7 @@
 				</div>
 				<div class="meta-bubble">
 					<span class="value">
-						<mb-convert id="volume" class="meta-values-input" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="beer.recipe.volume"></mb-convert>
+						<mb-calc.convert.convert id="volume" class="meta-values-input" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="beer.recipe.volume"></mb-calc.convert.convert>
 					</span>
 					<span class="label">VOL</span>
 				</div>
@@ -87,10 +87,10 @@
 					<div class="step-number">{{step.stepNumber}}</div>
 					<div class="step-meta">
 						<span class="values">
-							<label for="length">Volume </label><mb-convert id="volume" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="step.volume"></mb-convert>
+							<label for="length">Volume </label><mb-calc.convert.convert id="volume" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="step.volume"></mb-calc.convert.convert>
 							<label for="length">Length: </label><input type="text" id="length" ng-model="step.length"/>
 							<label for="length">Temperature: </label>
-							<mb-convert id="temperature" modelunit="celcius" localunit="{{user.settings.temperature}}" modelvalue="step.temperature"></mb-convert>
+							<mb-calc.convert.convert id="temperature" modelunit="celcius" localunit="{{user.settings.temperature}}" modelvalue="step.temperature"></mb-calc.convert.convert>
 							<button class="remove form-button" ng-click="removeStep(step)">X</button>
 						</span>
 					</div>
@@ -110,9 +110,9 @@
 					<label for="type">Type: </label>
 					<select id="type" style="width: auto;display:inline-block" ng-model="beer.recipe.spargeStep.type" ng-options="type for type in spargeTypes"></select>
 
-					<label for="amount">Amount: </label><mb-convert id="amount" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="beer.recipe.spargeStep.amount"></mb-convert>
+					<label for="amount">Amount: </label><mb-calc.convert.convert id="amount" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="beer.recipe.spargeStep.amount"></mb-calc.convert.convert>
 
-					<label for="temperature">Temperature: </label><mb-convert id="temperature" modelunit="celcius" localunit="{{user.settings.temperature}}" modelvalue="beer.recipe.spargeStep.temperature"></mb-convert>
+					<label for="temperature">Temperature: </label><mb-calc.convert.convert id="temperature" modelunit="celcius" localunit="{{user.settings.temperature}}" modelvalue="beer.recipe.spargeStep.temperature"></mb-calc.convert.convert>
 				</span>
 			</div>
 			<textarea class="step-notes" ng-model="beer.recipe.spargeStep.notes" placeholder="notes"></textarea>
@@ -129,7 +129,7 @@
 						<span class="values">
 							<label for="length">Add at: </label>
 							<input type="text" id="length" ng-model="step.length"/>
-							<label for="volume">Volume: </label><mb-convert id="volume" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="step.volume"></mb-convert>
+							<label for="volume">Volume: </label><mb-calc.convert.convert id="volume" modelunit="liters" localunit="{{user.settings.liquid}}" modelvalue="step.volume"></mb-calc.convert.convert>
 							<button class="remove form-button" ng-click="removeStep(step)">X</button>
 						</span>
 					</div>
@@ -149,9 +149,9 @@
 					<div class="step-meta">
 						<span class="values">
 							<label for="length">Duration:</label>
-							<mb-convert modelunit="days" localunit="days" modelvalue="step.length"></mb-convert>
+							<mb-calc.convert.convert modelunit="days" localunit="days" modelvalue="step.length"></mb-calc.convert.convert>
 							<label for="length">Temperature: </label>
-							<mb-convert id="temperature" modelunit="celcius" localunit="{{user.settings.temperature}}" modelvalue="step.temperature"></mb-convert>
+							<mb-calc.convert.convert id="temperature" modelunit="celcius" localunit="{{user.settings.temperature}}" modelvalue="step.temperature"></mb-calc.convert.convert>
 							<button class="remove form-button" ng-click="removeStep(step)">X</button>
 						</span>
 					</div>

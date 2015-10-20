@@ -5,9 +5,9 @@ if headline
 				case type
 					when 'fermentables'
 						if item
-							span(class='bubble' style="background:rgba(#{convert(item.lovibond, 'lovibond', 'rgb')},1);")
+							span(class='bubble' style="background:rgba(#{calc.convert.convert(item.lovibond, 'lovibond', 'rgb')},1);")
 						else
-							span(class='bubble' style="background:rgba(#{convert(results[0].lovibond, 'lovibond', 'rgb')},1);")
+							span(class='bubble' style="background:rgba(#{calc.convert.convert(results[0].lovibond, 'lovibond', 'rgb')},1);")
 						img(src='images/fermentable-large.png', width='72', height='72', alt='Malt')
 
 					when 'hops'
@@ -27,9 +27,9 @@ if headline
 
 					when 'beers'
 						if item
-							span(class='bubble', style="background:rgba(#{convert(item.srm.standard, 'srm', 'rgb')},1);")
+							span(class='bubble', style="background:rgba(#{calc.convert.convert(item.srm.standard, 'srm', 'rgb')},1);")
 						else
-							span(class='bubble', style="background:rgba(#{convert(15, 'srm', 'rgb')},1);")
+							span(class='bubble', style="background:rgba(#{calc.convert.convert(15, 'srm', 'rgb')},1);")
 						img(src='images/tulip-large.png', width='72', height='72', alt='Beer')
 
 					when 'origins'
@@ -38,7 +38,7 @@ if headline
 
 					when 'beerstyles'
 						if item
-							span(class='bubble' style="background:rgba(#{convert((item.srmLow+item.srmHigh)/2, 'srm', 'rgb')},1);")
+							span(class='bubble' style="background:rgba(#{calc.convert.convert((item.srmLow+item.srmHigh)/2, 'srm', 'rgb')},1);")
 							img(src='images/fermentable-large.png', width='72', height='72', alt='Hop')
 					when 'suppliers'
 						if item
