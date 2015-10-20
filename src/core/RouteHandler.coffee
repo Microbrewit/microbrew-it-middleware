@@ -93,6 +93,8 @@ class RouteHandler
 	# @param [Object] req The REQUEST object
 	# @param [Function] reply HAPI reply function
 	request: (req, reply) =>
+		console.info "#{req.method.toUpperCase()}: #{req.path}"
+
 		# Recreate the request object using util handlers
 		request =
 			raw: req
