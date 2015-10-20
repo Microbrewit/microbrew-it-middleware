@@ -8,7 +8,7 @@ exports.render = (renderObj) ->
 		options ?= {}
 		options.pretty = true
 		options.compileDebug = true
-		options.convert = calc.convert.convert
+		options.calc = calc
 		options.country = country
 		return jade.renderFile(renderObj.template, options)
 	else
