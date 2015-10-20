@@ -10,17 +10,51 @@ RouteHandler = require '../../core/RouteHandler'
 class SingleHandler extends RouteHandler
 
 	getRoute: () ->
-		# return [
-		# 	{
+		super [
+			{ 
+				path: '/api/beers'
+				method: 'POST'
+			}
+			{ 
+				path: '/api/beers/{id}'
+				method: 'PUT'
+			}
+		]
 
-		# 	}
-		# ]
-		super { path: '/beers', method: 'POST' }
+	updateBeer: (req, reply) =>
+		@logger.log 'wat'
+		reply 'wat?'
+
+	addBeer: (req, reply) =>
+		beer = req.raw.payload
+
+		beer.recipe.brewers = []
+		beer.recipe.brewers.push 
+			username: req.user.username
+
+		beer.brewers = []
+		beer.brewers.push 
+			username: req.user.username
+
+		if @verifyRecipe(beer)
+			console.log 'TRY POSTING IT'
+			@api.beers.post beer, (err,res,body) ->
+				console.log err
+				console.log body
+				reply body
+			, req.token
+		else
+			reply 'lol'
 
 	# Check that recipe contents are present
-	verifyRecipe: () ->
+	verifyRecipe: (recipe) ->
+		# @logger.log JSON.stringify recipe, false, '\t'
+		return true
 
-	onRequest: (request, reply) ->
+	onPost: (req, reply) ->
+		@logger.log 'onPost'
+		@addBeer req, reply
+
 		
 
 
