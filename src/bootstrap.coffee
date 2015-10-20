@@ -104,7 +104,8 @@ server.auth.strategy 'session','cookie',
 	password: 'supersecretpassword'
 	cookie: 'app-cookie'
 	ttl: 24 * 60 * 60 * 1000
-	redirectTo: 'login'
+	redirectTo: '/login'
+	appendNext: true
 	isSecure: false
 
 server.route routes
