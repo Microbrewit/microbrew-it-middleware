@@ -46,8 +46,16 @@ class RouteHandler
 		route.redirect ?= false
 		route.method ?= 'GET'
 		route.method = route.method.toUpperCase()
-
 		route.handler ?= @request
+
+		if route.auth
+			route.redirect = '/login'
+			auth = 'session'
+		else
+			auth = 
+				mode: 'try'
+				strategy: 'session'
+
 
 		return {
 			method: route.method
@@ -56,9 +64,7 @@ class RouteHandler
 			config: 
 				handler: route.handler
 
-				auth:
-					mode: 'try'
-					strategy: 'session'
+				auth: auth
 
 				plugins: 
 					'hapi-auth-cookie':
