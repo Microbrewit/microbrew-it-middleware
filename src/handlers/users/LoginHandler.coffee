@@ -3,26 +3,21 @@
 @copyright 2015 Microbrew.it
 ###
 
+querystring = require 'querystring'
 RouteHandler = require '../../core/RouteHandler'
 
 class SingleHandler extends RouteHandler
 
 	getRoute: () ->
-		return [
+		super [
 			{
 				method: 'GET'
-				path:'/login' 
-				config:
-					handler: @onGet
+				path:'/login'
 			}
 			{
 				method: 'POST'
 				path: '/login'
-				config: 
-					handler: @onPost
-				
-					plugins: 
-						'hapi-auth-cookie': {}                         
+				handler: @onPost                         
 			}
 		]
 
@@ -36,15 +31,21 @@ class SingleHandler extends RouteHandler
 					headline: @renderer.headline "Login"
 
 	onGet: (req, reply) =>
-		if req.auth.isAuthenticated
+		console.log req
+		if req.user
 			reply.redirect '/'
 		else
 			reply @render()
 
 	onPost: (req, reply) =>
-		console.log req
+
+		# Check if we have a referer page (next)
+		referer = req.headers.referer.split('?')
+		next = (querystring.parse referer[1]).next
+		next = '/' if next is ''
+		
 		if req.auth.isAuthenticated
-			reply.redirect '/'
+			reply.redirect next
 		else
 			@api.http.authenticate req.payload.username, req.payload.password, (err, res, token) =>
 					if token.username
@@ -57,7 +58,7 @@ class SingleHandler extends RouteHandler
 									username: user.username
 									gravatar: user.gravatar
 									settings: user.settings
-							reply.redirect '/'
+							reply.redirect next
 						)
 
 
