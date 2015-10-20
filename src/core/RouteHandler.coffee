@@ -96,7 +96,17 @@ class RouteHandler
 			headers: @_getHeaders(req)
 			params: @_getParams(req)
 
-		@onRequest(request, reply)
+		unless @onRequest(request, reply)
+			if request.raw.method is 'get'
+				@onGet request, reply
+			else if request.raw.method is 'post'
+				@onPost request, reply
+			else if request.raw.method is 'delete'
+				@onDelete request, reply
+			else if request.raw.method is 'put'
+				@onPut request, reply
+			else if request.raw.method is 'patch'
+				@onPatch request, reply
 
 	# Handle incoming HTTP requests
 	# @param [Object] req
@@ -108,57 +118,32 @@ class RouteHandler
 	# @option req [Function] reply The HAPI reply function
 	# @param [Function] reply The HAPI reply function
 	onRequest: (req, reply) ->
-		if req.raw.method is 'GET'
-			@onGet req, reply
-		else if req.raw.method is 'POST'
-			@onPost req, reply
-		else if req.raw.method is 'DELETE'
-			@onDelete req, reply
-		else if req.raw.method is 'PUT'
-			@onPut req, reply
-		else if req.raw.method is 'PATCH'
-			@onPatch req, reply
-
-		@logger.warn "#{@constructor.name}.onRequest not implemented (path: #{req.raw.path})"
-
-		reply 'HTTP 500'
-
-		console.log req.raw.path
+		return false
 
 	# Default GET handler
 	# Called with same params as @onRequest
 	onGet: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onGet not implemented (path: #{req.raw.path})"
 
-		reply 'HTTP 500'
-
 	# Default POST handler
 	# Called with same params as @onRequest
 	onPost: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onPost not implemented (path: #{req.raw.path})"
-
-		reply 'HTTP 500'
 
 	# Default DELETE handler
 	# Called with same params as @onRequest
 	onDelete: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onDelete not implemented (path: #{req.raw.path})"
 
-		reply 'HTTP 500'
-
 	# Default PUT handler
 	# Called with same params as @onRequest
 	onPut: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onPut not implemented (path: #{req.raw.path})"
 
-		reply 'HTTP 500'
-
 	# Default PATCH handler
 	# Called with same params as @onRequest
 	onPatch: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onPatch not implemented (path: #{req.raw.path})"
-
-		reply 'HTTP 500'
 
 	# Get token from request object
 	# @param [Object] req HAPI HTTP Request
