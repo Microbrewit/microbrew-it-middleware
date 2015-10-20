@@ -31,7 +31,6 @@ class SingleHandler extends RouteHandler
 					headline: @renderer.headline "Login"
 
 	onGet: (req, reply) =>
-		console.log req
 		if req.user
 			reply.redirect '/'
 		else
@@ -42,11 +41,12 @@ class SingleHandler extends RouteHandler
 		# Check if we have a referer page (next)
 		referer = req.headers.referer.split('?')
 		next = (querystring.parse referer[1]).next
-		next = '/' if next is ''
+		next = '/' if next is '' or not next
 		
 		if req.auth.isAuthenticated
 			reply.redirect next
 		else
+
 			@api.http.authenticate req.payload.username, req.payload.password, (err, res, token) =>
 					if token.username
 						@api.users.get({ id: token.username }, (err, res, user) ->
@@ -60,6 +60,8 @@ class SingleHandler extends RouteHandler
 									settings: user.settings
 							reply.redirect next
 						)
+					else
+						reply @render()
 
 
 module.exports = SingleHandler
