@@ -101,7 +101,7 @@ class SingleHandler extends RouteHandler
 		]
 
 	# Show the recipe app
-	render: (user, title, navigationState) ->
+	render: (user, title="Add new beer", navigationState="recipe") ->
 		return @renderer.page
 			title: title
 			navigationState: navigationState
