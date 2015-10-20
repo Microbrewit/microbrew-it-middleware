@@ -29,18 +29,19 @@ class SingleHandler extends RouteHandler
 			{ 
 				path: '/beers/add'
 				method: 'GET'
-				handler: (req, reply) => 
-					@onRequest(req, reply, 'Add new beer', 'recipe')
+				auth: true
 			}
 			{ 
 				path: '/beers/{id}/edit'
 				method: 'GET'
+				auth: true
 				handler: (req, reply) => 
 					@onRequest(req, reply, "Edit #{req.params.id}", 'recipe')
 			}
 			{ 
 				path: '/beers/{id}/fork'
 				method: 'GET'
+				auth: true
 				handler: (req, reply) => 
 					@onRequest(req, reply,  "Fork #{req.params.id}", 'beers')
 			}
