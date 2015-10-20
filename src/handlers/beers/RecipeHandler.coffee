@@ -45,6 +45,59 @@ class SingleHandler extends RouteHandler
 				handler: (req, reply) => 
 					@onRequest(req, reply,  "Fork #{req.params.id}", 'beers')
 			}
+
+			# The Recipe app will want some data
+			# We proxy the API to avoid CORS
+			{ 
+				path: '/api/fermentables'
+				method: 'GET'
+				handler: (req, reply) => 
+					@api.fermentables.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
+						reply body
+			}
+			{ 
+				path: '/api/hops'
+				method: 'GET'
+				handler: (req, reply) => 
+					@api.hops.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
+						reply body
+			}
+			{ 
+				path: '/api/hops/forms'
+				method: 'GET'
+				handler: (req, reply) => 
+					@api.hops.forms { callback: req.query.callback }, (err, res, body) ->
+						reply body
+			}
+			{ 
+				path: '/api/yeasts'
+				method: 'GET'
+				handler: (req, reply) => 
+					@api.yeasts.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
+						reply body
+			}
+			{ 
+				path: '/api/others'
+				method: 'GET'
+				handler: (req, reply) => 
+					@api.others.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
+						reply body
+			}
+			{ 
+				path: '/api/beerstyles'
+				method: 'GET'
+				handler: (req, reply) => 
+					@api.beerStyles.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
+						reply body
+			}
+			{ 
+				path: '/api/beers/{id}'
+				method: 'GET'
+				handler: (req, reply) => 
+					console.log req.params.id
+					@api.beers.get { id: req.params.id }, (err, res, body) ->
+						reply body
+			}
 		]
 
 	# Show the recipe app
