@@ -14,7 +14,7 @@ class Handler extends RouteHandler
 
 	render: (results, user, pagination) ->
 		return @renderer.page
-			title: " Hops - Ingredients"
+			title: "Hops - Ingredients"
 			navigationState: 'ingredients'
 			user: user
 			html: @renderer.render
