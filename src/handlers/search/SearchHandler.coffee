@@ -20,10 +20,11 @@ class Handler extends RouteHandler
 		@renderer.page
 			title: "Search"
 			navigationState: 'search'
-			user: req?.auth?.credentials?.user
+			user: user
 			html: @renderer.render
 				template: "public/templates/search/index.jade"
 				data: 
+					user: user
 					type:'search' 
 					#headline: @renderer.headline "Search"
 					results: results
