@@ -21,6 +21,7 @@ RouteHandler = require './core/RouteHandler'
 RouteHandler.prototype.api = api
 
 handlers = [
+	'./handlers/api/ApiHandler'
 	'./handlers/frontpage/IndexHandler'
 	'./handlers/assets/StaticHandler'
 
