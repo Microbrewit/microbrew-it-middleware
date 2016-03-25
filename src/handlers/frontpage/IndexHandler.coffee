@@ -23,7 +23,7 @@ class Handler extends RouteHandler
 					results: body.beers
 
 	onRequest: (request, reply) ->
-		@api.beers.get { limit: 10 }, (err, res, body) =>
+		@api.beers.get { partial: 'last', limit: 10 }, (err, res, body) =>
 			reply @render(err, res, body, request.user)
 		, request.token
 
