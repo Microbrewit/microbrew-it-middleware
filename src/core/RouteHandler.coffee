@@ -10,7 +10,6 @@ BaseHandler for handling requests
 @copyright 2015 Microbrew.it
 ###
 class RouteHandler
-	constructor: ->
 
 	# Logger instance, use this instead of console.log (see core/Logger)
 	logger: logger
@@ -52,7 +51,7 @@ class RouteHandler
 			route.redirect = '/login'
 			auth = 'session'
 		else
-			auth = 
+			auth =
 				mode: 'try'
 				strategy: 'session'
 
@@ -61,12 +60,12 @@ class RouteHandler
 			method: route.method
 			path: route.path
 
-			config: 
+			config:
 				handler: route.handler
 
 				auth: auth
 
-				plugins: 
+				plugins:
 					'hapi-auth-cookie':
 						redirectTo: route.redirect
 		}
@@ -122,7 +121,8 @@ class RouteHandler
 	# @option req [Object/Bool] token The token object or false
 	# @option req [Object/Bool] user The logged in user object or false
 	# @option req [Object] header The HTTP headers from the request
-	# @option req [Object] params Combination of url-params (e.g fermentables/{id} adds id) and GET params (e.g size = 50). (Examples combined results in object {id: something, size: 50})
+	# @option req [Object] params Combination of url-params (e.g fermentables/{id} adds id)
+	# and GET params (e.g size = 50). (Examples combined results in object {id: something, size: 50})
 	# @option req [Function] reply The HAPI reply function
 	# @param [Function] reply The HAPI reply function
 	onRequest: (req, reply) ->
@@ -130,26 +130,36 @@ class RouteHandler
 
 	# Default GET handler
 	# Called with same params as @onRequest
+	# @note Only called if return value from onRequest is falsy
+	# @see onRequest
 	onGet: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onGet not implemented (path: #{req.raw.path})"
 
 	# Default POST handler
 	# Called with same params as @onRequest
+	# @note Only called if return value from onRequest is falsy
+	# @see onRequest
 	onPost: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onPost not implemented (path: #{req.raw.path})"
 
 	# Default DELETE handler
 	# Called with same params as @onRequest
+	# @note Only called if return value from onRequest is falsy
+	# @see onRequest
 	onDelete: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onDelete not implemented (path: #{req.raw.path})"
 
 	# Default PUT handler
 	# Called with same params as @onRequest
+	# @note Only called if return value from onRequest is falsy
+	# @see onRequest
 	onPut: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onPut not implemented (path: #{req.raw.path})"
 
 	# Default PATCH handler
 	# Called with same params as @onRequest
+	# @note Only called if return value from onRequest is falsy
+	# @see onRequest
 	onPatch: (req, reply) ->
 		@logger.warn "#{@constructor.name}.onPatch not implemented (path: #{req.raw.path})"
 
@@ -175,18 +185,17 @@ class RouteHandler
 	_getHeaders: (req) ->
 		return req.headers
 
-	# Get payload/GET  parameters
+	# Get payload/GET parameters
 	# @param [Object] req HAPI HTTP request object
 	# @return [Object] params GET params concated with path params (e.g {id})
 	# @private
 	_getParams: (req) ->
 		params = {}
 
-		for key,val of req.params
-			params[key] = val 
-		for key,val of req.query
+		for key, val of req.params
 			params[key] = val
-		console.info 'PARAMS:', params
+		for key, val of req.query
+			params[key] = val
 
 		return params
 
@@ -202,18 +211,19 @@ class RouteHandler
 		query.from ?= 0
 
 		next = JSON.parse JSON.stringify query # clone
-		next.from = parseInt(query.from, 10) + parseInt(query.size,10)
+		next.from = parseInt(query.from, 10) + parseInt(query.size, 10)
 
-		nextLink = pathname + '?'
-		for key, val of next
-			nextLink += "#{key}=#{val}&"
-
-
+		if query.size <= currentResults
+			nextLink = pathname + '?'
+			for key, val of next
+				nextLink += "#{key}=#{val}&"
+		else
+			nextLink = undefined
 
 		prev = JSON.parse JSON.stringify query
-		prev.from = parseInt(query.from, 10) - parseInt(query.size,10)
+		prev.from = parseInt(query.from, 10) - parseInt(query.size, 10)
 
-		if prev.from >= 0 and query.size <= currentResults
+		if prev.from >= 0
 			prevLink = pathname + '?'
 			for key, val of prev
 				prevLink += "#{key}=#{val}&"
