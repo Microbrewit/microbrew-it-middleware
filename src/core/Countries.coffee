@@ -1,4 +1,4 @@
-countries = [ 
+countries = [
 	{name: 'Afghanistan', code: 'AF'}
 	{name: 'Åland Islands', code: 'AX'}
 	{name: 'Albania', code: 'AL'}
@@ -241,7 +241,7 @@ countries = [
 	{name: 'Western Sahara', code: 'EH'}
 	{name: 'Yemen', code: 'YE'}
 	{name: 'Zambia', code: 'ZM'}
-	{name: 'Zimbabwe', code: 'ZW'} 
+	{name: 'Zimbabwe', code: 'ZW'}
 ]
 
 exports.getCode = (name) ->
@@ -254,7 +254,7 @@ exports.getName = (code) ->
 		if country.code is code
 			return country.name
 
-exports.getImageByCode = (code="") ->
+exports.getImageByCode = (code = '') ->
 	console.log "/images/countries/#{code.toLowerCase()}.png"
 	return "/images/flags/#{code.toLowerCase()}.png"
 
