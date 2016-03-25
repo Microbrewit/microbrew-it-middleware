@@ -4,8 +4,11 @@
   "description": "Server middleware for Microbrew.it",
   "main": "src/bootstrap.coffee",
   "scripts": {
-    "start": "coffee src/bootstrap.coffee",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "forever -c coffee src/bootstrap.coffee --environment=prod",
+    "dev": "nodemon src/bootstrap.coffee --environment=dev",
+    "build-css": "node-sass --include-path scss public/scss/main.scss   public/css/main.css",
+    "watch-css": "nodemon -e public/scss -x \"npm run build-css\"",
+    "watch-dev": "parallel --linebuffer ::: \"npm run watch-css\" \"npm run dev\""
   },
   "author": "Torstein Thune <torstein@gmail.com> (http://thune.io/)",
   "license": "MIT",
