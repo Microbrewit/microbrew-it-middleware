@@ -17,5 +17,6 @@
     "lodash": "^3.9.3",
     "microbrewit-node": "latest",
     "microbrewit-formulas": "latest"
+    "minimist": "^1.2.0"
   }
 }

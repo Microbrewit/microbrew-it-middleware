@@ -7,8 +7,13 @@ Sets up routes and injects dependencies.
 @copyright 2015 Microbrew.it
 ###
 
+
 config = require '../config'
-config = config[config.environment]
+
+args = require('minimist')(process.argv.slice(2))
+env = args.environment or= config.environment
+
+config = config[env]
 
 # Initialise microbrewit-node API wrapper
 api = (require 'microbrewit-node').init({ apiUrl: config.api, clientId: config.clientId })
@@ -94,11 +99,9 @@ server = new (require 'hapi').Server()
 server.connection config.connection
 
 #Registers a plugin for hapi
-server.register( register: require('hapi-auth-cookie'), (err) ->
-	if err 
-		cosole.log err 
+server.register {register: require('hapi-auth-cookie')}, (err) ->
+	logger.log err if err
 
-)
 
 #Sets the configuration for the session.
 server.auth.strategy 'session','cookie',
@@ -112,4 +115,4 @@ server.auth.strategy 'session','cookie',
 server.route routes
 
 server.start () ->
-	logger.log "Microbrew.it running on http://#{config.connection.host}:#{config.connection.port}"
+	logger.log "Microbrew.it running with #{env.toUpperCase()} settings on http://#{config.connection.host}:#{config.connection.port}"
