@@ -14,14 +14,12 @@ convert = (require 'microbrewit-formulas').convert.convert
 exports.autoConvert = (value, type, user) ->
 	unless user
 		return value
-
 	return value
 
 # Determine if a user is admin
 # @param [Object] user
 # @return [Boolean]
 exports.isAdmin = (user) ->
-	console.log user.username in admins
 	if user.username in admins
 		return true
 	return false
@@ -47,3 +45,4 @@ exports.canEdit = (user, item) ->
 # @return [Object, Boolean] The user object or false
 exports.getUserFromRequest = (req) ->
 	return req?.auth?.credentials?.user
+	
