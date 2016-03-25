@@ -38,10 +38,10 @@ class SingleHandler extends RouteHandler
 			html: @renderer.render
 				template: "public/templates/beers/index.jade"
 				data:
-					type:'beers'
+					type: 'beers'
 					subNavState: 'recipe'
 					subnav: subNav
-					headline: 
+					headline:
 						headline: beer.name
 						subheader: "<a href=\"beerstyles/#{beer.beerStyle.beerStyleId}\">#{beer.beerStyle.name}</a><br /> <small>by #{brewers.join(',')}</small>"
 					mode: 'single'
@@ -49,7 +49,7 @@ class SingleHandler extends RouteHandler
 					item: beer
 
 	onRequest: (request, reply) ->
-		@api.beers.get request.params, (err, res, body) => 
+		@api.beers.get request.params, (err, res, body) =>
 			reply @render(body.beers[0], request.user)
 		, request.token
 

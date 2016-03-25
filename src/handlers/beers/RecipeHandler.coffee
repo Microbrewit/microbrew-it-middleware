@@ -48,6 +48,7 @@ class SingleHandler extends RouteHandler
 
 			# The Recipe app will want some data
 			# We proxy the API to avoid CORS
+			# @deprecated
 			{ 
 				path: '/api/fermentables'
 				method: 'GET'
@@ -55,6 +56,7 @@ class SingleHandler extends RouteHandler
 					@api.fermentables.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
 						reply body
 			}
+			# @deprecated
 			{ 
 				path: '/api/hops'
 				method: 'GET'
@@ -62,6 +64,7 @@ class SingleHandler extends RouteHandler
 					@api.hops.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
 						reply body
 			}
+			# @deprecated
 			{ 
 				path: '/api/hops/forms'
 				method: 'GET'
@@ -69,6 +72,7 @@ class SingleHandler extends RouteHandler
 					@api.hops.forms { callback: req.query.callback }, (err, res, body) ->
 						reply body
 			}
+			# @deprecated
 			{ 
 				path: '/api/yeasts'
 				method: 'GET'
@@ -76,6 +80,7 @@ class SingleHandler extends RouteHandler
 					@api.yeasts.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
 						reply body
 			}
+			# @deprecated
 			{ 
 				path: '/api/others'
 				method: 'GET'
@@ -83,6 +88,7 @@ class SingleHandler extends RouteHandler
 					@api.others.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
 						reply body
 			}
+			# @deprecated
 			{ 
 				path: '/api/beerstyles'
 				method: 'GET'
@@ -90,6 +96,7 @@ class SingleHandler extends RouteHandler
 					@api.beerStyles.get { size: 1000, callback: req.query.callback }, (err, res, body) ->
 						reply body
 			}
+			# @deprecated
 			{ 
 				path: '/api/beers/{id}'
 				method: 'GET'

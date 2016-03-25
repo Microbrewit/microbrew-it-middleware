@@ -34,14 +34,18 @@ class Handler extends RouteHandler
 				path: '/json/*'
 				method: 'PUT'
 			}
+			# { 
+			# 	path: '/json/{endpoint}'
+			# 	method: 'GET'
+			# }
 			{ 
-				path: '/json/{endpoint}'
+				path: '/json/{endpoint}/{id?}'
 				method: 'GET'
 			}
-			{ 
-				path: '/json/{endpoint}/{id}'
-				method: 'GET'
-			}
+			# { 
+			# 	path: '/json/{endpoint}/{id}'
+			# 	method: 'GET'
+			# }
 			{ 
 				path: '/json'
 				method: 'DELETE'

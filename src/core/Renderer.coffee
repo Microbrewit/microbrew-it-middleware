@@ -2,6 +2,12 @@ jade = require 'jade'
 calc = require 'microbrewit-formulas'
 country = require './Countries'
 
+# Split string containing camelCase into array of lowercased words
+# @param [String] camelString
+# @return [Array]
+splitCamelCase = (camelString = '') ->
+	return camelString.split(/(?=[A-Z])/).map((s) -> return s.toLowerCase())
+
 exports.render = (renderObj) ->
 	if renderObj.template
 		options = renderObj.data
@@ -10,6 +16,7 @@ exports.render = (renderObj) ->
 		options.compileDebug = true
 		options.calc = calc
 		options.country = country
+		options.splitCamelCase = splitCamelCase
 		return jade.renderFile(renderObj.template, options)
 	else
 		return renderObj.data
@@ -21,7 +28,7 @@ exports.page = (data) ->
 
 exports.header = (title) ->
 	title ?= "Homebrewer's home"
-	title += " - Microbrew.it"
+	title += ' - Microbrew.it'
 	return @render
 		template: 'public/head.jade'
 		data:
@@ -33,7 +40,7 @@ exports.navigation = (navigationState) ->
 		data:
 			navigationState: navigationState
 
-exports.headline = (headline, subheader, image = "") ->
+exports.headline = (headline, subheader, image = '') ->
 	return {
 		headline: headline
 		subheader: subheader
@@ -48,4 +55,3 @@ exports.error = (options) ->
 	return @render
 		template: 'public/header.jade'
 		data: options
-

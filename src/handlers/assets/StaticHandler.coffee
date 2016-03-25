@@ -48,11 +48,18 @@ class StaticHandler extends RouteHandler
 			}
 			{
 				method: 'GET',
-				path:'/recipe/{filename}', 
+				path:'/recipe/{p*}', 
 				handler: 
 					file: (request) ->
-						return "public/recipe/#{request.params.filename}"
+						return "public/recipe/#{request.params.p}"
 			}
+			# {
+			# 	method: 'GET',
+			# 	path:'/recipe/build/{filename}', 
+			# 	handler: 
+			# 		file: (request) ->
+			# 			return "public/recipe/build/#{request.params.filename}"
+			# }
 			{
 				method: 'GET',
 				path:'/templates/beers/{filename}', 
