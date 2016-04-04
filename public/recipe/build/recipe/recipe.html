@@ -1,0 +1,71 @@
+<header>
+	<h1>{{mode}} {{beer.name}}</h1>
+</header>
+<section class="beer-meta">
+	<div class="inner-wrapper">
+		<section class="beer-meta meta-info">
+			<div class="inner-wrapper">
+				<div class="meta-bubble">
+					<span class="value" title="ABV or alcohol by volume is how many % of the beer's volume that consists of alcohol.">{{beer.abv.standard}}%</span>
+					<span class="label">ABV</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="OG or original gravity is the boyency of the liquid after the mash. It is used to calculate ABV."> {{beer.recipe.og}}</span>
+					<span class="label">OG</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="FG or final gravity is the boyency of the beer after fermentation. It is used to calculate ABV."> {{beer.recipe.fg}}</span>
+					<span class="label">FG</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="IBU/EBU is a measure of the bitterness of the beer."> {{beer.ibu.standard.toFixed(2)}}</span>
+					<span class="label">IBU</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="SRM/EBC is a measure of the colour of the beer. SRM is standard, EBC is often used in Europe."> {{beer.srm.standard.toFixed(2)}}</span>
+					<span class="label">SRM</span>
+				</div>
+			</div>
+			<div class="inner-wrapper">
+				<div class="meta-bubble">
+					<span class="value" title="Volume of water used at start of mash."> <input ng-model="beer.recipe.mashVolume" type="number" /></span>
+					<span class="label">Mash Volume</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="Volume of mash before starting boil (after sparge)."> <input ng-model="beer.recipe.preBoilVolume" type="number" /></span>
+					<span class="label">Pre-boil Volume</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="Final volume of beer."> <input ng-model="beer.recipe.volume" type="number" /></span>
+					<span class="label">Final Volume</span>
+				</div>
+				<div class="meta-bubble">
+					<span class="value" title="Brewhouse Efficiency estimate (how much of the malt sugar you thing you'll extract)."> <input ng-model="beer.recipe.efficiency" type="number" /></span>
+					<span class="label">Efficiency</span>
+				</div>
+			</div>
+			<div class="inner-wrapper">
+				<div class="button meta-bubble" ng-click="setMeasures('imperial')">Imperial</div>
+				<div class="button meta-bubble" ng-click="setMeasures('metric')">Metric</div>
+			</div>
+		</section>
+	</div>
+</section>
+
+<form class="add-beer">
+	<ul class="steps">
+		<li class="{{step.type}}" ng-repeat="step in beer.recipe.steps">
+			<div mb-step step="step" settings="settings" refresh="refresh" recipe="beer.recipe" remove="removeStep"></div>
+			<div class="inner-wrapper" ng-if="step.type !== undefined">
+				<button class="button add step" ng-click="addStep(step)">Add step</button>
+			</div>
+		</li>
+	</ul>
+
+	<section class="buttons">
+		<div class="inner-wrapper">
+			<button class="button add">SAVE</button>
+		</div>
+	</section>
+	
+</form>

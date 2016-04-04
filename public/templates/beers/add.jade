@@ -15,7 +15,8 @@
 						| The source code for the recipe builder is available at 
 						a(href="https://github.com/microbrewit") our Github.
 
-	.recipe(ng-controller='MainController')
+	.recipe
 		//- div(mb-message='')
 		.ui-view-container(ui-view='')
-script(src='recipe/build.min.js', async='')
+//- script(src='recipe/build.min.js', async='')
+script(src='recipe/build/build.js', async='')
