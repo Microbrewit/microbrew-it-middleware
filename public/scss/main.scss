@@ -33,6 +33,14 @@ h2 {
 	font-size: 160%;
 }
 
+.no-wrap {
+	input {
+		display: inline-block;
+		width: auto;
+	}
+
+}
+
 .the-content {
 	padding: 25px 0;
 	background: #efefef;
