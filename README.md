@@ -26,6 +26,11 @@ Make sure the configurations in config.coffee for the production setting is corr
 Running the project:
 - `npm start`  - This runs the middleware in a forever container which restarts the process should it fail.
 
+#### Docker
+The Microbrew.it Middleware is also available as a Docker image at hub.docker.com.
+To run the docker container>
+`docker run -d -p 3000:3000 -e API_URL=http://dev.microbrew.it -e CLIENT_ID=localhost:3000 -e PORT=3000 microbrewit/microbrew-it-middleware:latest`
+
 ### A note on dependencies
 We use `npm shrinkwrap` and `shrinkpack` to lock our dependencies.
 
