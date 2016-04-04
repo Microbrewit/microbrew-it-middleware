@@ -6,17 +6,32 @@ Sets up routes and injects dependencies.
 @author Torstein Thune
 @copyright 2015 Microbrew.it
 ###
-
-
-config = require '../config'
-
 args = require('minimist')(process.argv.slice(2))
-env = args.environment or= config.environment
 
-config = config[env]
+getEnvVar = ->
+	envVar = {}
+	envVar.api = process.env.API_URL
+	envVar.authUrl = process.env.AUTH_URL
+	envVar.clientId = process.env.CLIENT_ID
+	envVar.clientSecret = process.env.CLIENT_SECRET
+
+	envVar.connection =
+		port: process.env.PORT
+		host: process.env.HOST
+
+	return envVar
+
+if args.environment
+	config = (require '../config')[args.environment]
+else
+	config = getEnvVar()
 
 # Initialise microbrewit-node API wrapper
-api = (require 'microbrewit-node').init({ apiUrl: config.api, clientId: config.clientId })
+api = (require 'microbrewit-node').init
+	apiUrl: config.api
+	authUrl: config.authUrl
+	clientId: config.clientId
+	clientSecret: config.clientSecret
 
 # Initialise Logger
 logger = require './core/Logger'
@@ -115,4 +130,5 @@ server.auth.strategy 'session','cookie',
 server.route routes
 
 server.start () ->
-	logger.log "Microbrew.it running with #{env.toUpperCase()} settings on http://#{config.connection.host}:#{config.connection.port}"
+	logger.log "Microbrew.it running on http://#{config.connection.host}:#{config.connection.port}"
+	logger.log JSON.stringify config, false, '\t'
