@@ -16,24 +16,7 @@
 			.meta-bubble
 				span(class='value' title='SRM/EBC is used to measure the colour of the beer.') #{item.srm.standard}
 				span.label SRM
-			//- section.meta.calculations
-			//- 	span.abv(title="ABV or alcohol by volume is how many % of the beer's volume that consists of alcohol.")
-			//- 		| Alcohol: 
-			//- 		strong
-			//- 			mb-abv(og='#{item.recipe.og}', fg='#{item.recipe.fg}', formula='microbrewit')
-			//- 			| %
-			//- 	span.og(title='OG or original gravity is the boyency of the liquid after the mash. It is used to calculate ABV.')
-			//- 		| Original Gravity: 
-			//- 		strong #{item.recipe.og.toFixed(3)}
-			//- 	span.fg(title='FG or final gravity is the boyency of the beer after fermentation. It is used to calculate ABV.')
-			//- 		| Final Gravity: 
-			//- 		strong #{item.recipe.fg.toFixed(3)}
-			//- 	span.bitterness(title='IBU/EBU is a measure of the bitterness of the beer.')
-			//- 		| Bitterness: 
-			//- 		strong #{item.ibu.tinseth} IBU
-			//- 	span.colour(title='SRM/EBC is used to measure the colour of the beer.')
-			//- 		| Colour: 
-			//- 		strong #{item.srm.standard} SRM
+
 if headline && headline.minidisplay
 	.minidisplay-wrapper
 		| by
@@ -41,40 +24,43 @@ if headline && headline.minidisplay
 		each result in item.brewers
 			if result.dataType === 'user'
 				include ../users/minidisplay.jade
-include ../../subnavigation.jade
-section.recipe.the-content
-	section.mash.steps
-		.inner-wrapper
-			h2 Mash
-			ul
-				each step in item.recipe.mashSteps
-					li.step-wrapper(title="Mash step")
-						.step-number #{step.stepNumber}
-						.step-meta #{step.volume} liters for #{step.length} minutes at #{step.temperature} celcius
 
-						include recipeStep.jade
-	section.boil.steps
-		.inner-wrapper
-			h2 Boil
-			ul
-				each step in item.recipe.boilSteps
-					li.step-wrapper
-						.step-number #{step.stepNumber}
-						.step-meta
-							span.step-type
-							span.values
-								label(for='length') Add at #{step.length} minutes
-						include recipeStep.jade
-	if item.recipe.fermentationSteps.length > 0
-		section.fermentation.steps
-			.inner-wrapper
-				h2 Fermentation
-				ul
-					each step in item.recipe.fermentationSteps
-						li.step-wrapper
+include ../../subnavigation.jade
+
+section.recipe.the-content
+	if item.recipe.steps
+		ul.steps
+			each step in item.recipe.steps
+				if (step.type === 'mash')
+					li.mash.step-wrapper(title="Mash step")
+						.inner-wrapper
+							.step-number #{step.stepNumber}
+							.step-meta Mash #{step.volume} liters for #{step.length} minutes at #{step.temperature} celcius
+							include recipeStep.jade
+
+				else if (step.type === 'sparge')
+					li.sparge.step-wrapper(title="Sparge step")
+						.inner-wrapper
+							| SPARGE TODO
+
+				else if (step.type === 'boil')
+					li.boil.step-wrapper(title="Boil step")
+						.inner-wrapper
 							.step-number #{step.stepNumber}
 							.step-meta
 								span.step-type
+									| Boil
+								span.values
+									label(for='length') Add at #{step.length} minutes
+							include recipeStep.jade
+
+				else if (step.type === 'fermentation')
+					li.fermentation.step-wrapper(title="Fermentation step")
+						.inner-wrapper
+							.step-number #{step.stepNumber}
+							.step-meta
+								span.step-type
+									| Fermentation
 								span.values
 									label(for='length') Duration #{step.length} days
 									label(for='length') Temperature #{step.temperature} celcius

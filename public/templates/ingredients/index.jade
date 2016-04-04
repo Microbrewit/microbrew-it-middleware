@@ -1,9 +1,0 @@
-article.hops
-	include ../../headline.jade
-	include ../../subnavigation.jade
-	section.the-content
-		if results
-			include ../gridList.jade
-		else if query
-			.inner-wrapper
-				.center You search for "#{query}" returned #{hits} hits.

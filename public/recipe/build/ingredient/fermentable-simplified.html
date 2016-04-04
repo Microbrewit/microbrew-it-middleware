@@ -1,0 +1,12 @@
+<div class="fermentable list-item">
+	<div class="meta-wrapper">
+		<span class="meta lovibond" title="Lovibond is a measure of colour">{{::ingredient.lovibond}}°L</span>
+		<span class="meta ppg" title="PPG is the amount of sugar">{{::ingredient.ppg}} PPG</span>
+	</div>
+	<div class="left-circle">
+		<span class="minibubble" style="background-color: rgba({{::ingredient.calculated.rgb}}, 1)" title="{{::ingredient.type}} has a colour of {{::ingredient.lovibond}}°L">
+		</span>
+	</div>
+	<h3 class="name">{{::ingredient.name}}</h3>
+
+</div>

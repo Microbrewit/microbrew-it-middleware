@@ -3,5 +3,33 @@ article.users
 
 	include ../../subnavigation.jade
 
-	section.the-content
-		h2 TODO =(
+	form.the-content(method="POST", action="/account/settings")
+		h2 Account
+		p TODO
+
+		h2 Measurements
+		radiogroup
+			radio(id="measurements" value="" selected) Metric
+			radio(id="measurements" value="") Imperial
+
+		h2 Formulas
+		h3 ABV
+		input(type="radio" name="abv" id="microbrewit" value="microbrewit" checked="checked") 
+		label(for="microbrewit") Microbrewit
+		input(type="radio" name="abv" id="simple" value="simple") 
+		label(for="simple") Simple
+		input(type="radio" name="abv" id="advanced" value="advanced") 
+		label(for="advanced") Advanced
+		input(type="radio" name="abv" id="alternative-simple" value="alternative-simple") 
+		label(for="alternative-simple") Alternative Simple
+		input(type="radio" name="abv" id="alternative-advanced" value="alternative-advanced") 
+		label(for="alternative-advanced") Alternative Advanced
+
+		h3 IBU
+		radio(value="" selected) Tinseth
+		radio(value="") Rager
+
+		h3 SRM
+
+		button Save
+

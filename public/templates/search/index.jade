@@ -2,9 +2,10 @@ article.search
 	include ../../headline.jade
 	include ../../subnavigation.jade
 	include searchbox.jade
-	section.the-content
-		if results && results.length > 0
-			include ../gridList.jade
-		else if query
-			.inner-wrapper
-				.center You search for "#{query}" returned #{hits} hits.
+	if query
+		section.the-content
+			if results && results.length > 0
+				include ../gridList.jade
+			else if query
+				.inner-wrapper
+					.center You search for "#{query}" returned #{hits} hits.

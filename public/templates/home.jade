@@ -1,0 +1,36 @@
+article.frontpage
+	header
+		.header-content-wrapper
+			if !user
+				h1 Beer brewers' home
+				.subheader
+					| Participating in the alpha?
+				a.call-to-action.create(href='/login') LOGIN
+			else
+				h1 Welcome back, #{user.username}!
+				.subheader
+				a.call-to-action.create(href='/beers/add') CREATE NEW RECIPE
+			
+			//- section(style="color:white;font-size:120%;bottom:0")
+			//- 	section.inner-wrapper
+			//- 		.third
+			//- 			h3.center Customisability
+			//- 			p Set your account to use imperial or metric values and the beer formulas you prefer.
+			//- 		.third
+			//- 			h3.center Clones & forks
+			//- 			p Easily create your own variations of any recipe on the site through the fork-button.
+
+			//- 		.third
+			//- 			h3.center Homebreweries
+			//- 			p Create your own home brewery and create recipes with your friends.
+article.beers
+	section.the-content
+		h2 Latest recipes
+		include ../../public/templates/gridList.jade
+//- article.frontpage
+//- 	section.huge-call-to-action
+//- 		h2.center
+//- 			a(class="button" href="/beers") See more recipes
+//- 			|  or 
+//- 			a(class="button" href="/register") register a user 
+//- 			| and get brewing!

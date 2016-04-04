@@ -33,6 +33,14 @@ h2 {
 	font-size: 160%;
 }
 
+.no-wrap {
+	input {
+		display: inline-block;
+		width: auto;
+	}
+
+}
+
 .the-content {
 	padding: 25px 0;
 	background: #efefef;
@@ -64,6 +72,47 @@ h2 {
 
 	&:target {
 		display: block;
+	}
+}
+
+.notes.text {
+	border: none;
+	background: none;
+
+	.inner-wrapper {
+		p {
+			width: 90%;
+			padding: 0 25px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 25px;
+			
+		}
+		margin-bottom: 25px;
+	}
+}
+
+.zebra {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+
+	th {
+		background: #666;
+		color: #fff;
+		text-align: left;
+		font-weight: normal;
+		padding: 5px;
+	}
+
+	tr:nth-child(odd) {
+		background: #efefef;
+	}
+	tr {
+		background: #fff;
+	}
+	td {
+		padding: 5px;
 	}
 }
 

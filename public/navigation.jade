@@ -7,18 +7,18 @@ nav#main-navigation
 			a(href='/beers/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
 		li
 			a(href='/beers', class=navigationState === 'beers' ? 'active':'') Beer
-		li
-			a(href='/breweries', class=navigationState === 'breweries' ? 'active':'') Breweries
+		//- li
+		//- 	a(href='/breweries', class=navigationState === 'breweries' ? 'active':'') Breweries
 		li
 			a(href='/users', class=navigationState === 'brewers' ? 'active':'') Brewers
 		li
-			a(href='ingredients', class=navigationState === 'ingredients' ? 'active':'') Ingredients
+			a(href='/fermentables', class=navigationState === 'ingredients' ? 'active':'') Ingredients
 		li
 			a(href='search', class=navigationState === 'search' ? 'active' : '') Search
 		
 		if user
 			li.right
-				a.user.minidisplay(href='account')
+				a.user.minidisplay(href='users/#{user.username}')
 					if user.gravatar
 						span(class='microbubble' style="background: url('#{user.gravatar}') center center;background-size: contain;")
 					else

@@ -1,15 +1,22 @@
-article.hops
-	include ../../headline.jade
-	case mode
-		when 'list'
+case mode
+	when 'list'
+		article.hops
+			include ../../headline.jade
 			include ../../subnavigation.jade
-	section.the-content
-		case mode
-			when 'list'
-				include ../gridList.jade
-			//- when 'edit'
-			//- 	include edit.jade
-			//- when 'new'
-			//- 	include edit.jade
-			default
-				include single.jade
+		section.the-content
+			include ../gridList.jade
+	when 'edit'
+		article.hop
+			include ../../headline.jade
+			include ../../subnavigation.jade
+			include edit.jade
+	when 'new'
+		article.hop
+			include ../../headline.jade
+			include ../../subnavigation.jade
+			include edit.jade
+	default
+		article.hop
+			include ../../headline.jade
+			include ../../subnavigation.jade
+			include single.jade

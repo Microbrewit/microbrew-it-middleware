@@ -36,7 +36,7 @@
 				</span>
 				<span class="meta ba" title="Beta acids contributes the hoppy, herbal flavour"><input type="text" ng-model="item.betaValue"/>% beta</span>
 				<span class="meta ibu"><mb-bitterness ingredient="item" boilVolume="{{step.volume}}" boilGravity="{{beer.recipe.og}}" boilTime="{{step.length}}" formula="{{user.settings.bitterness.formula}}" change="updateHopsValues"/></span>
-				<button class="remove form-button" ng-click="removeFromStep(item, step.fermentables)">X</button>
+				<button class="remove form-button" ng-click="removeFromStep(item, step.hops)">X</button>
 			</div>
 
 			<div class="left-circle">
@@ -89,7 +89,7 @@
 				<span class="meta flocculation">{{item.flocculation}}</span>
 				<span class="meta alcoholTolerance">{{item.alcoholTolerance}}</span>
 				<span class="meta temperature">{{item.temperatureLow}}{{user.settings.measurements.temperature.short}} - {{item.temperatureHigh}}{{user.settings.measurements.temperature.short}}</span>
-				<button class="remove form-button" ng-click="removeFromStep(yeast, step.yeast)">X</button>
+				<button class="remove form-button" ng-click="removeFromStep(item, step.yeasts)">X</button>
 			</div>
 
 			<div class="left-circle">

@@ -1,0 +1,22 @@
+case mode
+	when 'list'
+		article.others
+			include ../../headline.jade
+			include ../../subnavigation.jade
+		section.the-list
+			include ../gridList.jade
+	when 'edit'
+		article.others
+			include ../../headline.jade
+			include ../../subnavigation.jade
+			include edit.jade
+	when 'new'
+		article.others
+			include ../../headline.jade
+			include ../../subnavigation.jade
+			include edit.jade
+	default
+		article.others
+			include ../../headline.jade
+			include ../../subnavigation.jade
+			include single.jade

@@ -1,0 +1,7 @@
+<div class="ingredient">
+	<div ng-if="ingredient.type === 'fermentable'" ng-include="'recipe/build/ingredient/fermentable.html'" />
+	<div ng-if="ingredient.type === 'hop'" ng-include="'recipe/build/ingredient/hop.html'" />
+	<div ng-if="ingredient.type === 'yeast'" ng-include="'recipe/build/ingredient/yeast.html'" />
+	<div ng-if="ingredient.type === 'other'" ng-include="'recipe/build/ingredient/other.html'" />
+	<div ng-if="!ingredient.type" ng-include="'recipe/build/ingredient/choose.html'" />
+</div>

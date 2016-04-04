@@ -1,9 +1,13 @@
 div.other.list-item
 	.meta-wrapper
+		span.meta.subType(title='Type of ingredient') #{splitCamelCase(result.subType).join(' ')}
 
 	.left-circle
 		span(class='minibubble' style="background: url('images/yeast-large.png') center center;background-size:contain;background-color: #333;")
 	if showStatic
 		input.name(value="#{result.name}")
 	else
-		h3.name #{result.name}
+		if result.amount
+			span.amount #{result.amount} grams
+		h3.name 
+			a(href="others/#{result.otherId}") #{result.name}

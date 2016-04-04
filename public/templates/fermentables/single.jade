@@ -1,10 +1,33 @@
 .inner-wrapper
-	.meta
-		span.lovibond(title="Lovibond is a measure of a grain's colour.")
-			| Colour: 
-			strong
-				| #{item.lovibond}°L 
-				mb-colour-box.colour-box(type='lovibond', colour='#{lovibond}', size='20px')
-		span.ppg(title='PPG descripbes the sugar contents of a malt')
-			| PPG: 
-			strong #{item.ppg}
+	section.fermentable-meta.meta-info
+		.inner-wrapper
+			.meta-bubble(title="Lovibond is a measure of a grain's colour.")
+				span(class='value') 
+					.left-circle
+						span(class='minibubble' style="background:rgba(#{calc.convert.convert(item.lovibond, 'lovibond', 'rgb')},1);")
+					| #{item.lovibond}
+				span.label °L 
+			.meta-bubble(title='PPG describes the sugar contents of a malt')
+				span(class='value') #{item.ppg}
+				span.label PPG
+			if item.supplier
+				.meta-bubble(title='Maltster/supplier')
+					span(class='value') 
+						a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
+					span.label SUPPLIER
+			if item.superFermentableId
+				.meta-bubble(title='Maltster/supplier')
+					span(class='value') 
+						a(href="suppliers/#{item.superFermentableId}") Category
+
+include ../../subnavigation.jade
+
+section.the-content
+	section.subtypes
+		.inner-wrapper
+			h2 Subtypes
+			if item.subFermentables.length > 0
+				each result in item.subFermentables
+					include gridItem.jade
+			else
+				p.center #{item.name} has no subtypes.

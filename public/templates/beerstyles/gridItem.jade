@@ -1,7 +1,7 @@
 .grid-item
 	a.content(href='beerstyles/#{result.beerStyleId}')
 		.top-circle
-			span(class='minibubble' style="background:rgba(#{convert((result.srmLow+result.srmHigh)/2, 'srm', 'rgb')},1);")
+			span(class='minibubble' style="background:rgba(#{calc.convert.convert((result.srmLow+result.srmHigh)/2, 'srm', 'rgb')},1);")
 			img(src='images/fermentable-large.png', width='50', height='50', alt='Hop')
 		h3 #{result.name}
 		.type Beer Style
