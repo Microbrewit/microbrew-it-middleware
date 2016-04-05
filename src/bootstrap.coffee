@@ -64,6 +64,7 @@ handlers = [
 	'./handlers/beers/SingleHandler'
 	'./handlers/beers/RecipeHandler'
 	'./handlers/beers/PostHandler'
+	'./handlers/beers/ImportHandler'
 
 	# Other data
 	'./handlers/glasses/ListHandler'

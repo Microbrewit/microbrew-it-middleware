@@ -57925,6 +57925,11 @@ mbit.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     url: '/beers/add',
     templateUrl: 'recipe/build/recipe/recipe.html',
     controller: 'RecipeController'
+  }).state('import', {
+    url: '/beers/import',
+    mode: 'import',
+    templateUrl: 'recipe/build/recipe/recipe.html',
+    controller: 'RecipeController'
   });
 });
 
@@ -58377,7 +58382,7 @@ mbit = angular.module('Microbrewit');
 
 mbit.controller('RecipeController', [
   'mbit/api/Beer', 'mbit/api/Ingredient', '$scope', 'mbit/recipe/utility', 'mbit/recipe/BaseModel', 'mbit/services/RecipeUtilityService', '$stateParams', function(Beer, Ingredient, $scope, Utility, BaseModel, Utils, $stateParams) {
-    var getRecipe, id;
+    var getRecipe;
     getRecipe = function(id) {
       return Beer.get(id).then(function(data) {
         console.log(data.beers[0]);
@@ -58385,9 +58390,11 @@ mbit.controller('RecipeController', [
       });
     };
     console.log('stateParams:', $stateParams);
-    id = $stateParams.id;
-    if (id) {
-      getRecipe(id);
+    if ($stateParams.id) {
+      getRecipe($stateParams.id);
+    } else if (recipe) {
+      console.log(recipe);
+      $scope.beer = recipe.beers[0];
     } else {
       $scope.beer = BaseModel;
     }

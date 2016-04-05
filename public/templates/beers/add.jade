@@ -1,4 +1,7 @@
 
+if recipe
+	script.
+		var recipe = !{JSON.stringify(recipe)};
 
 .recipe-builder(ng-app="Microbrewit")
 	.main-loading(ng-show='loading > 0', style='position:fixed;z-index:10;top:0;left:0;right:0;bottom:0;background:white;color:#333;')
@@ -6,6 +9,7 @@
 			h1.logo-text Microbrew.it
 			.subheader Loading...
 			.spinner-icon.center
+
 
 			noscript
 				.warning 
