@@ -22,8 +22,10 @@ class SingleHandler extends RouteHandler
 	render: (item, user) ->
 
 		beerStylesPretty = []
-		for style in item.beerStyles
-			beerStylesPretty.push "<a href=\"beerstyles/#{style.id}\">#{style.name.trim()}</a>"
+
+		if item.beerstyles
+			for style in item.beerstyles
+				beerStylesPretty.push "<a href=\"beerstyles/#{style.id}\">#{style.name.trim()}</a>"
 
 		beerStylesPretty = @replaceLast(beerStylesPretty.join(', '), ', ', ' and ')
 

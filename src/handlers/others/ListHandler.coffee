@@ -37,11 +37,11 @@ class Handler extends RouteHandler
 
 	onRequest: (req, reply) ->
 		@api.others.get req.params, (err, res, body) => 
-			req.params.size ?= body.others.length
+			req.params.size ?= body.others?.length
 			reply @render(
 				body.others, 
 				req.user,
-				@makePrevNextLink(req.params, req.raw.url.pathname, body.others.length)
+				@makePrevNextLink(req.params, req.raw.url.pathname, body.others?.length)
 			)
 		, req.token
 
