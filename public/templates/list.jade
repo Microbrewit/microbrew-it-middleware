@@ -2,7 +2,7 @@
 	ul.listItem-list
 		each result in results
 			li
-				case result.dataType
+				case result.type
 					when 'fermentable'
 						include fermentables/listItem.jade
 					when 'hop'
@@ -24,7 +24,7 @@
 					when 'yeast'
 						include yeasts/listItem.jade
 					default
-						p No template for "#{item.dataType}"
+						p No template for "#{item.type}"
 
 	if prevPage
 		a(href=prevPage, class="prev") Previous page
