@@ -58016,7 +58016,7 @@ mbit.factory('mbit/api/Request', [
         requestUrl += '&callback=JSON_CALLBACK';
       }
       console.log("GET: " + requestUrl);
-      promise = $http.jsonp(requestUrl, {}).error(function(data, status, headers) {
+      promise = $http.get(requestUrl, {}).error(function(data, status, headers) {
         console.error("GET " + requestUrl + " gave HTTP " + status, data);
         return {
           data: data,
@@ -58182,16 +58182,48 @@ var mbit;
 mbit = angular.module('Microbrewit');
 
 mbit.directive('mbChooseIngredient', [
-  'mbit/api/Ingredient', 'mbit/services/RecipeUtilityService', function(Ingredients, Utils) {
+  'mbit/api/Ingredient', 'mbit/services/RecipeUtilityService', '$document', function(Ingredients, Utils, $document) {
     var link;
     link = function(scope, element, attrs, controller, transcludeFn) {
-      var checkCacheValid, filterIngredients, getAllIngredients, getFermentables, getHops, getIngredientsFromCache, getOthers, getYeasts, ingredients;
-      scope.visible = true;
-      scope.open = function() {
-        return scope.visible = true;
-      };
-      scope.close = function() {
+      var ESC_KEY_CODE, checkCacheValid, close, escHandler, filterIngredients, getAllIngredients, getFermentables, getHops, getIngredientsFromCache, getOthers, getYeasts, ingredients, open, setIngredientCallback;
+      ESC_KEY_CODE = 27;
+      scope.visible = false;
+      setIngredientCallback = null;
+      escHandler = (function(_this) {
+        return function(e) {
+          console.log(e.keyCode);
+          if (e.keyCode === ESC_KEY_CODE) {
+            console.log('close');
+            return scope.close();
+          }
+        };
+      })(this);
+      close = function() {
+        console.log(scope);
+        console.log('hide');
         return scope.visible = false;
+      };
+      open = function() {
+        scope.visible = true;
+        return $document.on('keydown', function(e) {
+          console.log(e.keyCode);
+          if (e.keyCode === ESC_KEY_CODE) {
+            scope.visible = false;
+            scope.$apply();
+            return $document.off('keydown');
+          }
+        });
+      };
+      scope.$on('openIngredientPicker', function(event, callback) {
+        setIngredientCallback = callback;
+        return open();
+      });
+      scope.close = function() {
+        return close();
+      };
+      scope.setIngredient = function(ingredient) {
+        setIngredientCallback(ingredient);
+        return close();
       };
       ingredients = [];
       getFermentables = function() {
@@ -58250,7 +58282,7 @@ mbit.directive('mbChooseIngredient', [
         filterText = filterText.toLowerCase();
         filtered = _.filter(ingredients, function(ingredient) {
           var searchIn;
-          if (typeFilters[ingredient.dataType] === false) {
+          if (typeFilters[ingredient.type] === false) {
             return false;
           }
           searchIn = (ingredient.name + " " + ingredient.productCode).toLowerCase();
@@ -58277,9 +58309,6 @@ mbit.directive('mbChooseIngredient', [
       });
     };
     return {
-      scope: {
-        'setIngredient': '='
-      },
       replace: true,
       templateUrl: 'recipe/build/ingredient/ingredient-chooser.html',
       link: link
@@ -58292,7 +58321,7 @@ var mbit;
 mbit = angular.module('Microbrewit');
 
 mbit.directive('mbIngredient', [
-  'mbit/services/RecipeUtilityService', function(Utils) {
+  'mbit/services/RecipeUtilityService', '$rootScope', function(Utils, $rootScope) {
     var link;
     link = function(scope, element, attrs, controller, transcludeFn) {
       var mergeIngredient, refreshValues, setIngredient;
@@ -58310,17 +58339,13 @@ mbit.directive('mbIngredient', [
           console.log(key);
           if (key === '$$hashKey') {
 
-          } else if (key === 'dataType') {
-            ingredient.type = val;
-          } else if (key === 'type') {
-            ingredient.subType = val;
           } else {
             ingredient[key] = val;
           }
         }
         return ingredient;
       };
-      scope.setIngredient = function(ingredient) {
+      setIngredient = function(ingredient) {
         var key, newIngredient, results, val;
         newIngredient = mergeIngredient(scope.ingredient, ingredient);
         results = [];
@@ -58330,7 +58355,10 @@ mbit.directive('mbIngredient', [
         }
         return results;
       };
-      setIngredient = function(ingredientModel) {};
+      scope.openIngredientPicker = function() {
+        console.log('openIngredientPicker');
+        return $rootScope.$broadcast('openIngredientPicker', setIngredient);
+      };
       refreshValues = function(ingredient) {
         switch (ingredient.type) {
           case 'fermentable':
@@ -58392,7 +58420,7 @@ mbit.controller('RecipeController', [
     console.log('stateParams:', $stateParams);
     if ($stateParams.id) {
       getRecipe($stateParams.id);
-    } else if (recipe) {
+    } else if (typeof recipe === 'object') {
       console.log(recipe);
       $scope.beer = recipe.beers[0];
     } else {
@@ -58746,6 +58774,10 @@ mbit.directive('mbStep', [
         return scope.step.stepNumber = number;
       };
       scope.addIngredient = function() {
+        var base;
+        if ((base = scope.step).ingredients == null) {
+          base.ingredients = [];
+        }
         return scope.step.ingredients.push({});
       };
       return scope.removeIngredient = function(ingredient) {

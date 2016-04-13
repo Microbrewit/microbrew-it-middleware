@@ -1,5 +1,8 @@
 <header>
-	<h1>{{mode}} {{beer.name}}</h1>
+	<div class="inner-wrapper">
+		<h1>{{mode}} <input type="text" ng-model="beer.name" /></h1>
+		
+	</div>
 </header>
 <section class="beer-meta">
 	<div class="inner-wrapper">
@@ -53,6 +56,8 @@
 </section>
 
 <form class="add-beer">
+	<mb-choose-ingredient settings="settings"></mb-choose-ingredient>
+	
 	<ul class="steps">
 		<li class="{{step.type}}" ng-repeat="step in beer.recipe.steps">
 			<div mb-step step="step" settings="settings" refresh="refresh" recipe="beer.recipe" remove="removeStep"></div>
@@ -67,5 +72,4 @@
 			<button class="button add">SAVE</button>
 		</div>
 	</section>
-	
 </form>

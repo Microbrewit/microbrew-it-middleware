@@ -1,4 +1,5 @@
-<div ng-show="visible" class="bg" ng-click="close()" style="z-index:20;position:fixed;top:0;left:0;right:0;bottom:0;background: rgba(0,0,0,0.4)">
+<div ng-show="visible" style="z-index:20;position:fixed;">
+	<div class="bg" style="position:fixed;top:0;left:0;right:0;bottom:0;background: rgba(0,0,0,0.4)" ng-click="close()"/>
 	<div class="ingredient-chooser" style="position:fixed;top:100px;padding-top: 0;left:40px;right:40px;bottom: 40px; background: white;border:1px solid #ccc;">
 
 		<header class="search" style="padding:0 60px;margin:0;position:absolute;top:0;left:0;right:0;height:50px;border-bottom:1px solid #ccc;background:white;">
@@ -26,10 +27,10 @@
 
 		<ul style="box-sizing:border-box;height:100%;padding-top: 50px;overflow:auto; background: white;width:100%;clear:both;">
 			<li ng-repeat="ingredient in ingredients" ng-click="setIngredient(ingredient)">
-					<div ng-if="ingredient.dataType === 'fermentable'" ng-include="'recipe/build/ingredient/fermentable-simplified.html'" />
-					<div ng-if="ingredient.dataType === 'hop'" ng-include="'recipe/build/ingredient/hop-simplified.html'" />
-					<div ng-if="ingredient.dataType === 'yeast'" ng-include="'recipe/build/ingredient/yeast.html'" />
-					<div ng-if="ingredient.dataType === 'other'" ng-include="'recipe/build/ingredient/other-simplified.html'" />
+					<div ng-if="ingredient.type === 'fermentable'" ng-include="'recipe/build/ingredient/fermentable-simplified.html'" />
+					<div ng-if="ingredient.type === 'hop'" ng-include="'recipe/build/ingredient/hop-simplified.html'" />
+					<div ng-if="ingredient.type === 'yeast'" ng-include="'recipe/build/ingredient/yeast-simplified.html'" />
+					<div ng-if="ingredient.type === 'other'" ng-include="'recipe/build/ingredient/other-simplified.html'" />
 			</li>
 		</ul>
 	</div>
