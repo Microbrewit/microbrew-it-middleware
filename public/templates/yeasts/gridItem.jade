@@ -8,4 +8,5 @@
 		.meta
 			.meta-table
 				.meta-cell #{result.productCode}
-				.meta-cell #{result.supplier.name}
+				if(result && result.supplier && result.supplier.name)
+					.meta-cell #{result.supplier.name}
