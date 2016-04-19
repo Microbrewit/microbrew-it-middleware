@@ -14,7 +14,8 @@
   "license": "MIT",
   "devDependencies": {
     "node-sass": "^3.4.2",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "lattice": "git+ssh://git@github.com:Torthu/Lattice-2.git#master"
   },
   "dependencies": {
     "avatar-generator": "^1.0.6",
@@ -27,6 +28,7 @@
     "lodash": "^3.9.3",
     "microbrewit-formulas": "1.1.0",
     "microbrewit-node": "1.0.2",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "microbrewit-recipe-calculator": "git+ssh://git@github.com:Microbrewit/microbrewit-recipe-calculator.git#master"
   }
 }
