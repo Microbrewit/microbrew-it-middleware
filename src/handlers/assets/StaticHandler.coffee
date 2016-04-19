@@ -46,13 +46,6 @@ class StaticHandler extends RouteHandler
 					file: (request) ->
 						return "public/fonts/#{request.params.filename}"
 			}
-			{
-				method: 'GET',
-				path:'/recipe/{p*}', 
-				handler: 
-					file: (request) ->
-						return "public/recipe/#{request.params.p}"
-			}
 			# {
 			# 	method: 'GET',
 			# 	path:'/recipe/build/{filename}', 

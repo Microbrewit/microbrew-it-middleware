@@ -45,6 +45,15 @@ class SingleHandler extends RouteHandler
 				handler: (req, reply) => 
 					@onRequest(req, reply,  "Fork #{req.params.id}", 'beers')
 			}
+
+			# Serve static assets (i.e the microbrewit-recipe-calculator app)
+			{
+				method: 'GET',
+				path:'/recipe/build/{p*}', 
+				handler: 
+					file: (request) ->
+						return "node_modules/microbrewit-recipe-calculator/build/#{request.params.p}"
+			}
 		]
 
 	# Show the recipe app
