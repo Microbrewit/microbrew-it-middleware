@@ -1,0 +1,100 @@
+.ingredient-chooser-wrapper {
+	z-index: 20;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	.bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.4);
+	}
+
+	.ingredient-chooser {
+		position: fixed;
+		top: 100px;
+		padding-top: 0;
+		left: 40px;
+		right: 40px;
+		bottom: 40px;
+		background: white;
+		border: 1px solid #ccc;
+	}
+
+	.search {
+		z-index: 20;
+		padding: 0 20px;
+		margin: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		line-height: 50px;
+		border-bottom: 1px solid #ccc;
+		background: white;
+	}
+
+	.filter-text {
+		width: 50%;
+		max-width: 300px;
+		min-width: 200px;
+		margin-right: 25px;
+		text-align: left;
+		padding: 0 15px;
+		height: 30px;
+		display: inline-block;
+	}
+
+	.filters {
+		display: inline-block;
+		mix-width: 400px;
+		padding: 0;
+		margin: 0;
+
+		li {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
+			background: red;
+
+			input[type="checkbox"] {
+				display: none;
+			}
+
+			input[type="checkbox"] + label {
+ 				background: white;
+			}
+
+			input[type="checkbox"]:checked + label {
+ 				background: #333;
+ 				color: white;
+
+			}
+
+			label {
+				display: inline-block;
+				height: 100%;
+				padding: 5px 10px;
+			}
+		}
+	}
+	.button-wrapper {
+		float:right;
+		line-height: 50px;
+	}
+
+	.listItem-list {
+		box-sizing: border-box;
+		height: 100%;
+		padding-top: 50px;
+		overflow: auto;
+		background: white;
+		width: 100%;
+		clear: both;
+	}
+}

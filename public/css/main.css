@@ -969,6 +969,82 @@ h1 input {
       right: -12px;
       content: ''; }
 
+.ingredient-chooser-wrapper {
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+  .ingredient-chooser-wrapper .bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); }
+  .ingredient-chooser-wrapper .ingredient-chooser {
+    position: fixed;
+    top: 100px;
+    padding-top: 0;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background: white;
+    border: 1px solid #ccc; }
+  .ingredient-chooser-wrapper .search {
+    z-index: 20;
+    padding: 0 20px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    line-height: 50px;
+    border-bottom: 1px solid #ccc;
+    background: white; }
+  .ingredient-chooser-wrapper .filter-text {
+    width: 50%;
+    max-width: 300px;
+    min-width: 200px;
+    margin-right: 25px;
+    text-align: left;
+    padding: 0 15px;
+    height: 30px;
+    display: inline-block; }
+  .ingredient-chooser-wrapper .filters {
+    display: inline-block;
+    mix-width: 400px;
+    padding: 0;
+    margin: 0; }
+    .ingredient-chooser-wrapper .filters li {
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      background: red; }
+      .ingredient-chooser-wrapper .filters li input[type="checkbox"] {
+        display: none; }
+      .ingredient-chooser-wrapper .filters li input[type="checkbox"] + label {
+        background: white; }
+      .ingredient-chooser-wrapper .filters li input[type="checkbox"]:checked + label {
+        background: #333;
+        color: white; }
+      .ingredient-chooser-wrapper .filters li label {
+        display: inline-block;
+        height: 100%;
+        padding: 5px 10px; }
+  .ingredient-chooser-wrapper .button-wrapper {
+    float: right;
+    line-height: 50px; }
+  .ingredient-chooser-wrapper .listItem-list {
+    box-sizing: border-box;
+    height: 100%;
+    padding-top: 50px;
+    overflow: auto;
+    background: white;
+    width: 100%;
+    clear: both; }
+
 .header-bubble {
   margin-top: 35px;
   position: relative;
