@@ -14,12 +14,12 @@ class ImportHandler extends RouteHandler
 			{
 				path: '/beers/import'
 				method: 'GET'
-				auth: true
+				auth: false
 			}
 			{
 				path: '/beers/import'
 				method: 'POST'
-				auth: true
+				auth: false
 				config:
 					payload:
 						maxBytes: 209715200
