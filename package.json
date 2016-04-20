@@ -14,21 +14,19 @@
   "license": "MIT",
   "devDependencies": {
     "node-sass": "^3.4.2",
-    "nodemon": "^1.9.1",
     "lattice": "git+ssh://git@github.com:Torthu/Lattice-2.git#master"
   },
   "dependencies": {
-    "avatar-generator": "^1.0.6",
-    "coffee-script": "^1.10.0",
-    "forever": "0.15.1",
-    "hapi": "^8.6.1",
+    "avatar-generator": "1.0.6",
+    "coffee-script": "1.10.0",
+    "hapi": "8.6.1",
     "hapi-auth-cookie": "2.2.0",
     "jade": "^1.9.2",
     "jwt-decode": "^2.0.1",
-    "lodash": "^3.9.3",
-    "minimist": "^1.2.0",
+    "lodash": "^4.0.0",
     "microbrewit-formulas": "git+ssh://git@github.com:Microbrewit/microbrewit-formulas.git#feature/more-formulas",
     "microbrewit-node": "git+ssh://git@github.com:Microbrewit/microbrewit-node.git#new-authentication-flow",
-    "microbrewit-recipe-calculator": "git+ssh://git@github.com:Microbrewit/microbrewit-recipe-calculator.git#master"
+    "microbrewit-recipe-calculator": "git+ssh://git@github.com:Microbrewit/microbrewit-recipe-calculator.git#master",
+    "minimist": "1.2.0"
   }
 }
