@@ -14,7 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "node-sass": "^3.4.2",
-    "lattice": "git+ssh://git@github.com:Torthu/Lattice-2.git#master"
+    "lattice": "Torthu/Lattice-2.git#master"
   },
   "dependencies": {
     "avatar-generator": "1.0.6",
