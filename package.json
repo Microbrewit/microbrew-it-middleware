@@ -26,9 +26,9 @@
     "jade": "^1.9.2",
     "jwt-decode": "^2.0.1",
     "lodash": "^3.9.3",
-    "microbrewit-formulas": "1.1.0",
-    "microbrewit-node": "1.0.2",
     "minimist": "^1.2.0",
+    "microbrewit-formulas": "git+ssh://git@github.com:Microbrewit/microbrewit-formulas.git#feature/more-formulas",
+    "microbrewit-node": "git+ssh://git@github.com:Microbrewit/microbrewit-node.git#new-authentication-flow",
     "microbrewit-recipe-calculator": "git+ssh://git@github.com:Microbrewit/microbrewit-recipe-calculator.git#master"
   }
 }
