@@ -33,12 +33,23 @@
 	}
 }
 
-.beerstyles .beerstyle .minibubble, .beerstyle.minibubble {
+.beerstyles .beerstyle .minibubble, .beerstyle .minibubble {
 	background: url('../images/beerstyle-large.png') center center;
 	background-size: contain;
 	background-color: #FF8000;
 }
 
+.others .other .minibubble, .other .minibubble {
+	background: url('../images/others-large.png') center center;
+	background-size: contain;
+	background-color: #FF7373;
+}
+
+.user .minibubble {
+	background: url('../images/users-large.png') center center;
+	background-size: contain;
+	background-color: #00D9D9;
+}
 
 
 

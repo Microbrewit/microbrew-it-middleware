@@ -33,32 +33,30 @@
 						span.label BreweryDB
 if subnav
 	include ../../subnavigation.jade
-section.the-content
-	if item.description
-		.inner-wrapper
-			h2 About #{item.name}
-			.description !{item.description}
+if item.description
+	.inner-wrapper
+		h2 About #{item.name}
+		.description !{item.description}
 
-	if item.beers.length > 0
-		.the-list(id='beer')
-			h2 Beers
-			.inner-wrapper
-				if item.beers.length > 0
-					ul.search-grid-results
-						each result in item.beers
-							li
-								include ../beers/gridItem.jade
-				else
-					p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has not added any beers.
+if item.beers.length > 0 || item.members.length > 0
+	section.the-content
+		
+		if item.beers.length > 0
+			.the-list(id='beer')
+				h2 Beers
+				.inner-wrapper
+					if item.beers.length > 0
+						ul.search-grid-results
+							each result in item.beers
+								li
+									include ../beers/gridItem.jade
 
-	if item.members.length > 0
-		.the-list(id='brewers')
-			h2 Brewers
-			.inner-wrapper
-				if item.members.length > 0
-					ul.search-grid-results
-						each result in item.members
-							li
-								include ../users/gridItem.jade
-				else
-					p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has no registered brewers.
+		if item.members.length > 0
+			.the-list(id='brewers')
+				h2 Brewers
+				.inner-wrapper
+					if item.members.length > 0
+						ul.search-grid-results
+							each result in item.members
+								li
+									include ../users/gridItem.jade

@@ -2,10 +2,9 @@
 	a.content(href='beerstyles/#{result.beerStyleId}')
 		.top-circle
 			span(class='minibubble' style="background-color:rgba(#{calc.convert.convert((result.srm.low+result.srm.high)/2, 'srm', 'rgb')},1);")
-			//- img(src='images/fermentable-large.png', width='50', height='50', alt='Hop')
 		h3 #{result.name}
 		.type Beer Style
 		.meta
 			.meta-table
-				.meta-cell #{result.ogLow} - #{result.ogHigh}
-				.meta-cell #{result.fgLow} - #{result.fgHigh}
+				.meta-cell #{result.og.low} - #{result.og.high}
+				.meta-cell #{result.fg.low} - #{result.fg.high}

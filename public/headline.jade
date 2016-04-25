@@ -44,11 +44,15 @@ if headline
 					when 'origins'
 						if item
 							span(class='bubble', style="background: url('#{country.getImageByName(item.name)}') center center;background-size: 152%;")
+						else
+							span(class='bubble', style="background: url('images/globe-large.png') center center;")
 
 					when 'beerstyles'
 						if item
 							span(class='bubble' style="background:rgba(#{calc.convert.convert((item.srm.low+item.srm.high)/2, 'srm', 'rgb')},1);")
-							img(src='images/beerstyle-large.png', width='72', height='72', alt='Hop')
+						else
+							span(class='bubble' style="background:#FF8000")
+						img(src='images/beerstyle-large.png', width='72', height='72', alt='Hop')
 
 					when 'glasses'
 						if item
@@ -58,24 +62,29 @@ if headline
 					when 'users'
 						if item
 							if item.gravatar
-								span(class='bubble', style="background: url('#{item.gravatar}') center center;background-size: contain;")
+								span(class='bubble', style="background: url('#{item.gravatar}') center center;background-color:#00D9D9;background-size: contain;")
 							else
-								span(class='bubble', style="background: url('/random/#{item.username}?size=72') center center;background-size: contain;")
+								span(class='bubble', style="background: url('images/users-large.png') center center;background-color: #00D9D9;background-size: contain;")
 						else
-							span(class='bubble', style="background: url('/random/brewers?size=72') center center;background-size: contain;")
+							span(class='bubble', style="background: url('images/users-large.png') center center;background-color: #00D9D9;background-size: contain;")
 
 					when 'account'
 						if user
 							if user.gravatar
 								span(class='bubble', style="background: url('#{user.gravatar}') center center;background-size: contain;")
 							else
-								span(class='bubble', style="background: url('/random/#{user.username}?size=72') center center;background-size: contain;")
+								span(class='bubble', style="background: url('images/users-large.png') center center;background-color: #00D9D9;background-size: contain;")
 						else
-							span(class='bubble', style="background: url('/random/brewers?size=72') center center;background-size: contain;")
+							span(class='bubble', style="background: url('images/users-large.png') center center;background-color: #00D9D9;background-size: contain;")
 
 					when 'yeasts'
 						span(class='bubble' style="background:rgba(231,200,126,1);")
 						img(src='images/yeast-large.png', width='72', height='72', alt='Yeast')
+
+					when 'others'
+						span(class='bubble' style="background:#FF7373;")
+						img(src='images/others-large.png', width='72', height='72', alt='Others')
+
 					default
 						span(class='bubble' style="background:rgba(231,200,126,1);")
 

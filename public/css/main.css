@@ -74,7 +74,7 @@ a {
 body {
   margin: 0;
   color: #333;
-  background: #fbfbfb; }
+  background: white; }
 
 h2 {
   text-align: center;
@@ -609,15 +609,20 @@ h1 + .sub-nav {
   background-size: contain;
   background-color: #006DD9; }
 
-.beerstyles .beerstyle .minibubble {
+.beerstyles .beerstyle .minibubble, .beerstyle .minibubble {
   background: url("../images/beerstyle-large.png") center center;
   background-size: contain;
   background-color: #FF8000; }
 
-.beerstyle .minibubble {
-  background: url("../images/beerstyle-large.png") center center;
+.others .other .minibubble, .other .minibubble {
+  background: url("../images/others-large.png") center center;
   background-size: contain;
-  background-color: #FF8000; }
+  background-color: #FF7373; }
+
+.user .minibubble {
+  background: url("../images/users-large.png") center center;
+  background-size: contain;
+  background-color: #00D9D9; }
 
 .filters {
   list-style: none; }
