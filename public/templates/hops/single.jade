@@ -19,16 +19,27 @@
 						a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
 					span.label SUPPLIER
 
-	section.flavours
-		.inner-wrapper
-			h2 Flavours and aroma
-
-			if item.flavours.length > 0
+	if item.flavours.length > 0 || item.flavourDescription
+		section.flavours
+			.inner-wrapper
+				h2 Flavours and aroma
+				if item.flavours.length > 0
+					.meta
+						span.flavours
+							| Tastes of  #{ item.flavours.join(', ')}
 				.meta
-					span.flavours
-						| Tastes of  #{ item.flavours.join(', ')}
-			.meta
-				p #{item.flavourDescription}
+					p #{item.flavourDescription}
+
+	if item.notes || item.purpose
+		section.notes.text 
+			.inner-wrapper
+				h2 Notes
+				if item.purpose
+					p #{item.name} is generally used for 
+						strong #{item.purpose}
+						| .
+
+				p #{item.notes}
 
 	section.acids
 		.inner-wrapper
@@ -39,10 +50,11 @@
 					th minimum
 					th maximum
 				each range, name in item.acids
-					tr 
-						td #{name}
-						td #{range.low}%
-						td #{range.high}%
+					if range.low !== 0 || range.high !== 0
+						tr 
+							td #{name}
+							td #{range.low}%
+							td #{range.high}%
 	section.oils
 		.inner-wrapper
 			h2 Oil breakdown
@@ -52,30 +64,30 @@
 					th minimum
 					th maximum
 				each range, name in item.oils
-					tr 
-						td #{name}
-						td #{range.low}%
-						td #{range.high}%
+					if range.low !== 0 || range.high !== 0
+						tr 
+							td #{name}
+							td #{range.low}%
+							td #{range.high}%
 
-	section.notes.text 
+	if item.beerstyles.length > 0
+		section.beerstyles
+			.inner-wrapper
+				h2 Beerstyles
+				p.description.center #{item.name} is often used in these beerstyles:
+				br
+				ul.listItem-list
+					each result in item.beerstyles
+						li
+							div.list-item
+								a(href='/beerstyles/#{result.id}') #{result.name}
+
+
+if item.substitutes && item.substitutes.length > 0
+	section.substitutes.the-content
+		h2 Substitutes
 		.inner-wrapper
-			h2 Notes
-			p #{item.name} is generally used for #{item.purpose}.
-			p #{item.notes}
-			p #{item.name} is often used in !{beerStylesPretty} style beers.
-
-
-section.substitutes.the-content
-	h2 Substitutes
-	.inner-wrapper
-		if item.substitutes && item.substitutes.length > 0
 			ul.grid-list
 				each result in item.substitutes
 					li
-						include gridItem.jade
-		else
-			.center
-				| Sorry, there are no substitutes registered for 
-				strong #{item.name}
-				| .
-
+						include listItem.jade

@@ -81,6 +81,12 @@ h2 {
   font-weight: normal;
   font-size: 160%; }
 
+.normal-list {
+  list-style: disc; }
+  .normal-list li {
+    dispaly: block;
+    padding: 5px 0; }
+
 .no-wrap input {
   display: inline-block;
   width: auto; }
@@ -217,6 +223,17 @@ h2 {
   border-right: 1px solid #ccc; }
   .meta-bubble:last-child {
     border-right: 0; }
+  .meta-bubble .minibubble {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.2); }
+  .meta-bubble .minibubble-label {
+    margin-left: 5px;
+    margin-right: 10px; }
   .meta-bubble .value {
     float: left;
     background: transparent !important;

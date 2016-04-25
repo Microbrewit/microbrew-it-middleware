@@ -3,13 +3,15 @@
 		.inner-wrapper
 			.meta-bubble(title="Lovibond is a measure of a grain's colour.")
 				span(class='value') 
-					.left-circle
-						span(class='minibubble' style="background:rgba(#{calc.convert.convert(item.lovibond, 'lovibond', 'rgb')},1);")
-					| #{item.lovibond}
+					span(class='minibubble' style="background:rgba(#{calc.convert.convert(item.lovibond, 'lovibond', 'rgb')},1);") &nbsp;
+					span.minibubble-label #{item.lovibond}
 				span.label °L 
 			.meta-bubble(title='PPG describes the sugar contents of a malt')
 				span(class='value') #{item.ppg}
 				span.label PPG
+			.meta-bubble(title='')
+				span(class='value') #{item.subType}
+				span.label Class
 			if item.supplier
 				.meta-bubble(title='Maltster/supplier')
 					span(class='value') 
@@ -22,12 +24,12 @@
 
 include ../../subnavigation.jade
 
-section.the-content
-	section.subtypes
-		.inner-wrapper
-			h2 Subtypes
-			if item.subFermentables.length > 0
+if item.subFermentables.length > 0
+	.the-content
+		.inner-wrapper.fermentables
+			h2 Sub types
+			ul.listItem-list
 				each result in item.subFermentables
-					include gridItem.jade
-			else
-				p.center #{item.name} has no subtypes.
+					li
+						div.list-item
+							a(href='/fermentables/#{result.id}') #{result.name}

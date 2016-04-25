@@ -1,34 +1,32 @@
 .inner-wrapper
 	section.beer-meta.meta-info
 		.inner-wrapper
-			.meta-bubble
-				span(class='value' title="ABV or alcohol by volume is how many % of the beer's volume that consists of alcohol.") #{item.abv.standard}%
-				span.label ABV
-			.meta-bubble
-				span(class='value' title='OG or original gravity is the boyency of the liquid after the mash. It is used to calculate ABV.') #{item.recipe.og.toFixed(3)}
-				span.label OG
-			.meta-bubble
-				span(class='value' title='FG or final gravity is the boyency of the beer after fermentation. It is used to calculate ABV.') #{item.recipe.fg.toFixed(3)}
-				span.label FG
-			.meta-bubble
-				span(class='value' title='IBU/EBU is a measure of the bitterness of the beer.') #{item.ibu.tinseth}
-				span.label IBU
-			.meta-bubble
-				span(class='value' title='SRM/EBC is used to measure the colour of the beer.') #{item.srm.standard}
-				span.label SRM
-
-if headline && headline.minidisplay
-	.minidisplay-wrapper
-		| by
-		br
-		each result in item.brewers
-			if result.dataType === 'user'
-				include ../users/minidisplay.jade
+			if item.abv
+				.meta-bubble
+					span(class='value' title="ABV or alcohol by volume is how many % of the beer's volume that consists of alcohol.") #{item.abv.standard}%
+					span.label ABV
+			if item.recipe
+				if item.recipe.og
+					.meta-bubble
+						span(class='value' title='OG or original gravity is the boyency of the liquid after the mash. It is used to calculate ABV.') #{item.recipe.og.toFixed(3)}
+						span.label OG
+				if item.recipe.fg
+					.meta-bubble
+						span(class='value' title='FG or final gravity is the boyency of the beer after fermentation. It is used to calculate ABV.') #{item.recipe.fg.toFixed(3)}
+						span.label FG
+			if item.ibu
+				.meta-bubble
+					span(class='value' title='IBU/EBU is a measure of the bitterness of the beer.') #{item.ibu.tinseth}
+					span.label IBU
+			if item.srm
+				.meta-bubble
+					span(class='value' title='SRM/EBC is used to measure the colour of the beer.') #{item.srm.standard}
+					span.label SRM
 
 include ../../subnavigation.jade
 
-section.recipe.the-content
-	if item.recipe.steps
+if item.recipe && item.recipe.steps
+	section.recipe.the-content
 		ul.steps
 			each step in item.recipe.steps
 				if (step.type === 'mash')

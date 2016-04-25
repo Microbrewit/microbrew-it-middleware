@@ -2,9 +2,9 @@
 	section.yeast-meta.meta-info
 		.inner-wrapper
 
-			if item.temperatureLow || item.temperatureHigh
+			if item.temperature.low || item.temperature.high
 				.meta-bubble.temperature(title="Temperature range.")
-					span(class='value') #{item.temperatureLow} - #{item.temperatureHigh}
+					span(class='value') #{item.temperature.low} - #{item.temperature.high}
 					span.label C
 
 			if item.flocculation
@@ -22,10 +22,10 @@
 					span.value #{item.attenutionRange}
 					span.label Attenution
 
-//- 	flocculation
-//- alcoholTolerance
-//- species
-//- attenutionRange
+			if item.species
+				.meta-bubble
+					span.value #{item.species}
+					span.label Species
 
 section.the-content.notes.text
 	.inner-wrapper
@@ -35,27 +35,11 @@ section.the-content.notes.text
 			if item.supplier
 				| supplied by 
 				a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}.
-		p(title="Notes") #{item.notes}
-		p(title="Pitching notes") #{item.pitchingFermentationNotes}
 
+		if item.notes
+			h2 Notes
+			p(title="Notes") #{item.notes}
 
-//- yeastId: 143,
-//- name: "Abbey Ale Yeast",
-//- temperatureHigh: 85,
-//- temperatureLow: 60,
-//- flocculation: "75-88",
-//- alcoholTolerance: "High",
-//- productCode: "WLP530",
-//- notes: "Used to produce Trappist style beers. Similar to WLP500, but is less fruity and more alcohol tolerant (up to 15% ABV).",
-//- type: null,
-//- brewerySource: "Westmalle",
-//- species: "Ale",
-//- attenutionRange: "Medium-High",
-//- pitchingFermentationNotes: "More ester development via underpitching and/or higher fermentation temperature. 80+ Fermentation temperature results in aggressive, highly attenuative yeast character",
-//- supplier: {
-//- id: 29,
-//- name: "Vintner's Harvest"
-//- },
-//- dataType: "yeast",
-//- custom: false
-//- }
+		if item.pitchingFermentationNotes
+			h2 Fermentation notes
+			p(title="Pitching notes") #{item.pitchingFermentationNotes}

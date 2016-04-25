@@ -31,6 +31,9 @@ class SingleHandler extends RouteHandler
 		subNav = @_createSubNav(beer, user)
 		brewers = @_getBrewers(beer)
 
+		subheader = "<a href=\"beerstyles/#{beer.beerStyle.beerStyleId}\">#{beer.beerStyle.name}</a>"
+		subheader += "<br /> <small>by #{brewers.join(',')}</small>" if brewers.length > 0
+
 		return @renderer.page
 			title: beer.name
 			navigationState: 'beers'
@@ -43,7 +46,7 @@ class SingleHandler extends RouteHandler
 					subnav: subNav
 					headline:
 						headline: beer.name
-						subheader: "<a href=\"beerstyles/#{beer.beerStyle.beerStyleId}\">#{beer.beerStyle.name}</a><br /> <small>by #{brewers.join(',')}</small>"
+						subheader: subheader
 					mode: 'single'
 					user: user
 					item: beer

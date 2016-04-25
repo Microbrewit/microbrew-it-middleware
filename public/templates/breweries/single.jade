@@ -34,25 +34,31 @@
 if subnav
 	include ../../subnavigation.jade
 section.the-content
-	.subSection(id='details')
-		.inner-wrapper.description !{item.description}
-	.subSection.the-list(id='beer')
-		h2 Beers
+	if item.description
 		.inner-wrapper
-			if item.beers.length > 0
-				ul.search-grid-results
-					each result in item.beers
-						li
-							include ../beers/gridItem.jade
-			else
-				p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has not added any beers.
-	.subSection.the-list(id='brewers')
-		h2 Brewers
-		.inner-wrapper
-			if item.members.length > 0
-				ul.search-grid-results
-					each result in item.members
-						li
-							include ../users/gridItem.jade
-			else
-				p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has no registered brewers.
+			h2 About #{item.name}
+			.description !{item.description}
+
+	if item.beers.length > 0
+		.the-list(id='beer')
+			h2 Beers
+			.inner-wrapper
+				if item.beers.length > 0
+					ul.search-grid-results
+						each result in item.beers
+							li
+								include ../beers/gridItem.jade
+				else
+					p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has not added any beers.
+
+	if item.members.length > 0
+		.the-list(id='brewers')
+			h2 Brewers
+			.inner-wrapper
+				if item.members.length > 0
+					ul.search-grid-results
+						each result in item.members
+							li
+								include ../users/gridItem.jade
+				else
+					p #{item.name.charAt(0).toUpperCase()}#{item.name.slice(1)} has no registered brewers.

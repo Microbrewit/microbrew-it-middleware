@@ -1,16 +1,70 @@
 .inner-wrapper
-	.meta
-		span.og(title="OG low and high")
-			| Original Gravity: 
-			strong
-				| #{item.ogLow} - #{item.ogHigh} 
-				mb-colour-box.colour-box(type='lovibond', colour='#{lovibond}', size='20px')
-		span.ppg(title='FG low and high')
-			| Final Gravity: 
-			strong #{item.fgLow} - #{item.fgHigh}
-		span.ibu(title='IBU low and high')
-			| IBU: 
-			strong #{item.ibuLow} - #{item.ibuHigh}
-		span.ibu(title='SRM low and high')
-			| SRM: 
-			strong #{item.srmLow} - #{item.srmHigh}
+	.meta-info
+
+		if item.abv && item.abv.low
+			.meta-bubble
+				span(class='value' title='OG or original gravity is the boyency of the liquid after the mash. It is used to calculate ABV.') #{item.abv.low} - #{item.abv.high}
+				span.label ABV
+
+		.meta-bubble
+			span(class='value' title='OG or original gravity is the boyency of the liquid after the mash. It is used to calculate ABV.') #{item.og.low} - #{item.og.high}
+			span.label OG
+
+		.meta-bubble
+			span(class='value' title='FG or final gravity is the boyency of the beer after fermentation. It is used to calculate ABV.') #{item.fg.low} - #{item.fg.high}
+			span.label FG
+
+		.meta-bubble
+			span(class='value' title='IBU/EBU is a measure of the bitterness of the beer.') #{item.ibu.low} - #{item.ibu.high}
+			span.label IBU
+
+		.meta-bubble
+			span(class='value' title='SRM/EBC is used to measure the colour of the beer.')
+				span(class='minibubble' style="background:rgba(#{calc.convert.convert(item.srm.low, 'srm', 'rgb')},1);") &nbsp;
+				span.minibubble-label #{item.srm.low}
+				span(class='minibubble' style="background:rgba(#{calc.convert.convert(item.srm.high, 'srm', 'rgb')},1);") &nbsp;
+				span.minibubble-label #{item.srm.high}
+			span.label SRM
+
+if item.superBeerStyle
+	.inner-wrapper.superStyle
+		h2 Sub-style of
+		br
+		ul.listItem-list
+			li
+				div.list-item
+					a(href='/beerstyles/#{item.superBeerStyle.id}') #{item.superBeerStyle.name}
+
+if item.comments
+	.inner-wrapper.description
+		h2 Comments
+		p #{item.comments}
+
+
+if item.subBeerStyles.length > 0
+	.inner-wrapper.subStyles
+		h2 Sub styles
+		p.description.center These styles are generally classified as sub-styles of #{item.name}.
+		br
+		ul.listItem-list
+			each result in item.subBeerStyles
+				li
+					div.list-item
+						a(href='/beerstyles/#{result.id}') #{result.name}
+
+if item.hops.length > 0
+	.inner-wrapper.hops
+		h2 Typical hops
+		p.description.center These hops are typically found in #{item.name} style beers.
+		br
+		ul.listItem-list
+			each result in item.hops
+				li
+					div.list-item
+						.left-circle
+							span(class='minibubble' style="background: url('images/hops-large.png') center center;background-size:contain;background-color:rgba(0,128,64,1);")
+						a(href='/hops/#{result.id}') #{result.name}
+
+//- superBeerStyle "superBeerStyle":null
+//- subBeerStyles {"id":2,"name":"Light American Wheat Ale or Lager without Yeast"}
+//- hops {"id":207,"name":"Test Hop"}
