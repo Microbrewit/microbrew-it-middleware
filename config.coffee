@@ -1,19 +1,26 @@
+# Used if ENV VARs is not set
 exports.environment = 'dev'
-exports.prod = 
+exports.prod =
 	connection:
 		port: 3000
 		host: 'localhost'
-	api: 'http://dev.microbrew.it'
-	clientId: 'localhost:3000'
-exports.stage = 
+	api: 'https://api.microbrew.it'
+	authUrl: 'https://auth.microbrew.it'
+	clientId: ''
+	clientSecret: ''
+exports.stage =
 	connection:
 		port: 3000
 		host: 'localhost'
-	api: 'http://dev.microbrew.it'
-	clientId: 'localhost:3000'
+	api: 'https://api.microbrew.it'
+	authUrl: 'https://auth.microbrew.it'
+	clientId: ''
+	clientSecret: ''
 exports.dev =
 	connection:
 		port: 3000
 		host: 'localhost'
-	api: 'http://dev.microbrew.it'
-	clientId: 'localhost:3000'
+	api: 'https://api.microbrew.it'
+	authUrl: 'https://auth.microbrew.it'
+	clientId: ''
+	clientSecret: ''
