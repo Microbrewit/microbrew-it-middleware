@@ -81,9 +81,9 @@ h2 {
   font-weight: normal;
   font-size: 160%; }
 
-.normal-list {
+.zebra-list {
   list-style: disc; }
-  .normal-list li {
+  .zebra-list li {
     dispaly: block;
     padding: 5px 0; }
 
@@ -599,6 +599,26 @@ h1 + .sub-nav {
   background-size: contain;
   background-color: #008040; }
 
+.brewery .minibubble {
+  background: url("../images/brewery-large.png") center center;
+  background-size: contain;
+  background-color: #B22D00; }
+
+.supplier .minibubble {
+  background: url("../images/supplier-large.png") center center;
+  background-size: contain;
+  background-color: #006DD9; }
+
+.beerstyles .beerstyle .minibubble {
+  background: url("../images/beerstyle-large.png") center center;
+  background-size: contain;
+  background-color: #FF8000; }
+
+.beerstyle .minibubble {
+  background: url("../images/beerstyle-large.png") center center;
+  background-size: contain;
+  background-color: #FF8000; }
+
 .filters {
   list-style: none; }
   .filters li {
@@ -779,15 +799,15 @@ h1 input {
   min-height: 100px;
   margin: 0 auto; }
 
-.beerstyle {
+.recipe.beerstyle {
   width: 60%;
   margin: 15px auto 25px auto;
   position: relative; }
-  .beerstyle .ui-select-search {
+  .recipe.beerstyle .ui-select-search {
     text-align: center !important;
     box-sizing: border-box;
     width: 100% !important; }
-  .beerstyle .ui-select-toggle {
+  .recipe.beerstyle .ui-select-toggle {
     display: block;
     width: 100%;
     text-align: center;
@@ -795,10 +815,10 @@ h1 input {
     position: relative;
     font-size: 25px;
     color: #444; }
-    .beerstyle .ui-select-toggle:hover {
+    .recipe.beerstyle .ui-select-toggle:hover {
       background: #eee;
       cursor: pointer; }
-    .beerstyle .ui-select-toggle:after {
+    .recipe.beerstyle .ui-select-toggle:after {
       position: absolute;
       right: 10px;
       top: 15px;

@@ -29,15 +29,25 @@
 
 section.the-content.notes.text
 	.inner-wrapper
-		p #{item.name} (#{item.productCode}) is a #{item.species.toLowerCase()} yeast, 
-			if item.brewerySource
-				| that was originally cultivated by #{item.brewerySource}, and is now 
-			if item.supplier
-				| supplied by 
-				a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}.
+		if item.supplier
+			.suppliers
+				h2 Supplier
+				ul.listItem-list
+					li
+						div.list-item.supplier
+							.left-circle
+								span.minibubble
+							a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
+
+
+				
 
 		if item.notes
 			h2 Notes
+			p #{item.name} (#{item.productCode}) is a #{item.species.toLowerCase()} yeast, 
+				if item.brewerySource
+					| that was originally cultivated by #{item.brewerySource}.
+					
 			p(title="Notes") #{item.notes}
 
 		if item.pitchingFermentationNotes

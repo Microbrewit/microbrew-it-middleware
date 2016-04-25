@@ -1,12 +1,10 @@
-.grid-item
+.grid-item.brewery
 	a.content(href='breweries/#{result.breweryId}')
 		.top-circle
 			if result.avatar !== null
 				span(class='minibubble' style="background: url('http://img.microbrew.it/#{result.avatar}') center center;background-color: #333;background-size: cover;")
-			else if result.origin && result.origin.name !== "Unkown"
-				span(class='minibubble' style="background: url('#{country.getImageByName(result.origin.name)}') center center;background-size: 152%;")
 			else
-				span(class='minibubble' style="background: url('/random/#{result.name}?size=50') center center;background-color: #333;background-size: contain;")
+				span(class='minibubble')
 
 		h3 #{result.name}
 		.type #{result.type}

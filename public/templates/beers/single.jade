@@ -25,6 +25,30 @@
 
 include ../../subnavigation.jade
 
+if item.breweries.length > 0 || item.brewers.length > 0
+	.inner-wrapper.breweries.brewers
+		h2 Brewed by
+		br
+		ul.listItem-list
+			each result in item.breweries
+				li
+					div.list-item.brewery
+						.left-circle
+							span.minibubble
+						if result.breweryId
+							a(href='/breweries/#{result.breweryId}') #{result.name}
+						if result.id
+							a(href='/breweries/#{result.id}') #{result.name}
+			each result in item.brewers
+				li
+					div.list-item.brewer
+						.left-circle
+							span.minibubble
+						if result.brewerId
+							a(href='/breweries/#{result.brewerId}') #{result.name}
+						if result.id
+							a(href='/breweries/#{result.id}') #{result.name}
+
 if item.recipe && item.recipe.steps
 	section.recipe.the-content
 		ul.steps

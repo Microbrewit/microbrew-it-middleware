@@ -17,6 +17,31 @@
 	}
 }
 
+.brewery {
+	.minibubble {
+		background: url('../images/brewery-large.png') center center;
+		background-size: contain;
+		background-color: #B22D00;
+	}
+}
+
+.supplier {
+	.minibubble {
+		background: url('../images/supplier-large.png') center center;
+		background-size: contain;
+		background-color: #006DD9;
+	}
+}
+
+.beerstyles .beerstyle .minibubble, .beerstyle.minibubble {
+	background: url('../images/beerstyle-large.png') center center;
+	background-size: contain;
+	background-color: #FF8000;
+}
+
+
+
+
 .filters {
 	list-style: none;
 	li {

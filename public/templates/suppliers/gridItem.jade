@@ -1,6 +1,9 @@
-.grid-item
+.grid-item.supplier
 	a.content(href='suppliers/#{result.supplierId}')
-		span(class='minibubble' style="background: url('#{country.getImageByName(result.origin.name)}') center center;background-size: 152%;")
+		if result.origin && result.origin.name && result.origin.name !== 'Unkown' && result.origin.name !== 'Unknown'
+			span(class='minibubble' style="background: url('#{country.getImageByName(result.origin.name)}') center center;background-size: 152%;")
+		else
+			span(class='minibubble')
 		h3 #{result.name}
 		.type Supplier
 		.meta

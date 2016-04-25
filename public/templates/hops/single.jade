@@ -15,7 +15,8 @@
 					span.label #{item.origin.name}
 			if item.supplier
 				.meta-bubble(title='Maltster/supplier')
-					span(class='value') 
+					span.value.supplier
+						span.minibubble
 						a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
 					span.label SUPPLIER
 
@@ -76,10 +77,12 @@
 				h2 Beerstyles
 				p.description.center #{item.name} is often used in these beerstyles:
 				br
-				ul.listItem-list
+				ul.listItem-list.beerstyle
 					each result in item.beerstyles
 						li
 							div.list-item
+								.left-circle
+									span.minibubble
 								a(href='/beerstyles/#{result.id}') #{result.name}
 
 

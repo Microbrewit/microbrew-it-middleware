@@ -32,7 +32,9 @@ if item.superBeerStyle
 		br
 		ul.listItem-list
 			li
-				div.list-item
+				div.list-item.beerstyle
+					.left-circle
+						span.minibubble
 					a(href='/beerstyles/#{item.superBeerStyle.id}') #{item.superBeerStyle.name}
 
 if item.comments
@@ -49,7 +51,9 @@ if item.subBeerStyles.length > 0
 		ul.listItem-list
 			each result in item.subBeerStyles
 				li
-					div.list-item
+					div.list-item.beerstyle
+						.left-circle
+							span.minibubble
 						a(href='/beerstyles/#{result.id}') #{result.name}
 
 if item.hops.length > 0
