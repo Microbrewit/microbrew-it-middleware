@@ -1,7 +1,7 @@
 .grid-item
 	a.content(href='beers/#{result.id}')
 		.top-circle
-			if item.srm
+			if result.srm
 				span(class='minibubble' style="background:rgba(#{calc.convert.convert(result.srm.standard, 'srm', 'rgb')},1);")
 			img(src='images/tulip-large.png', width='50', height='50', alt='Beer')
 		h3 #{result.name}
