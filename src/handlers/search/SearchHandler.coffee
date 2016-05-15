@@ -34,19 +34,20 @@ class Handler extends RouteHandler
 					prevPage: pagination?.prev
 
 	_parseHits: (body) ->
-		results = []
-		for item in body.hits.hits
-			resultItem = item._source
-			resultItem.score = item._score
-			results.push resultItem
-		return results
+		return body
+		# results = []
+		# for item in body.hits.hits
+		# 	resultItem = item._source
+		# 	resultItem.score = item._score
+		# 	results.push resultItem
+		# return results
 
 	onRequest: (req, reply) ->
 		@logger.log req.params
 		if req.raw.query?.query
 			@api.search.get(req.params, (err, res, body) =>
 				@logger.log JSON.stringify body, false, '\t'
-				hits = body.hits.total
+				hits = body.length
 				query = req.params.query
 				results = @_parseHits(body)
 				pagination = @makePrevNextLink(req.raw.url.query, req.raw.url.pathname, results.length)
