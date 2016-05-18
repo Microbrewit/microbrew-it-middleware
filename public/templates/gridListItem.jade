@@ -1,0 +1,26 @@
+li
+	case result.type
+		when 'fermentable'
+			include fermentables/gridItem.jade
+		when 'hop'
+			include hops/gridItem.jade
+		when 'brewery'
+			include breweries/gridItem.jade
+		when 'beer'
+			include beers/gridItem.jade
+		when 'origin'
+			include origins/gridItem.jade
+		when 'beerstyle'
+			include beerstyles/gridItem.jade
+		when 'supplier'
+			include suppliers/gridItem.jade
+		when 'glass'
+			include glasses/gridItem.jade
+		when 'user'
+			include users/gridItem.jade
+		when 'yeast'
+			include yeasts/gridItem.jade
+		when 'other'
+			include others/gridItem.jade
+		default
+			p No template for "#{item.type}"
