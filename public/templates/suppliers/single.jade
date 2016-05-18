@@ -5,3 +5,11 @@
 				.meta-bubble.origin(title='Origin')
 					span.value.minibubble(style="background: url('#{country.getImageByName(item.origin.name)}') center center !important;background-size: 152% !important;width:30px;height:30px;border-radius:50%;")
 					span.label #{item.origin.name}
+
+if related.length > 0
+	section.related
+		h2 Supplies
+		.inner-wrapper
+			ul.listItem-list
+				each result in related
+					include ../listItem.jade
