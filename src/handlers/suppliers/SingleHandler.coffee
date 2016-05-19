@@ -33,7 +33,6 @@ class SingleHandler extends RouteHandler
 					q: "type:(hop OR fermentable OR yeast) AND supplier.id:#{body.suppliers[0].supplierId}"
 					sort: 'productCode:asc'
 			, (err, res, esBody) =>
-				console.log JSON.stringify esBody, false, '\t'
 				reply @render(body.suppliers[0], esBody.hits.hits, request.user)
 		, request.token
 
