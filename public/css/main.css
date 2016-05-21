@@ -121,6 +121,7 @@ h2 {
   .notes.text .inner-wrapper, .notes.text .footer-content {
     margin-bottom: 25px; }
     .notes.text .inner-wrapper p, .notes.text .footer-content p {
+      box-sizing: border-box;
       width: 90%;
       padding: 0 25px;
       margin-left: auto;

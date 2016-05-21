@@ -90,6 +90,7 @@ h2 {
 
 	.inner-wrapper {
 		p {
+			box-sizing: border-box;
 			width: 90%;
 			padding: 0 25px;
 			margin-left: auto;
