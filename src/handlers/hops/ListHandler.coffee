@@ -36,12 +36,20 @@ class Handler extends RouteHandler
 					prevPage: pagination.prev
 
 	onRequest: (req, reply) ->
-		@api.hops.get req.params, (err, res, body) => 
-			req.params.size ?= body.hops.length
+
+		@api.search.esSearch
+			params:
+				size: if req.params.size then req.params.size else 100
+				from: if req.params.from then req.params.from else 0
+				q: 'type:hop'
+				sort: 'name:asc'
+				
+		, (err, res, body) =>
+			req.params.size ?= body.hits.hits.length
 			reply @render(
-				body.hops, 
+				body.hits.hits,
 				req.user,
-				@makePrevNextLink(req.params, req.raw.url.pathname, body.hops.length)
+				@makePrevNextLink(req.params, req.raw.url.pathname, body.hits.hits.length)
 			)
 		, req.token
 
