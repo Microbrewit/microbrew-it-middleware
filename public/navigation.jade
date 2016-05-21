@@ -1,8 +1,12 @@
 
-nav#main-navigation
+nav#main-navigation.display
 	ul.inner-wrapper
 		li.logo-text
 			a(href="/" class=navigationState === 'home' ? 'active':'') Microbrew.it
+		li.mobile#more
+			M
+		li.mobile
+			a(href="search", class=navigationState === 'search' ? 'active' : '') Search
 		li
 			a(href='/beers/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
 		li

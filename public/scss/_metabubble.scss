@@ -21,6 +21,25 @@
 
 }
 
+@media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px)  {
+	.meta-bubble {
+		text-align:center;
+		width: 100%;
+		padding: 20px 15px !important;
+		border-right: 0 !important;
+		display: block;
+
+		.value {
+			float: none !important;
+			display: inline-block;
+		}
+		.label {
+			float: none !important;
+			display: inline-block;
+		}
+	}
+}
+
 .meta-bubble {
 	position: relative;
 	height: 32px;
@@ -29,6 +48,8 @@
 	padding: 0 15px;
 
 	border-right: 1px solid #ccc;
+
+
 
 	&:last-child {
 		border-right: 0;

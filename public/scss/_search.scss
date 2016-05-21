@@ -6,9 +6,19 @@
 	margin-bottom: 10px;
 	font-size: 25px;
 
+	background: url('../images/search.png') top right no-repeat #fefefe;
+	padding-left: 15px;
+
 	@include col(7/10, 0, false); 
 	padding: 0 15px;
 }
+
+@media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px)  {
+	.big-search-box {
+		@include col(9/10, 0, false); 
+	}
+}
+
 .search-input {
 	padding-bottom: 50px;
 }
