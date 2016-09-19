@@ -15,7 +15,7 @@ class Handler extends RouteHandler
 	render: (results, user, pagination) ->
 		return @renderer.page
 			title: "Hops - Ingredients"
-			navigationState: 'ingredients'
+			navigationState: 'hops'
 			user: user
 			html: @renderer.render
 				template: "public/templates/hops/index.jade"

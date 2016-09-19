@@ -14,7 +14,7 @@ class SingleHandler extends RouteHandler
 	render: (item, user) ->
 		return @renderer.page
 			title: "#{item.name} - beerstyles - Ingredients"
-			navigationState: 'other'
+			navigationState: 'beerstyles'
 			user: user
 			html: @renderer.render
 				template: "public/templates/beerstyles/index.jade"

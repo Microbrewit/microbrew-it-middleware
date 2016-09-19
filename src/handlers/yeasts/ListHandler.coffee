@@ -15,7 +15,7 @@ class Handler extends RouteHandler
 	render: (results, user, pagination) ->
 		return @renderer.page
 			title: "Yeasts - Ingredients"
-			navigationState: 'ingredients'
+			navigationState: 'yeasts'
 			user: user
 			html: @renderer.render
 				template: "public/templates/yeasts/index.jade"

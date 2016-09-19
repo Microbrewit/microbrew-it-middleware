@@ -2,21 +2,21 @@ case mode
 	when 'list'
 		article.fermentable
 			include ../../headline.jade
-			include ../../subnavigation.jade
+			//- include ../../subnavigation.jade
 		section.the-content
 			include ../gridList.jade
 	when 'edit'
 		article.fermentable
 			include ../../headline.jade
-			include ../../subnavigation.jade
+			//- include ../../subnavigation.jade
 			include edit.jade
 	when 'new'
 		article.fermentable
 			include ../../headline.jade
-			include ../../subnavigation.jade
+			//- include ../../subnavigation.jade
 			include edit.jade
 	default
 		article.fermentable
 			include ../../headline.jade
-			include ../../subnavigation.jade
+			//- include ../../subnavigation.jade
 			include single.jade

@@ -1,1 +1,88 @@
-p TO DO!
+.inner-wrapper
+	form(method="PUT").edit
+
+		section.meta
+			.inner-wrapper
+				h2 Meta info
+				table.zebra.oils
+
+					tr
+						td Name
+						td 
+							input(type="text", value="#{item.name}" name="name")
+
+					tr
+						td Purpose
+						td
+							select(name="purpose")
+								- purposes = [ 'Aroma', 'Bittering', 'Aroma/Bittering']
+								each purpose in purposes
+									option(value=purpose, selected=item.purpose == purpose) #{purpose}
+					
+
+		section.notes.text 
+			.inner-wrapper
+				h2 Notes
+				textarea(name='notes' class="notes") #{item.notes}
+
+		section.aromawheel
+			.inner-wrapper
+				h2 Aroma Wheel
+				ul
+					each aroma in aromas
+						li 
+							label(for="aromawheel.#{aroma.id}") #{aroma.name} 
+							input(name="aromawheel.#{aroma.id}" id="aromawheel.#{aroma.id}" type="checkbox")
+
+		section.acids
+			.inner-wrapper
+				h2 Acid breakdown
+				table.zebra.oils
+					tr
+						th Acid
+						th minimum
+						th maximum
+
+					each range, name in item.acids
+						tr
+							td #{name} acid
+							td 
+								input(name="#{name}.low" value="#{range.low}" min="0" type="number" step="0.1")
+							td
+								input(name="#{name}.high" value="#{range.high}" min="0" type="number" step="0.1")
+
+		section.oils
+			.inner-wrapper
+				h2 Oil breakdown
+				table.zebra.oils
+					tr
+						th Oil
+						th minimum
+						th maximum
+						
+					each range, name in item.oils
+						tr
+							td #{name}
+							td 
+								input(name="#{name}.low" value="#{range.low}" min="0" type="number" step="0.1")
+							td
+								input(name="#{name}.high" value="#{range.high}" min="0" type="number" step="0.1")
+
+		section.beerstyles
+			.inner-wrapper
+				h2 Beerstyles
+				ul.listItem-list.beerstyle
+					each result in item.beerstyles
+						li
+							div.list-item
+								.left-circle
+									span.minibubble
+								a(href='/beerstyles/#{result.id}') #{result.name}
+
+		section.substitutes
+			.inner-wrapper
+				h2 Substitutes
+				ul.listItem-list.beerstyle
+					each result in item.substitutes
+						li
+							include listItem.jade

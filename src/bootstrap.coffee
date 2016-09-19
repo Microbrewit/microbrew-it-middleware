@@ -88,6 +88,7 @@ handlers = [
 
 	'./handlers/hops/ListHandler'
 	'./handlers/hops/SingleHandler'
+	'./handlers/hops/EditHandler'
 
 	'./handlers/yeasts/ListHandler'
 	'./handlers/yeasts/SingleHandler'

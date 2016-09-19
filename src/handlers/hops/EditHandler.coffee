@@ -17,9 +17,23 @@ class SingleHandler extends RouteHandler
 		return string
 
 	getRoute: () ->
-		super { path: '/hops/{id}', method: 'GET' }
+		super [
+			{ path: '/hops/add', method: 'GET', handler: @addHandler }
+			{ path: '/hops/add', method: 'POST', handler: @addHandler }
+			{ path: '/hops/{id}/edit', method: 'GET', handler: @editHandler }
+			{ path: '/hops/{id}/edit', method: 'PUT', handler: @editHandler }
+		]
 
-	render: (item, user) ->
+
+	editHandler: (request, reply) =>
+		@api.hops.aromas {}, (err, res, aromas) =>
+			@api.hops.get request.params, (err, res, body) => 
+				console.log 'body', body
+				reply @render(body.hops[0], request.user, aromas)
+			, request.token
+		, request.token
+
+	render: (item, user, aromas) ->
 
 		beerStylesPretty = []
 
@@ -39,13 +53,16 @@ class SingleHandler extends RouteHandler
 				data: 
 					type:'hops' 
 					headline: @renderer.headline "#{item.name}", "#{item.purpose} Hop"
-					mode: 'single'
+					mode: 'edit'
 					item: item
+					aromas: aromas
 					beerStylesPretty: beerStylesPretty
 
 	onRequest: (request, reply) ->
-		@api.hops.get request.params, (err, res, body) => 
-			reply @render(body.hops[0], request.user)
+		@api.hops.aromas {}, (err, res, body) =>
+			@api.hops.get request.params, (err, res, body) => 
+				reply @render(body.hops[0], request.user)
+			, request.token
 		, request.token
 
 

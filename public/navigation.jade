@@ -7,27 +7,35 @@ nav#main-navigation.display
 			M
 		li.mobile
 			a(href="search", class=navigationState === 'search' ? 'active' : '') Search
-		li
-			a(href='/beers/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
-		li
-			a(href='/beers', class=navigationState === 'beers' ? 'active':'') Beer
+		//- li
+		//- 	a(href='/beers/add', class=navigationState === 'recipe' ? 'active':'') Add new recipe
+		//- li
+		//- 	a(href='/beers', class=navigationState === 'beers' ? 'active':'') Beer
 		//- li
 		//- 	a(href='/breweries', class=navigationState === 'breweries' ? 'active':'') Breweries
+		//- li
+		//- 	a(href='/users', class=navigationState === 'brewers' ? 'active':'') Brewers
 		li
-			a(href='/users', class=navigationState === 'brewers' ? 'active':'') Brewers
+			a(href='/beerstyles', class=navigationState === 'beerstyles' ? 'active':'') Beerstyles
 		li
-			a(href='/fermentables', class=navigationState === 'ingredients' ? 'active':'') Ingredients
+			a(href='/suppliers', class=navigationState === 'suppliers' ? 'active':'') Suppliers
+		li
+			a(href='/fermentables', class=navigationState === 'fermentables' ? 'active':'') Fermentables
+		li
+			a(href='/hops', class=navigationState === 'hops' ? 'active':'') Hops
+		li
+			a(href='/yeasts', class=navigationState === 'yeasts' ? 'active':'') Yeast
 		li
 			a(href='search', class=navigationState === 'search' ? 'active' : '') Search
 		
-		if user
-			li.right
-				a.user.minidisplay(href='users/#{user.username}')
-					if user.gravatar
-						span(class='microbubble' style="background: url('#{user.gravatar}') center center;background-size: contain;")
-					else
-						span(class='microbubble' style="background: url('/random/#{user.username}?size=50') center center;background-size: contain;")
-					span #{user.username}
-		else
-			li.right
-				a(href='login', class=navigationState === 'login' ? 'active':'') Login
+		//- if user
+		//- 	li.right
+		//- 		a.user.minidisplay(href='users/#{user.username}')
+		//- 			if user.gravatar
+		//- 				span(class='microbubble' style="background: url('#{user.gravatar}') center center;background-size: contain;")
+		//- 			else
+		//- 				span(class='microbubble' style="background: url('/random/#{user.username}?size=50') center center;background-size: contain;")
+		//- 			span #{user.username}
+		//- else
+		//- 	li.right
+		//- 		a(href='login', class=navigationState === 'login' ? 'active':'') Login

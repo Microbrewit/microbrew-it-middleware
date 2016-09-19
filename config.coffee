@@ -3,11 +3,11 @@ exports.environment = 'dev'
 exports.prod =
 	connection:
 		port: 3000
-		host: 'localhost'
+		# host: 'localhost'
 	api: 'https://api.microbrew.it'
 	authUrl: 'https://auth.microbrew.it'
-	clientId: ''
-	clientSecret: ''
+	clientId: 'microbrewit'
+	clientSecret: 'secret'
 exports.stage =
 	connection:
 		port: 3000
