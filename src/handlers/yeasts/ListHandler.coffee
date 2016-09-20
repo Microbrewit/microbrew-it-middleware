@@ -36,12 +36,18 @@ class Handler extends RouteHandler
 					prevPage: pagination.prev
 
 	onRequest: (req, reply) ->
-		@api.yeasts.get req.params, (err, res, body) => 
-			req.params.size ?= body.yeasts.length
+		@api.search.esSearch
+			params:
+				size: if req.params.size then req.params.size else 100
+				from: if req.params.from then req.params.from else 0
+				q: 'type:yeast'
+				sort: 'name:asc'
+		, (err, res, body) =>
+			req.params.size ?= body.hits.hits.length
 			reply @render(
-				body.yeasts, 
+				body.hits.hits,
 				req.user,
-				@makePrevNextLink(req.params, req.raw.url.pathname, body.yeasts.length)
+				@makePrevNextLink(req.params, req.raw.url.pathname, body.hits.hits.length)
 			)
 		, req.token
 

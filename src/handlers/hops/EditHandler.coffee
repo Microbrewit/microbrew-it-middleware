@@ -21,11 +21,12 @@ class SingleHandler extends RouteHandler
 			{ path: '/hops/add', method: 'GET', handler: @addHandler }
 			{ path: '/hops/add', method: 'POST', handler: @addHandler }
 			{ path: '/hops/{id}/edit', method: 'GET', handler: @editHandler }
-			{ path: '/hops/{id}/edit', method: 'PUT', handler: @editHandler }
+			{ path: '/hops/{id}/edit', method: 'POST', handler: @editHandler }
 		]
 
 
 	editHandler: (request, reply) =>
+
 		@api.hops.aromas {}, (err, res, aromas) =>
 			@api.hops.get request.params, (err, res, body) => 
 				console.log 'body', body
@@ -51,7 +52,7 @@ class SingleHandler extends RouteHandler
 			html: @renderer.render
 				template: "public/templates/hops/index.jade"
 				data: 
-					type:'hops' 
+					type: 'hops' 
 					headline: @renderer.headline "#{item.name}", "#{item.purpose} Hop"
 					mode: 'edit'
 					item: item

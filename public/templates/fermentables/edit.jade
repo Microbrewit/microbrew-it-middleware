@@ -12,3 +12,6 @@
 		label(for="checkbox") Custom
 		input(type='checkbox' name='custom' id="custom" value=item.custom ? '#{item.custom}' : "")
 		button(class="submit" type="submit") Save
+
+	form(action="delete" method="post")
+		button.delete DELETE

@@ -1,4 +1,7 @@
 .inner-wrapper
+	form(action="hops/#{item.hopId}/delete" method="POST")
+		button.submit.delete DELETE
+
 	form(method="PUT").edit
 
 		section.meta

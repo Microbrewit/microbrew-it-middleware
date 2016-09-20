@@ -12,7 +12,7 @@ class Handler extends RouteHandler
 	getRoute: () ->
 		super { path: '/fermentables', method: 'GET' }
 
-	render: (body, user, pagination) ->
+	render: (results, user, pagination) ->
 		return @renderer.page
 			title: " Fermentables - Ingredients"
 			navigationState: 'fermentables'
@@ -23,7 +23,7 @@ class Handler extends RouteHandler
 					type:'fermentables' 
 					headline: @renderer.headline 'Fermentables', 'Malts, adjuncts, sugars'
 					mode: 'list'
-					results: body.fermentables
+					results: results
 					subNavState: 'fermentables'
 					subnav: [
 						{href: '/fermentables', label: 'Fermentables', activeState: 'fermentables'}
@@ -36,12 +36,20 @@ class Handler extends RouteHandler
 					prevPage: pagination.prev
 
 	onRequest: (req, reply) ->
-		@api.fermentables.get req.params, (err, res, body) => 
-			req.params.size ?= body.fermentables.length
+		@api.search.esSearch
+			params:
+				size: if req.params.size then req.params.size else 100
+				from: if req.params.from then req.params.from else 0
+				q: 'type:fermentable'
+				sort: 'name:asc'
+				
+		, (err, res, body) =>
+			console.log body
+			req.params.size ?= body.hits.hits.length
 			reply @render(
-				body, 
+				body.hits.hits,
 				req.user,
-				@makePrevNextLink(req.params, req.raw.url.pathname, body.fermentables.length)
+				@makePrevNextLink(req.params, req.raw.url.pathname, body.hits.hits.length)
 			)
 		, req.token
 

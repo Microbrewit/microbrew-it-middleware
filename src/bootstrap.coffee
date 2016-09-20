@@ -92,6 +92,8 @@ handlers = [
 
 	'./handlers/yeasts/ListHandler'
 	'./handlers/yeasts/SingleHandler'
+
+	'./handlers/DeleteHandler'
 ]
 
 handlersInit = []
