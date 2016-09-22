@@ -92,6 +92,8 @@ handlers = [
 	'./handlers/yeasts/ListHandler'
 	'./handlers/yeasts/SingleHandler'
 
+	# Handle content
+	'./handlers/AddHandler'
 	'./handlers/EditHandler'
 	'./handlers/DeleteHandler'
 ]
