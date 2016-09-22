@@ -1,0 +1,5 @@
+include ../headline.jade
+
+form(method="POST")
+	textArea(style="display: block;padding: 40px;line-height: 140%;margin:0 auto;margin-bottom: 40px;width:90%;height: 600px;" id="item" name="item") #{JSON.stringify(item, false, '\t')}
+	button.submit SUBMIT

@@ -19,6 +19,15 @@ class SingleHandler extends RouteHandler
 	getRoute: () ->
 		super { path: '/hops/{id}', method: 'GET' }
 
+	subNav: (id, user) ->
+		unless user
+			return null
+		else
+			return [
+				{href: "hops/#{id}/edit", label: 'Edit', activeState: 'edit'}
+				{href: "hops/#{id}/delete", label: 'Delete', activeState: 'delete'}
+			]
+
 	render: (item, user) ->
 
 		beerStylesPretty = []
@@ -42,6 +51,7 @@ class SingleHandler extends RouteHandler
 					mode: 'single'
 					item: item
 					beerStylesPretty: beerStylesPretty
+					subnav: @subNav(item.hopId, user)
 
 	onRequest: (request, reply) ->
 		@api.hops.get request.params, (err, res, body) => 

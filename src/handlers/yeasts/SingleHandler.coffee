@@ -11,6 +11,15 @@ class SingleHandler extends RouteHandler
 	getRoute: () ->
 		super { path: '/yeasts/{id}', method: 'GET' }
 
+	subNav: (id, user) ->
+		unless user
+			return null
+		else
+			return [
+				{href: "yeasts/#{id}/edit", label: 'Edit', activeState: 'edit'}
+				{href: "yeasts/#{id}/delete", label: 'Delete', activeState: 'delete'}
+			]
+
 	render: (item, user) ->
 		return @renderer.page
 			title: "#{item.name} - Yeasts - Ingredients"
@@ -23,6 +32,7 @@ class SingleHandler extends RouteHandler
 					headline: @renderer.headline "#{item.name}", "#{item.type}"
 					mode: 'single'
 					item: item
+					subnav: @subNav(item.yeastId, user)
 
 	onRequest: (request, reply) ->
 		@api.yeasts.get request.params, (err, res, body) => 

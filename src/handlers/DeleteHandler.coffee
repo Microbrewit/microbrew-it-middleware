@@ -28,33 +28,35 @@ class Handler extends RouteHandler
 
 	getRoute: () ->
 		super [
-			{ path: '/{itemType}/{id}/delete', method: 'POST', handler: @deleteHandler }
-			{ path: '/{itemType}/{id}/delete', method: 'GET', handler: @showDelete }
+			{ path: '/{itemType}/{id}/delete', method: 'POST', handler: @deleteHandler, auth: true }
+			{ path: '/{itemType}/{id}/delete', method: 'GET', handler: @showDelete, auth: true }
 		]
 
 	showDelete: (request, reply) =>
-		reply @renderer.page
-			title: "DELETE"
-			user: request.user
-			html: @renderer.render
-				template: "public/templates/delete.jade"
-				data:
-					type: request.params.itemType
-					id: request.params.id
-					mode: 'delete'
+		{id, itemType} = request.params
+		@api[itemType]?.get request.params, (err, res, body) => 
+			item = body[itemType]?[0]
+			reply @renderer.page
+				title: "DELETE #{item.name} (#{id})"
+				user: request.user
+				html: @renderer.render
+					template: "public/templates/delete.jade"
+					data:
+						headline: @renderer.headline "DELETE #{item.name}", " #{itemType[0].toUpperCase()}#{itemType[1...itemType.length - 1]} with ID #{id}"
+						item: item
+						type: itemType
+						id: id
 
 	deleteHandler: (request, reply) =>
-		console.log 'deleteHandler'
-
 		{id, itemType} = request.params
 
 		if @api[itemType]?
-			console.log 'ait'
-			@api[itemType].delete id, (err, res, body) =>
+			@api[itemType].delete {id}, (err, res, body) =>
 				if err
 					reply err
 				else
-					reply body
-			, request.token
+					reply.redirect "/#{itemType}"
+
+			, @_getToken request
 
 module.exports = Handler
