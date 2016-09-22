@@ -3,9 +3,16 @@
 		.top-circle
 			span(class='minibubble' style="background:rgba(#{calc.convert.convert(result.lovibond, 'lovibond', 'rgb')},1);")
 			img(src='images/fermentable-large.png', width='50', height='50', alt='Malt')
-		h3 #{result.name}
-		.type Fermentable
+		h3 #{result.name} 
+			if result.supplier && result.supplier.supplierId !== 0
+				| (#{result.supplier.name})
+		.type 
+			| Fermentable
+			br
+			if result.supplier && result.supplier.supplierId !== 0 && result.supplier.origin
+				| #{result.supplier.origin.name}
 		.meta
 			.meta-table
 				.meta-cell #{result.lovibond}°L
 				.meta-cell #{result.ppg} PPG
+				
