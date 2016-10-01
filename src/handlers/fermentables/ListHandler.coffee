@@ -12,6 +12,14 @@ class Handler extends RouteHandler
 	getRoute: () ->
 		super { path: '/fermentables', method: 'GET' }
 
+	subNav: (user) ->
+		unless user
+			return null
+		else
+			return [
+				{href: 'add/fermentables', label: 'Add'}
+			]
+
 	render: (results, user, pagination) ->
 		return @renderer.page
 			title: " Fermentables - Ingredients"
@@ -25,13 +33,7 @@ class Handler extends RouteHandler
 					mode: 'list'
 					results: results
 					subNavState: 'fermentables'
-					subnav: [
-						{href: '/fermentables', label: 'Fermentables', activeState: 'fermentables'}
-						{href: '/hops', label: 'Hops', activeState: 'hops'}
-						{href: '/yeasts', label: 'Yeasts', activeState: 'yeasts'}
-						{href: '/others', label: 'Others', activeState: 'others'}
-						{action: '/search/ingredients', label: 'Search', activeState: 'search'}
-					]
+					subnav: @subNav(user)
 					nextPage: pagination.next
 					prevPage: pagination.prev
 
@@ -44,7 +46,7 @@ class Handler extends RouteHandler
 				sort: 'name:asc'
 				
 		, (err, res, body) =>
-			console.log body
+			@logger.log body
 			req.params.size ?= body.hits.hits.length
 			reply @render(
 				body.hits.hits,

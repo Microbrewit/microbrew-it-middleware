@@ -17,7 +17,7 @@ class Handler extends RouteHandler
 		yeasts: {}
 
 	getTemplate: (type) ->
-		return if @jsonTemplates[type] then @jsonTemplates[type] else {}
+		return @jsonTemplates[type]
 
 
 	getRoute: () ->
@@ -28,6 +28,12 @@ class Handler extends RouteHandler
 
 	showAdd: (request, reply) =>
 		{itemType} = request.params
+
+		template = @getTemplate(itemType)
+
+		unless template
+			reply {"statusCode": 404, "error": "Not Found"}
+			return
 		
 		reply @renderer.page
 			title: "ADD #{itemType}"
@@ -46,7 +52,7 @@ class Handler extends RouteHandler
 			body: JSON.parse request.payload.item
 
 		@api[itemType]?.post query, (err, res, body) =>
-			
+
 			if err
 				reply err
 			else

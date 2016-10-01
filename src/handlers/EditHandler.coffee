@@ -34,6 +34,11 @@ class Handler extends RouteHandler
 
 	showEdit: (request, reply) =>
 		{id, itemType} = request.params
+
+		unless itemType in @validEndpoints
+			reply {"statusCode": 404, "error": "Not Found"}
+			return
+
 		@api[itemType]?.get request.params, (err, res, body) => 
 			item = body[itemType]?[0]
 			reply @renderer.page
@@ -51,11 +56,17 @@ class Handler extends RouteHandler
 	editHandler: (request, reply) =>
 		{id, itemType} = request.params
 
+		unless itemType in @validEndpoints
+			reply {"statusCode": 404, "error": "Not Found"}
+			return
+
 		query =
 			partial: id
 			body: JSON.parse request.payload.item
 
 		@api[itemType]?.put query, (err, res, body) =>
+			@logger.log 'statusCode', res.statusCode
+			@logger.log body
 			if err
 				reply err
 			else

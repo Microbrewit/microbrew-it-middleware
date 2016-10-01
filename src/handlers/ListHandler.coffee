@@ -5,44 +5,63 @@ Handler for Fermentable GET calls
 @copyright 2015 Microbrew.it
 ###
 
-RouteHandler = require '../../core/RouteHandler'
+RouteHandler = require '../core/RouteHandler'
 
 class Handler extends RouteHandler
 
-	getRoute: () ->
-		super { path: '/yeasts', method: 'GET' }
+	validEndpoints: [
+		'yeasts'
+		'hops'
+		'fermentables'
+		'beerstyles'
+		'others'
 
-	subNav: (user) ->
+		'origins'
+		'suppliers'
+		# 'breweries'
+		# 'users'
+	]
+
+	getRoute: () ->
+		super @validEndpoints.map (type) ->
+			{ path: "/#{type}", method: 'GET' }
+
+	subNav: (params, user) ->
 		unless user
 			return null
 		else
 			return [
-				{href: 'add/yeasts', label: 'Add'}
+				{href: "add/#{params.itemType}", label: 'Add', activeState: 'edit'}
 			]
 
-	render: (results, user, pagination) ->
+	render: (results, user, pagination, params) ->
 		return @renderer.page
-			title: "Yeasts - Ingredients"
-			navigationState: 'yeasts'
+			title: "#{params.itemType}"
+			navigationState: params.itemType
 			user: user
 			html: @renderer.render
-				template: "public/templates/yeasts/index.jade"
+				template: "public/templates/#{params.itemType}/index.jade"
 				data: 
-					type:'yeasts' 
-					headline: @renderer.headline 'Yeasts'
+					type: params.itemType 
+					headline: @renderer.headline params.itemType
 					mode: 'list'
 					results: results
-					subNavState: 'yeasts'
+					subNavState: params.itemType
 					subnav: @subNav(user)
 					nextPage: pagination.next
 					prevPage: pagination.prev
 
 	onRequest: (req, reply) ->
+		req.params.itemType = (req.raw.path.split('/'))[1]
+		{itemType} = req.params
+
+		singular = itemType.substr(0, itemType.length - 1)
+
 		@api.search.esSearch
 			params:
 				size: if req.params.size then req.params.size else 100
 				from: if req.params.from then req.params.from else 0
-				q: 'type:yeast'
+				q: "type:#{singular}"
 				sort: 'name:asc'
 		, (err, res, body) =>
 			req.params.size ?= body.hits.hits.length
@@ -50,6 +69,7 @@ class Handler extends RouteHandler
 				body.hits.hits,
 				req.user,
 				@makePrevNextLink(req.params, req.raw.url.pathname, body.hits.hits.length)
+				req.params
 			)
 		, req.token
 

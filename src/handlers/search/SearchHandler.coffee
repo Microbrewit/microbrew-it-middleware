@@ -89,8 +89,8 @@ searchHandler = (req, reply) =>
 				resultItem = item._source
 				resultItem.score = item._score
 				results.push resultItem
-			console.log response
-			console.log results
+			@logger.log response
+			@logger.log results
 
 			handler(req, reply, results, req.query.query, response.hits.total)
 	else

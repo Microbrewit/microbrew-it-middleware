@@ -51,21 +51,18 @@ class SingleHandler extends RouteHandler
 			@api.http.authenticate req.payload.username, req.payload.password, (err, res, token) =>
 				if token.access_token
 					decoded = jwt(token.access_token)
-					console.log decoded
+					@api.users.get({id: req.payload.username}, (err, res, user) ->
+						user = user.users[0]
+						req.auth.session.set
+							token: token
+							user:
+								username: user.username
+								gravatar: user.gravatar
+								settings: user.settings
+								
+						reply.redirect next
 
-					req.auth.session.set 
-						token: token
-						user: 
-							username: decoded.sub
-							gravatar: null
-							settings: {}
-							
-					reply.redirect next
-					# @api.users.get({ id: decoded.sub }, (err, res, user) ->
-					# 	console.log user
-					# 	# user = user.users[0]
-
-					# )
+					)
 				else
 					reply @render()
 

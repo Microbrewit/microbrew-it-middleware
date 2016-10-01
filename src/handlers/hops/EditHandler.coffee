@@ -29,7 +29,7 @@ class SingleHandler extends RouteHandler
 
 		@api.hops.aromas {}, (err, res, aromas) =>
 			@api.hops.get request.params, (err, res, body) => 
-				console.log 'body', body
+				@logger.log 'body', body
 				reply @render(body.hops[0], request.user, aromas)
 			, request.token
 		, request.token

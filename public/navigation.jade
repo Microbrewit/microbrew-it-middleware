@@ -16,11 +16,11 @@ nav#main-navigation.display
 		//- li
 		//- 	a(href='/users', class=navigationState === 'brewers' ? 'active':'') Brewers
 		li
-			a(href='/beerstyles', class=navigationState === 'beerstyles' ? 'active':'') Beerstyles
+			a(href='/beerstyles', class=navigationState === 'beerstyles' ? 'active':'') Styles
 		li
 			a(href='/suppliers', class=navigationState === 'suppliers' ? 'active':'') Suppliers
 		li
-			a(href='/fermentables', class=navigationState === 'fermentables' ? 'active':'') Fermentables
+			a(href='/fermentables', class=navigationState === 'fermentables' ? 'active':'') Malt
 		li
 			a(href='/hops', class=navigationState === 'hops' ? 'active':'') Hops
 		li
@@ -28,14 +28,14 @@ nav#main-navigation.display
 		li
 			a(href='search', class=navigationState === 'search' ? 'active' : '') Search
 		
-		//- if user
-		//- 	li.right
-		//- 		a.user.minidisplay(href='users/#{user.username}')
-		//- 			if user.gravatar
-		//- 				span(class='microbubble' style="background: url('#{user.gravatar}') center center;background-size: contain;")
-		//- 			else
-		//- 				span(class='microbubble' style="background: url('/random/#{user.username}?size=50') center center;background-size: contain;")
-		//- 			span #{user.username}
-		//- else
-		//- 	li.right
-		//- 		a(href='login', class=navigationState === 'login' ? 'active':'') Login
+		if user
+			li.right
+				a.user.minidisplay(href='users/#{user.username}')
+					span(class='microbubble' style="background: url('#{user.gravatar}') center center;background-size: contain;")
+					//- if user.gravatar
+					//- else
+					//- 	span(class='microbubble' style="background: url('/random/#{user.username}?size=50') center center;background-size: contain;")
+					//- span #{user.username}
+		else
+			li.right
+				a(href='login', class=navigationState === 'login' ? 'active':'') Login

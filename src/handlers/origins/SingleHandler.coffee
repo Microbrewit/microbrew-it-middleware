@@ -26,7 +26,7 @@ class SingleHandler extends RouteHandler
 					results: results
 
 	onRequest: (request, reply) ->
-		console.log request.params
+		@logger.log request.params
 		@api.origins.get request.params, (err, res, body) => 
 			@api.search.esSearch
 				params:

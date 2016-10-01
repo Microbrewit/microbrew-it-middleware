@@ -45,6 +45,9 @@ handlers = [
 	'./handlers/frontpage/IndexHandler'
 	'./handlers/assets/StaticHandler'
 
+	'./handlers/SingleHandler'
+	'./handlers/ListHandler'
+
 	# Search
 	'./handlers/search/SearchHandler'
 	
@@ -68,29 +71,15 @@ handlers = [
 
 	# Other data
 	'./handlers/glasses/ListHandler'
-	'./handlers/glasses/SingleHandler'
 	
-	'./handlers/beerstyles/ListHandler'
+	# './handlers/beerstyles/ListHandler'
 	'./handlers/beerstyles/SingleHandler'
 
-	'./handlers/suppliers/ListHandler'
+	# './handlers/suppliers/ListHandler'
 	'./handlers/suppliers/SingleHandler'
 
-	'./handlers/origins/ListHandler'
+	# './handlers/origins/ListHandler'
 	'./handlers/origins/SingleHandler'
-	
-	# Ingredients
-	'./handlers/fermentables/ListHandler'
-	'./handlers/fermentables/SingleHandler'
-
-	'./handlers/others/ListHandler'
-	'./handlers/others/SingleHandler'
-
-	'./handlers/hops/ListHandler'
-	'./handlers/hops/SingleHandler'
-
-	'./handlers/yeasts/ListHandler'
-	'./handlers/yeasts/SingleHandler'
 
 	# Handle content
 	'./handlers/AddHandler'

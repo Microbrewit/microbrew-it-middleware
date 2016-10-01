@@ -46,20 +46,13 @@ class StaticHandler extends RouteHandler
 					file: (request) ->
 						return "public/fonts/#{request.params.filename}"
 			}
-			# {
-			# 	method: 'GET',
-			# 	path:'/recipe/build/{filename}', 
-			# 	handler: 
-			# 		file: (request) ->
-			# 			return "public/recipe/build/#{request.params.filename}"
-			# }
 			{
 				method: 'GET',
 				path:'/templates/beers/{filename}', 
 				handler: 
 					file: (request) ->
-						console.log "Request for #{request.params.filename}"
-						console.log "return public/templates/beers/#{request.params.filename}"
+						@log "Request for #{request.params.filename}"
+						@log "return public/templates/beers/#{request.params.filename}"
 						return "public/templates/beers/#{request.params.filename}"
 			}
 			{
@@ -67,8 +60,8 @@ class StaticHandler extends RouteHandler
 				path:'/templates/recipe/{filename}', 
 				handler: 
 					file: (request) ->
-						console.log "Request for #{request.params.filename}"
-						console.log "return public/templates/beers/#{request.params.filename}"
+						@log "Request for #{request.params.filename}"
+						@log "return public/templates/beers/#{request.params.filename}"
 						return "public/templates/beers/#{request.params.filename}"
 			}
 		]

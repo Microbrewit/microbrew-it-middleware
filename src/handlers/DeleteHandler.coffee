@@ -34,6 +34,11 @@ class Handler extends RouteHandler
 
 	showDelete: (request, reply) =>
 		{id, itemType} = request.params
+
+		unless itemType in @validEndpoints
+			reply {"statusCode": 404, "error": "Not Found"}
+			return
+
 		@api[itemType]?.get request.params, (err, res, body) => 
 			item = body[itemType]?[0]
 			reply @renderer.page
@@ -49,6 +54,10 @@ class Handler extends RouteHandler
 
 	deleteHandler: (request, reply) =>
 		{id, itemType} = request.params
+
+		unless itemType in @validEndpoints
+			reply {"statusCode": 404, "error": "Not Found"}
+			return
 
 		if @api[itemType]?
 			@api[itemType].delete {id}, (err, res, body) =>
