@@ -14,33 +14,36 @@
 					span.value.minibubble(style="background: url('#{country.getImageByName(item.origin.name)}') center center !important;background-size: 152% !important;width:30px;height:30px;border-radius:50%;")
 					span.label #{item.origin.name}
 			if item.supplier
-				.meta-bubble(title='Maltster/supplier')
+				.meta-bubble(title='Maltster/supplier', itemprop="brand")
 					span.value.supplier
 						span.minibubble
-						a(href="suppliers/#{item.supplier.id}") #{item.supplier.name}
-					span.label SUPPLIER
+						a(href="suppliers/#{item.supplier.id}" itemprop="url") #{item.supplier.name}
+					span.label(itemprop="name") SUPPLIER
 
 	if item.flavours.length > 0 || item.flavourDescription
-		section.flavours
-			.inner-wrapper
-				h2 Flavours and aroma
-				if item.flavours.length > 0
-					.meta
-						span.flavours
-							| Tastes of  #{ item.flavours.join(', ')}
-				.meta
-					p #{item.flavourDescription}
+		section.notes.flavours.text
+
+				
+				
+				
+				
 
 	if item.notes || item.purpose
 		section.notes.text 
-			.inner-wrapper
+			.inner-wrapper(itemprop="description")
 				h2 Notes
 				if item.purpose
 					p #{item.name} is generally used for 
 						strong #{item.purpose}
 						| .
 
-				p #{item.notes}
+				p 
+					if item.flavourDescription !== ''
+						| #{item.flavourDescription}
+					else if item.flavours.length > 0
+						|  Taste notes:  #{ item.flavours.join(', ')}
+
+				p !{item.notes}
 
 	section.acids
 		.inner-wrapper
@@ -56,6 +59,23 @@
 							td #{name}
 							td #{range.low}%
 							td #{range.high}%
+
+	section.flavours.aroma
+		.inner-wrapper
+			h2 Flavours and aroma
+			table.zebra.aroma.flavour
+				tr
+					th Type
+					th Values
+				tr
+					td Aroma
+					td 
+						each aroma in item.aromaWheel
+							a() #{aroma.name} 
+				tr
+					td Flavour
+					td #{ item.flavours.join(', ')}
+
 	section.oils
 		.inner-wrapper
 			h2 Oil breakdown
@@ -87,10 +107,10 @@
 
 
 if item.substitutes && item.substitutes.length > 0
-	section.substitutes.the-content
+	section.substitutes.the-content(itemprop="isSimilarTo")
 		h2 Substitutes
 		.inner-wrapper
 			ul.grid-list
 				each result in item.substitutes
 					li
-						include listItem.jade
+						include gridItem.jade

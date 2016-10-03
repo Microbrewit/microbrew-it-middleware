@@ -1,4 +1,4 @@
-.grid-item
+.grid-item(itemscope itemtype="https://schema.org/Product")
 	if result.hopId
 		a.content(href='hops/#{result.hopId}')
 			.top-circle
@@ -13,9 +13,9 @@
 						.meta-cell #{result.acids.alpha.low} - #{result.acids.alpha.high}% AA
 						.meta-cell #{result.acids.beta.low} - #{result.acids.beta.high}% Beta
 	else if result.id
-		a.content(href='hops/#{result.id}')
+		a.content(href='hops/#{result.id}' itemprop="url")
 			.top-circle
 				span(class='minibubble' style="background:rgba(0,128,64,1);")
 				img(src='images/hops-large.png', width='50', height='50', alt='Hop')
-			h3 #{result.name}
+			h3(itemprop="name") #{result.name}
 			.type Hop

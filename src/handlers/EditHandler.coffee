@@ -19,6 +19,7 @@ class Handler extends RouteHandler
 		'hops'
 		'others'
 		'ingredients'
+		'beerstyles'
 		'beerStyles'
 	]
 
@@ -33,6 +34,7 @@ class Handler extends RouteHandler
 		]
 
 	showEdit: (request, reply) =>
+		request.params.itemType = 'beerStyles' if request.params.itemType is 'beerstyles'
 		{id, itemType} = request.params
 
 		unless itemType in @validEndpoints
@@ -43,7 +45,7 @@ class Handler extends RouteHandler
 			item = body[itemType]?[0]
 			reply @renderer.page
 				title: "EDIT #{itemType} #{id}"
-				user: request.user
+				user: @_getUser request
 				html: @renderer.render
 					template: "public/templates/edit.jade"
 					data:
@@ -51,10 +53,12 @@ class Handler extends RouteHandler
 						item: item
 						type: itemType
 						id: id
-		, request.token
+		, @_getToken request
 
 	editHandler: (request, reply) =>
+		request.params.itemType = 'beerStyles' if request.params.itemType is 'beerstyles'
 		{id, itemType} = request.params
+
 
 		unless itemType in @validEndpoints
 			reply {"statusCode": 404, "error": "Not Found"}
@@ -70,7 +74,7 @@ class Handler extends RouteHandler
 			if err
 				reply err
 			else
-				reply.redirect "/#{itemType}/#{id}"
+				reply.redirect "/#{itemType.toLowerCase()}/#{id}"
 		, @_getToken request
 
 module.exports = Handler

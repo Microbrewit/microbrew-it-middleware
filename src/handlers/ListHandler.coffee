@@ -5,6 +5,7 @@ Handler for Fermentable GET calls
 @copyright 2015 Microbrew.it
 ###
 
+_ = require 'lodash'
 RouteHandler = require '../core/RouteHandler'
 
 class Handler extends RouteHandler
@@ -62,7 +63,8 @@ class Handler extends RouteHandler
 
 		@api[itemType].get req.params, (err, res, body) =>
 			reply @render(
-				body[itemType]
+				_.sortBy body[itemType], (item) ->
+					item.name
 				req.user
 				@makePrevNextLink(req.params, req.raw.url.pathname, body[itemType].length)
 				req.params
@@ -73,7 +75,7 @@ class Handler extends RouteHandler
 		# 	params:
 		# 		size: if req.params.size then req.params.size else 100
 		# 		from: if req.params.from then req.params.from else 0
-		# 		q: "type:#{singular}"
+		# 		q: "type:#{singular},aromaWheel:citrus"
 		# 		sort: 'name:asc'
 		# , (err, res, body) =>
 		# 	req.params.size ?= body.hits.hits.length

@@ -88,7 +88,7 @@ if headline
 					default
 						span(class='bubble' style="background:rgba(231,200,126,1);")
 
-			h1 #{headline.headline}
+			h1(itemprop="name") #{headline.headline}
 			if headline.subheader && headline.subheader !== "undefined"
 				.subheader
 					span !{headline.subheader}
