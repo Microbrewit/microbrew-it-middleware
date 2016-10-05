@@ -20,18 +20,9 @@
 						a(href="suppliers/#{item.supplier.id}" itemprop="url") #{item.supplier.name}
 					span.label(itemprop="name") SUPPLIER
 
-	if item.flavours.length > 0 || item.flavourDescription
-		section.notes.flavours.text
-
-				
-				
-				
-				
-
 	if item.notes || item.purpose
 		section.notes.text 
 			.inner-wrapper(itemprop="description")
-				h2 Notes
 				if item.purpose
 					p #{item.name} is generally used for 
 						strong #{item.purpose}
@@ -45,58 +36,68 @@
 
 				p !{item.notes}
 
-	section.acids
+	section#metadata
 		.inner-wrapper
-			h2 Acid breakdown
-			table.zebra.oils
-				tr
-					th Acid
-					th minimum
-					th maximum
-				each range, name in item.acids
-					if range.low !== 0 || range.high !== 0
-						tr 
-							td #{name}
-							td #{range.low}%
-							td #{range.high}%
+			h2 Characteristics
+			section.acids
+				h3 Acid breakdown
+				table.zebra.oils
+					tr
+						th Acid
+						th minimum
+						th maximum
+					each range, name in item.acids
+						if range.low !== 0 || range.high !== 0
+							tr 
+								td #{name}
+								td #{range.low}%
+								td #{range.high}%
 
-	section.flavours.aroma
-		.inner-wrapper
-			h2 Flavours and aroma
-			table.zebra.aroma.flavour
-				tr
-					th Type
-					th Values
-				tr
-					td Aroma
-					td 
-						each aroma in item.aromaWheel
-							a() #{aroma.name} 
-				tr
-					td Flavour
-					td #{ item.flavours.join(', ')}
+			section.flavours.aroma
+				h3 Flavours and aroma
+				table.zebra.aroma.flavour
+					tr
+						th Type
+						th Values
+					tr
+						td Aroma
+						td 
+							each aroma in item.aromaWheel
+								a() #{aroma.name} 
+					tr
+						td Flavour
+						td #{ item.flavours.join(', ')}
 
-	section.oils
-		.inner-wrapper
-			h2 Oil breakdown
-			table.zebra.oils
-				tr
-					th Oil
-					th minimum
-					th maximum
-				each range, name in item.oils
-					if range.low !== 0 || range.high !== 0
-						tr 
-							td #{name}
-							td #{range.low}%
-							td #{range.high}%
+			section.oils
+				h3 Oil breakdown
+				table.zebra.oils
+					tr
+						th Oil
+						th minimum
+						th maximum
+					each range, name in item.oils
+						if range.low !== 0 || range.high !== 0
+							tr 
+								td #{name}
+								td #{range.low}%
+								td #{range.high}%
 
+	if item.substitutes && item.substitutes.length > 0
+		section#substitutes.hops(itemprop="isSimilarTo")
+			h2 Substitutes
+			.inner-wrapper
+				ul.listItem-list
+					each result in item.substitutes
+						li
+							div.list-item
+								.left-circle
+									span.minibubble
+								a(href='/hops/#{result.id}') #{result.name}
+								
 	if item.beerstyles.length > 0
 		section.beerstyles
 			.inner-wrapper
-				h2 Beerstyles
-				p.description.center #{item.name} is often used in these beerstyles:
-				br
+				h2 Relevant Beerstyles
 				ul.listItem-list.beerstyle
 					each result in item.beerstyles
 						li
@@ -106,11 +107,3 @@
 								a(href='/beerstyles/#{result.id}') #{result.name}
 
 
-if item.substitutes && item.substitutes.length > 0
-	section.substitutes.the-content(itemprop="isSimilarTo")
-		h2 Substitutes
-		.inner-wrapper
-			ul.grid-list
-				each result in item.substitutes
-					li
-						include gridItem.jade

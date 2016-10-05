@@ -21,6 +21,8 @@ class Handler extends RouteHandler
 		'ingredients'
 		'beerstyles'
 		'beerStyles'
+		'suppliers'
+		'breweries'
 	]
 
 	specialParams: [

@@ -22,7 +22,24 @@
 					span(class='value') 
 						a(href="suppliers/#{item.superFermentableId}") Category
 
-include ../../subnavigation.jade
+	section.meta
+		h2 Characteristics
+		table.zebra
+			tr
+				th Characteristic
+				th
+			tr
+				td Type
+				td #{item.subType}
+			tr
+				td Lovibond
+				td #{item.lovibond}
+			tr
+				td PPG
+				td #{item.ppg}
+			tr
+				td Flavours
+				td #{item.flavours.join(', ')}
 
 if item.subFermentables.length > 0
 	.the-content

@@ -15,6 +15,40 @@ class Handler extends RouteHandler
 		fermentables: {}
 		hops: {}
 		yeasts: {}
+		breweries: {	
+			"name": "",
+			"description": "",
+			"subtype": "HomeBrewery",
+			"type": "brewery",
+			"members": [],
+			"beers": [],
+			"origin": {},
+			"address": "",
+			"geoLocation": {
+				"latitude": 0,
+				"longitude": 0
+			},
+			"website": "",
+			"established": null,
+			"headerImage": null,
+			"avatar": null,
+			"isCommercial": false,
+			"socials": {}
+		}
+
+	metadata:
+		breweries:
+			singular: 'brewery'
+			id: 'brewerId'
+		yeasts:
+			singular: 'yeast'
+			id: 'yeastId'
+		hops:
+			singular: 'hop'
+			id: 'hopId'
+		fermentables:
+			singular: 'fermentable'
+			id: 'fermentableId'
 
 	getTemplate: (type) ->
 		return @jsonTemplates[type]
@@ -41,7 +75,7 @@ class Handler extends RouteHandler
 			html: @renderer.render
 				template: "public/templates/edit.jade"
 				data:
-					headline: @renderer.headline "ADD #{itemType[0].toUpperCase()}#{itemType[1...itemType.length - 1]}"
+					headline: @renderer.headline "ADD #{@metadata[itemType].singular}"
 					item: @getTemplate(itemType)
 					type: itemType
 
@@ -49,15 +83,14 @@ class Handler extends RouteHandler
 		{itemType} = request.params
 
 		query =
-			body: JSON.parse request.payload.item
+			payload: JSON.parse request.payload.item
 
 		@api[itemType]?.post query, (err, res, body) =>
 
 			if err
 				reply err
 			else
-				reply body
-				# reply.redirect "/#{itemType}/#{id}"
+				reply.redirect "/#{itemType}/#{body[@metadata[itemType].id]}"
 		, @_getToken request
 
 module.exports = Handler

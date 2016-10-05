@@ -27,7 +27,7 @@ if headline
 						if item
 							if item.avatar !== null
 								span(class='bubble', style="background: url('http://img.microbrew.it/#{item.avatar}') center center;background-color: #333;background-size: cover;")
-							else if item.origin && item.origin.name !== "Unkown"
+							else if item.origin && item.origin.name && item.origin.name !== "Unknown" && item.origin.name !== ""
 								span(class='bubble', style="background: url('#{country.getImageByName(item.origin.name)}') center center;background-size: 152%;")
 							else
 								span(class='bubble', style="background: url('/images/brewery-large.png') center center;background-color: #B22D00;background-size: contain;")
