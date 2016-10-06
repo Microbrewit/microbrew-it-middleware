@@ -48,6 +48,8 @@ handlers = [
 	'./handlers/SingleHandler'
 	'./handlers/ListHandler'
 
+	'./handlers/hops/AromaHandler'
+
 	# Search
 	'./handlers/search/SearchHandler'
 	

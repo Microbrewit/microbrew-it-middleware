@@ -63,7 +63,7 @@
 						td Aroma
 						td 
 							each aroma in item.aromaWheel
-								a() #{aroma.name} 
+								a(href="hops/aroma/#{aroma.name}") #{aroma.name} 
 					tr
 						td Flavour
 						td #{ item.flavours.join(', ')}
