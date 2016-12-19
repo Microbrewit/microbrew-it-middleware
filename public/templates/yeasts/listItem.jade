@@ -1,6 +1,8 @@
 div.fermentable.list-item
 	.meta-wrapper
-
+		if(result && result.supplier && result.supplier.name)
+			span.meta.supplier 
+				a(href="suppliers/#{result.supplier.id}") #{result.supplier.name}
 	.left-circle
 		span(class='minibubble' style="background: url('images/yeast-large.png') center center;background-size:contain;background-color:rgba(231,200,126,1);")
 	if showStatic

@@ -53,20 +53,35 @@
 								td #{range.low}%
 								td #{range.high}%
 
-			section.flavours.aroma
-				h3 Flavours and aroma
-				table.zebra.aroma.flavour
-					tr
-						th Type
-						th Values
-					tr
-						td Aroma
-						td 
-							each aroma in item.aromaWheel
-								a(href="hops/aroma/#{aroma.name}") #{aroma.name} 
-					tr
-						td Flavour
-						td #{ item.flavours.join(', ')}
+			if item.aromaWheel.length > 0 || item.flavours.length > 0
+				section.flavours.aroma
+					h3 Flavours and aroma
+					table.zebra.aroma.flavour
+						tr
+							th Type
+							th Values
+
+						if item.aromaWheel.length > 0
+							tr
+								td Aroma
+								td 
+									each aroma, index in item.aromaWheel
+										a(href="hops/aroma/#{aroma.name}") #{aroma.name}
+
+										if index < item.aromaWheel.length - 2
+											| , 
+										else if index === item.aromaWheel.length - 2
+											|  and 
+						if item.flavours.length > 0
+						tr
+							td Flavour
+							td 
+								each flavour, index in item.flavours
+									| #{flavour}
+									if index < item.flavours.length - 2
+										| , 
+									else if index === item.flavours.length - 2
+										|  and 
 
 			section.oils
 				h3 Oil breakdown

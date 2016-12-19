@@ -1,10 +1,28 @@
 article.frontpage
 	header
 		.header-content-wrapper
-			if !user
-				h1 
-					| Beer brewer's home
-					form(action="/search", method="GET")
-						.inner-wrapper
-							input(name="query" type="text" class="small" placeholder="ingredient, supplier or style")
-						button(type="submit" class="call-to-action") Search
+			h1 
+				| Microbrew.it
+				form(action="/search", method="GET")
+					.inner-wrapper
+						input(name="query" type="text" class="frontpage-search small" placeholder="ingredient, supplier or style")
+					button(type="submit" class="call-to-action") Search
+
+	.the-content
+		.inner-wrapper
+			.half
+				h2 Beer brewer's home
+				p Microbrew.it has one of the most complete repositories of ingredients, suppliers and styles. We are working on introducing more information. Keep posted.
+			.half
+				h2 Microbrew.it is open source
+				p 
+					| Microbrew.it is completely open source - with an open api! 
+					br
+					| Check out our source code at 
+					a(href="https://github.com/microbrewit") Github 
+					| and our api at 
+					a(href="https://api.microbrew.it") api.microbrew.it
+					|.
+
+
+

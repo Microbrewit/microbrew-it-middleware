@@ -5,15 +5,28 @@ html, body, .main, .ui-view-container {
 	background-size: cover;
 	background-position: bottom right;
 
+	.frontpage-search {
+		font-size: inherit;
+		width: 100%;
+		text-align: center;
+		background: rgba(255, 255, 255, 1);
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		color: black;
+		border-radius: 4px;
+		font-size: 24px;
+		padding: 16px;
+		margin: 30px 0px;
+	}
+
 	.the-content {
 		padding: 50px 0;
 		background: rgba(255,255,255,0.9) !important;
 		text-align:center;
-		div{
-			color: #333;
-			font-size: 130%;
-			text-align: justify;
-		}
+		// div{
+		// 	color: #333;
+		// 	font-size: 130%;
+		// 	text-align: justify;
+		// }
 		border: 0 !important;
 
 		&:before {

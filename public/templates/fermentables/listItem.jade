@@ -1,8 +1,12 @@
 div.fermentable.list-item
 	.meta-wrapper
-		span.meta.lovibond(title='Lovibond is a measure of colour') #{result.lovibond}°L
-		span.meta.ppg(title='PPG is the amount of sugar') #{result.ppg} PPG
-		span.meta.gp(title='PPG is the amount of sugar') 5 GP (7.8%)
+		if result.lovibond
+			span.meta.lovibond(title='Lovibond is a measure of colour') #{result.lovibond}°L
+		if result.ppg
+			span.meta.ppg(title='PPG is the amount of sugar') #{result.ppg} PPG
+		if result.gp
+			span.meta.gp(title='PPG is the amount of sugar') #{result.gp} GP
+
 	.left-circle
 		span(class='minibubble' style="background: url('images/fermentable-large.png') center center;background-size:contain;background-color:rgba(#{calc.convert.convert(result.lovibond, 'lovibond', 'rgb')},1);" alt='#{result.type}' title="#{result.type} has colour of #{result.lovibond}°L")
 	if showStatic

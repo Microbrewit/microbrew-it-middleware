@@ -131,9 +131,14 @@ section {
 
 @media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px)  {
 	.inner-wrapper {
-		width: 90%;
+		width: 96%;
 		margin: 0 auto;
 	}
+
+	#main-navigation .inner-wrapper {
+		width: 100%;
+	}
+
 	.aromawheel {
 		ul {
 			padding: 0;

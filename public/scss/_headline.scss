@@ -70,3 +70,61 @@ h1 + .subheader {
 	color: #444;
 	font-size: 25px;
 }
+
+@media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px)  {
+	header {
+		padding: 0 10px !important;
+		text-align: center;
+	}
+	.subheader {
+		display: none
+	}
+	.header-bubble {
+		margin: 0;
+		position: relative;
+		display: inline-block;
+		width: 34px;
+		height: 34px;
+		padding: 0;
+
+		&:before {
+			border: 0;
+			display: none !important;
+		}
+
+		img {
+			position: absolute;
+			left: 0;
+			margin: 0 !important;
+			top: 6px;
+			width: 100% !important;
+			height: 100% !important;
+			z-index: 2;
+		}
+	}
+	.bubble {
+		z-index: 1;
+		position: absolute;
+		left: 0;
+		top: 6px;
+		width: 100% !important;
+		height: 100% !important;
+		&:before, &:after {
+			display: none;
+		}
+	}
+	h1 {
+		padding: 10px 0;
+		display: inline-block;
+		line-height: 40px;
+		margin: 0px !important;
+		font-size: 30px !important;
+		// margin-top: -30px;
+		// float: left;
+		margin-left: 4px !important;
+
+	}
+	header {
+		padding: 0;
+	}
+}

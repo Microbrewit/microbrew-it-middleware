@@ -150,8 +150,10 @@ section {
 
 @media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px) {
   .inner-wrapper, .footer-content {
-    width: 90%;
+    width: 96%;
     margin: 0 auto; }
+  #main-navigation .inner-wrapper, #main-navigation .footer-content {
+    width: 100%; }
   .aromawheel ul {
     padding: 0;
     margin: 0; }
@@ -1246,6 +1248,49 @@ h1 + .subheader {
   color: #444;
   font-size: 25px; }
 
+@media only screen and (max-width: 760px), (min-device-width: 200px) and (max-device-width: 1024px) {
+  header {
+    padding: 0 10px !important;
+    text-align: center; }
+  .subheader {
+    display: none; }
+  .header-bubble {
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    padding: 0; }
+    .header-bubble:before {
+      border: 0;
+      display: none !important; }
+    .header-bubble img {
+      position: absolute;
+      left: 0;
+      margin: 0 !important;
+      top: 6px;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 2; }
+  .bubble {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 100% !important;
+    height: 100% !important; }
+    .bubble:before, .bubble:after {
+      display: none; }
+  h1 {
+    padding: 10px 0;
+    display: inline-block;
+    line-height: 40px;
+    margin: 0px !important;
+    font-size: 30px !important;
+    margin-left: 4px !important; }
+  header {
+    padding: 0; } }
+
 .grid-list {
   list-style: none;
   padding: 0;
@@ -1440,7 +1485,7 @@ h1 + .subheader {
     /* for IE 11 */
     display: none; }
   .list-item .ba, .list-item .aa {
-    width: 60px;
+    width: 120px;
     text-align: right; }
   .list-item .name {
     display: inline-block;
@@ -1524,15 +1569,22 @@ header + .minidisplay-wrapper {
   background: url("../images/background.jpg") top center;
   background-size: cover;
   background-position: bottom right; }
+  .frontpage .frontpage-search {
+    font-size: inherit;
+    width: 100%;
+    text-align: center;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: black;
+    border-radius: 4px;
+    font-size: 24px;
+    padding: 16px;
+    margin: 30px 0px; }
   .frontpage .the-content {
     padding: 50px 0;
     background: rgba(255, 255, 255, 0.9) !important;
     text-align: center;
     border: 0 !important; }
-    .frontpage .the-content div {
-      color: #333;
-      font-size: 130%;
-      text-align: justify; }
     .frontpage .the-content:before {
       display: none; }
   .frontpage .huge-call-to-action {
