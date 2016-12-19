@@ -4,7 +4,7 @@
   "description": "Server middleware for Microbrew.it",
   "main": "src/bootstrap.coffee",
   "scripts": {
-    "start": "node_modules/coffee-script/bin/coffee src/bootstrap.coffee",
+    "start": "node_modules/coffee-script/bin/coffee src/bootstrap.coffee --environment=prod",
     "dev": "nodemon src/bootstrap.coffee --environment=dev",
     "build-css": "node-sass --include-path scss public/scss/main.scss   public/css/main.css",
     "watch-css": "nodemon -e public/scss -x \"npm run build-css\"",
